@@ -17,7 +17,7 @@ info:
     * Order redemption. (a dual message pair transaction consisting of an online redeem authorization followed by a store-and-forward confirmation or reversal).
 
     Note that because of the requirements of different service providers, some fields that are optional according to this specification may be mandatory for certain providers. For guidelines on how to implement this API, please contact both Electrum and the relevant service provider(s).
-  version: 0.0.2
+  version: 1.0.0
   title: Money Transfer Service Interface
   contact:
     name: Electrum Support
@@ -53,7 +53,7 @@ paths:
           type: string
       responses:
         200:
-          description: Success
+          description: OK
           schema:
             $ref: '#/definitions/MoneyTransferAdminMessage'
         400:
@@ -93,8 +93,8 @@ paths:
         schema:
           $ref: '#/definitions/MoneyTransferAdminMessage'
       responses:
-        200:
-          description: Success
+        201:
+          description: Created
           schema:
             $ref: '#/definitions/MoneyTransferAdminMessage'
         400:
@@ -135,8 +135,8 @@ paths:
         schema:
           $ref: '#/definitions/MoneyTransferAuthRequest'
       responses:
-        200:
-          description: Success
+        201:
+          description: Created
           schema:
             $ref: '#/definitions/MoneyTransferAuthResponse'
         400:
@@ -183,8 +183,8 @@ paths:
           required: true
           type: string
       responses:
-        202:
-          description: Accepted
+        200:
+          description: OK
           schema:
             $ref: '#/definitions/MoneyTransferLookupResponse'
         400:
@@ -310,7 +310,7 @@ paths:
           $ref: '#/definitions/MoneyTransferRedeemRequest'
       responses:
         200:
-          description: Success
+          description: OK
           schema:
             $ref: '#/definitions/MoneyTransferRedeemResponse'
         400:
@@ -428,8 +428,11 @@ definitions:
     description: Details of a customer's address
     type: object
     properties:
-      streetAddress:
-        description: Street name, building number/name, apartment number
+      addressLine1:
+        description: First line of street address.
+        type: string
+      addressLine2:
+        description: Second line of street address (if required).
         type: string
       city:
         type: string
@@ -442,18 +445,6 @@ definitions:
         maxLength: 2
       postCode:
         type: string
-  Amounts:
-    description: Amounts which make up the transaction. Absent amounts have zero value.
-    type: object
-    properties:
-      requestAmount:
-        $ref: '#/definitions/LedgerAmount'
-      approvedAmount:
-        $ref: '#/definitions/LedgerAmount'
-      feeAmount:
-        $ref: '#/definitions/LedgerAmount'
-      balanceAmount:
-        $ref: '#/definitions/LedgerAmount'
   ErrorDetail:
     description: Represents the outcome of an unsuccessful transaction.
     type: object
@@ -665,7 +656,7 @@ definitions:
     type: object
     required:
     - id
-    - amounts
+    - amount
     - client
     - originator
     - receiver
@@ -678,8 +669,8 @@ definitions:
       id:
         type: string
         description: The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)
-      amounts:
-        $ref: '#/definitions/Amounts'
+      amount:
+        $ref: '#/definitions/LedgerAmount'
       time:
         type: string
         format: date-time
@@ -715,7 +706,7 @@ definitions:
     type: object
     required:
     - id
-    - amounts
+    - amount
     - client
     - originator
     - receiver
@@ -727,8 +718,8 @@ definitions:
       id:
         type: string
         description: The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)
-      amounts:
-        $ref: '#/definitions/Amounts'
+      amount:
+        $ref: '#/definitions/LedgerAmount'
       time:
         type: string
         format: date-time
@@ -764,7 +755,6 @@ definitions:
     type: object
     required:
     - id
-    - amounts
     - client
     - originator
     - receiver
@@ -776,8 +766,8 @@ definitions:
       id:
         type: string
         description: The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)
-      amounts:
-        $ref: '#/definitions/Amounts'
+      amount:
+        $ref: '#/definitions/LedgerAmount'
       time:
         type: string
         format: date-time
@@ -812,7 +802,7 @@ definitions:
     type: object
     required:
     - id
-    - amounts
+    - amount
     - client
     - originator
     - receiver
@@ -824,8 +814,8 @@ definitions:
       id:
         type: string
         description: The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)
-      amounts:
-        $ref: '#/definitions/Amounts'
+      amount:
+        $ref: '#/definitions/LedgerAmount'
       time:
         type: string
         format: date-time
