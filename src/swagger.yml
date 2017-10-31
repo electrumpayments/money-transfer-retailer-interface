@@ -588,69 +588,14 @@ definitions:
     required:
     - originator
     - receiver
-    - time
     - customerDetails
     properties:
-      time:
-        type: string
-        format: date-time
-        description: The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision
       originator:
         $ref: '#/definitions/Originator'
       receiver:
         $ref: '#/definitions/Institution'
       customerDetails:
         $ref: '#/definitions/PersonalDetails'
-  MoneyTransferConfirmation:
-    description: An advice that notifies of the positive completion of a transaction.
-    type: object
-    required:
-    - id
-    - requestId
-    - thirdPartyIdentifiers
-    - time
-    properties:
-      id:
-        type: string
-        description: The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).
-      requestId:
-        type: string
-        description: The UUID identifying the request that this advice relates to.
-      time:
-        type: string
-        format: date-time
-        description: The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision.
-      thirdPartyIdentifiers:
-        type: array
-        description: The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed. Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original request.
-        items:
-          $ref: '#/definitions/ThirdPartyIdentifier'
-  MoneyTransferLookupResponse:
-    description: Contains the data returned by a call to the lookupOrder operation.
-    type: object
-    required:
-    - amount
-    - originator
-    - receiver
-    - time
-    properties:
-      amount:
-        $ref: '#/definitions/LedgerAmount'
-      status:
-        type: string
-        description: The status of the order
-        enum:
-        - UNREDEEMED
-        - REDEEMED
-        - CANCELLED
-      time:
-        type: string
-        format: date-time
-        description: The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision
-      originator:
-        $ref: '#/definitions/Originator'
-      receiver:
-        $ref: '#/definitions/Institution'
   MoneyTransferAuthRequest:
     description: Used to submit data in a call to the createOrder operation.
     type: object
@@ -750,6 +695,27 @@ definitions:
       orderId:
         type: string
         description: Reference used by the service provider to uniquely identify the money transfer order on their system. This field can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef. Note that any reference issued by the provider that is specific to a particular leg of the order process should be set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own reference).
+  MoneyTransferLookupResponse:
+    description: Contains the data returned by a call to the lookupOrder operation.
+    type: object
+    required:
+    - amount
+    - originator
+    - receiver
+    properties:
+      amount:
+        $ref: '#/definitions/LedgerAmount'
+      status:
+        type: string
+        description: The status of the order
+        enum:
+        - UNREDEEMED
+        - REDEEMED
+        - CANCELLED
+      originator:
+        $ref: '#/definitions/Originator'
+      receiver:
+        $ref: '#/definitions/Institution'
   MoneyTransferRedeemRequest:
     description: Used to submit data in a call to the redeemOrder operation.
     type: object
@@ -797,6 +763,30 @@ definitions:
       orderRedeemRef:
         type: string
         description: Reference used by the recipient to redeem the order.
+  MoneyTransferConfirmation:
+    description: An advice that notifies of the positive completion of a transaction.
+    type: object
+    required:
+    - id
+    - requestId
+    - thirdPartyIdentifiers
+    - time
+    properties:
+      id:
+        type: string
+        description: The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).
+      requestId:
+        type: string
+        description: The UUID identifying the request that this advice relates to.
+      time:
+        type: string
+        format: date-time
+        description: The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision.
+      thirdPartyIdentifiers:
+        type: array
+        description: The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed. Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original request.
+        items:
+          $ref: '#/definitions/ThirdPartyIdentifier'
   MoneyTransferRedeemResponse:
     description: Contains the data returned by a call to the redeemOrder operation.
     type: object
