@@ -17,7 +17,7 @@ info:
     * Order redemption. (a dual message pair transaction consisting of an online redeem authorization followed by a store-and-forward confirmation or reversal).
 
     Note that because of the requirements of different service providers, some fields that are optional according to this specification may be mandatory for certain providers. For guidelines on how to implement this API, please contact both Electrum and the relevant service provider(s).
-  version: 1.0.0
+  version: 1.0.2
   title: Money Transfer Service Interface
   contact:
     name: Electrum Support
@@ -45,6 +45,12 @@ paths:
           in: query
           description: The assigned merchant identifier. Also known as card acceptor id.
           required: true
+          type: string
+        - name: originatorInstId
+          in: query
+          description: Identifies the institution from which the transaction originates. Value to be assigned by
+          Electrum.
+          required: false
           type: string
         - name: receiverId
           in: query
@@ -439,10 +445,9 @@ definitions:
       province:
         type: string
       country:
-        description: Country expressed as an ISO Alpha-2 code
-        type: string
-        minLength: 2
-        maxLength: 2
+        description: Nationality expressed as an ISO Alpha-2 or ISO Alpha-3 country code
+        minLength: 3
+        maxLength: 3
       postCode:
         type: string
   ErrorDetail:
@@ -586,8 +591,6 @@ definitions:
     description: Used to transfer data in calls to the /admin/customers resource.
     type: object
     required:
-    - originator
-    - receiver
     - customerDetails
     properties:
       originator:
@@ -903,15 +906,24 @@ definitions:
         description: Type of identification document
       nationality:
         type: string
-        description: Nationality expressed as an ISO Alpha-2 country code
-        minLength: 2
-        maxLength: 2
+        description: Nationality expressed as an ISO Alpha-2 or ISO Alpha-3 country code
+        minLength: 3
+        maxLength: 3
       dateOfBirth:
         type: string
         description: Date of birth
       contactNumber:
         type: string
         description: The person's contact number
+      altContactHome:
+        type: string
+        description: An alternative home contact number
+      altContactWork:
+        type: string
+        description: An alternative work contact number
+      email:
+        type: string
+        description: The person's email address
   SlipData:
     description: Data that may be printed on the customer slip for information purposes.
     type: object
