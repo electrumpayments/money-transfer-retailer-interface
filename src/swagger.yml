@@ -48,8 +48,7 @@ paths:
           type: string
         - name: originatorInstId
           in: query
-          description: Identifies the institution from which the transaction originates. Value to be assigned by
-          Electrum.
+          description: Identifies the institution from which the transaction originates. Value to be assigned by Electrum.
           required: false
           type: string
         - name: receiverId
