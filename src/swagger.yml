@@ -180,7 +180,12 @@ paths:
         - name: merchantId
           in: query
           description: The assigned merchant identifier. Also known as card acceptor id.
-          required: true
+          required: false
+          type: string
+        - name: originatorInstId
+          in: query
+          description: Identifies the institution from which the transaction originates. Value to be assigned by Electrum.
+          required: false
           type: string
         - name: receiverId
           in: query
