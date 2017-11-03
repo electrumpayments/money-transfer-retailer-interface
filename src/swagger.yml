@@ -444,9 +444,9 @@ definitions:
       province:
         type: string
       country:
-        description: Nationality expressed as an ISO Alpha-2 or ISO Alpha-3 country code
-        minLength: 3
-        maxLength: 3
+        description: Nationality expressed as an ISO Alpha-2 country code
+        minLength: 2
+        maxLength: 2
       postCode:
         type: string
   ErrorDetail:
@@ -905,9 +905,9 @@ definitions:
         description: Type of identification document
       nationality:
         type: string
-        description: Nationality expressed as an ISO Alpha-2 or ISO Alpha-3 country code
-        minLength: 3
-        maxLength: 3
+        description: Nationality expressed as an ISO Alpha-2 country code
+        minLength: 2
+        maxLength: 2
       dateOfBirth:
         type: string
         description: Date of birth
