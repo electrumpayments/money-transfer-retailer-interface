@@ -23,7 +23,8 @@ public interface IAdminResource {
 
    void getCustomerInfoImpl(
          @NotNull String idNumber,
-         @NotNull String merchantId,
+         String merchantId,
+         @NotNull String originatorInstId,
          @NotNull String receiverId,
          SecurityContext securityContext,
          Request request,

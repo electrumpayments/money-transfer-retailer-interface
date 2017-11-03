@@ -12,96 +12,25 @@
 
 package io.electrum.moneytransfer.model;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
-import javax.validation.constraints.NotNull;
+import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-
+import io.electrum.vas.Utils;
+import io.electrum.vas.model.BasicReversal;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * An advice that notifies that the outcome of an authorisation transaction be reversed. This can be either due to
  * cashier cancellation, or upstream timeout.
  */
 @ApiModel(description = "An advice that notifies that the outcome of an authorisation transaction be reversed. This can be either due to cashier cancellation, or upstream timeout.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2017-10-31T09:10:54.608Z")
-public class MoneyTransferReversal {
-   @JsonProperty("id")
-   private String id = null;
-
-   @JsonProperty("requestId")
-   private String requestId = null;
-
-   @JsonProperty("time")
-   private Date time = null;
-
-   @JsonProperty("thirdPartyIdentifiers")
-   private List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
-
-   /**
-    * The reason for the reversal
-    */
-   public enum ReversalReasonEnum {
-      TIMEOUT("TIMEOUT"),
-
-      CANCELLED("CANCELLED"),
-
-      RESPONSE_NOT_FINAL("RESPONSE_NOT_FINAL");
-
-      private String value;
-
-      ReversalReasonEnum(String value) {
-         this.value = value;
-      }
-
-      @Override
-      @JsonValue
-      public String toString() {
-         return String.valueOf(value);
-      }
-
-      @JsonCreator
-      public static ReversalReasonEnum fromValue(String text) {
-         for (ReversalReasonEnum b : ReversalReasonEnum.values()) {
-            if (String.valueOf(b.value).equals(text)) {
-               return b;
-            }
-         }
-         return null;
-      }
-   }
-
-   @JsonProperty("reversalReason")
-   private ReversalReasonEnum reversalReason = null;
+public class MoneyTransferReversal extends BasicReversal {
 
    public MoneyTransferReversal id(String id) {
       this.id = id;
       return this;
-   }
-
-   /**
-    * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
-    * 4122](https://tools.ietf.org/html/rfc4122)
-    * 
-    * @return id
-    **/
-   @JsonProperty("id")
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
-   @NotNull
-   public String getId() {
-      return id;
-   }
-
-   public void setId(String id) {
-      this.id = id;
    }
 
    public MoneyTransferReversal requestId(String requestId) {
@@ -109,43 +38,9 @@ public class MoneyTransferReversal {
       return this;
    }
 
-   /**
-    * The UUID identifying the request that this advice relates to.
-    * 
-    * @return requestId
-    **/
-   @JsonProperty("requestId")
-   @ApiModelProperty(required = true, value = "The UUID identifying the request that this advice relates to.")
-   @NotNull
-   public String getRequestId() {
-      return requestId;
-   }
-
-   public void setRequestId(String requestId) {
-      this.requestId = requestId;
-   }
-
-   public MoneyTransferReversal time(Date time) {
+   public MoneyTransferReversal time(DateTime time) {
       this.time = time;
       return this;
-   }
-
-   /**
-    * The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC
-    * 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
-    * time-secfrac be included up to millisecond precision
-    * 
-    * @return time
-    **/
-   @JsonProperty("time")
-   @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
-   @NotNull
-   public Date getTime() {
-      return time;
-   }
-
-   public void setTime(Date time) {
-      this.time = time;
    }
 
    public MoneyTransferReversal thirdPartyIdentifiers(List<ThirdPartyIdentifier> thirdPartyIdentifiers) {
@@ -158,65 +53,9 @@ public class MoneyTransferReversal {
       return this;
    }
 
-   /**
-    * The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed.
-    * Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in
-    * the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original
-    * request.
-    * 
-    * @return thirdPartyIdentifiers
-    **/
-   @JsonProperty("thirdPartyIdentifiers")
-   @ApiModelProperty(required = true, value = "The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed. Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original request.")
-   @NotNull
-   public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
-      return thirdPartyIdentifiers;
-   }
-
-   public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> thirdPartyIdentifiers) {
-      this.thirdPartyIdentifiers = thirdPartyIdentifiers;
-   }
-
-   public MoneyTransferReversal reversalReason(ReversalReasonEnum reversalReason) {
+   public MoneyTransferReversal reversalReason(ReversalReason reversalReason) {
       this.reversalReason = reversalReason;
       return this;
-   }
-
-   /**
-    * The reason for the reversal
-    * 
-    * @return reversalReason
-    **/
-   @JsonProperty("reversalReason")
-   @ApiModelProperty(required = true, value = "The reason for the reversal")
-   @NotNull
-   public ReversalReasonEnum getReversalReason() {
-      return reversalReason;
-   }
-
-   public void setReversalReason(ReversalReasonEnum reversalReason) {
-      this.reversalReason = reversalReason;
-   }
-
-   @Override
-   public boolean equals(java.lang.Object o) {
-      if (this == o) {
-         return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-         return false;
-      }
-      MoneyTransferReversal moneyTransferReversal = (MoneyTransferReversal) o;
-      return Objects.equals(this.id, moneyTransferReversal.id)
-            && Objects.equals(this.requestId, moneyTransferReversal.requestId)
-            && Objects.equals(this.time, moneyTransferReversal.time)
-            && Objects.equals(this.thirdPartyIdentifiers, moneyTransferReversal.thirdPartyIdentifiers)
-            && Objects.equals(this.reversalReason, moneyTransferReversal.reversalReason);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(id, requestId, time, thirdPartyIdentifiers, reversalReason);
    }
 
    @Override
@@ -224,22 +63,12 @@ public class MoneyTransferReversal {
       StringBuilder sb = new StringBuilder();
       sb.append("class MoneyTransferReversal {\n");
 
-      sb.append("    id: ").append(toIndentedString(id)).append("\n");
-      sb.append("    requestId: ").append(toIndentedString(requestId)).append("\n");
-      sb.append("    time: ").append(toIndentedString(time)).append("\n");
-      sb.append("    thirdPartyIdentifiers: ").append(toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    reversalReason: ").append(toIndentedString(reversalReason)).append("\n");
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
+      sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
+      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
+      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    reversalReason: ").append(Utils.toIndentedString(reversalReason)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(java.lang.Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

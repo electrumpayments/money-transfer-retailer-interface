@@ -12,57 +12,25 @@
 
 package io.electrum.moneytransfer.model;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
-import javax.validation.constraints.NotNull;
+import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import io.electrum.vas.Utils;
+import io.electrum.vas.model.BasicAdvice;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * An advice that notifies of the positive completion of a transaction.
  */
 @ApiModel(description = "An advice that notifies of the positive completion of a transaction.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2017-10-31T09:10:54.608Z")
-public class MoneyTransferConfirmation {
-   @JsonProperty("id")
-   private String id = null;
-
-   @JsonProperty("requestId")
-   private String requestId = null;
-
-   @JsonProperty("time")
-   private Date time = null;
-
-   @JsonProperty("thirdPartyIdentifiers")
-   private List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
+public class MoneyTransferConfirmation extends BasicAdvice {
 
    public MoneyTransferConfirmation id(String id) {
       this.id = id;
       return this;
-   }
-
-   /**
-    * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
-    * 4122](https://tools.ietf.org/html/rfc4122).
-    * 
-    * @return id
-    **/
-   @JsonProperty("id")
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).")
-   @NotNull
-   public String getId() {
-      return id;
-   }
-
-   public void setId(String id) {
-      this.id = id;
    }
 
    public MoneyTransferConfirmation requestId(String requestId) {
@@ -70,43 +38,9 @@ public class MoneyTransferConfirmation {
       return this;
    }
 
-   /**
-    * The UUID identifying the request that this advice relates to.
-    * 
-    * @return requestId
-    **/
-   @JsonProperty("requestId")
-   @ApiModelProperty(required = true, value = "The UUID identifying the request that this advice relates to.")
-   @NotNull
-   public String getRequestId() {
-      return requestId;
-   }
-
-   public void setRequestId(String requestId) {
-      this.requestId = requestId;
-   }
-
-   public MoneyTransferConfirmation time(Date time) {
+   public MoneyTransferConfirmation time(DateTime time) {
       this.time = time;
       return this;
-   }
-
-   /**
-    * The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC
-    * 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
-    * time-secfrac be included up to millisecond precision.
-    * 
-    * @return time
-    **/
-   @JsonProperty("time")
-   @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision.")
-   @NotNull
-   public Date getTime() {
-      return time;
-   }
-
-   public void setTime(Date time) {
-      this.time = time;
    }
 
    public MoneyTransferConfirmation thirdPartyIdentifiers(List<ThirdPartyIdentifier> thirdPartyIdentifiers) {
@@ -119,65 +53,16 @@ public class MoneyTransferConfirmation {
       return this;
    }
 
-   /**
-    * The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed.
-    * Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in
-    * the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original
-    * request.
-    * 
-    * @return thirdPartyIdentifiers
-    **/
-   @JsonProperty("thirdPartyIdentifiers")
-   @ApiModelProperty(required = true, value = "The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed. Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original request.")
-   @NotNull
-   public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
-      return thirdPartyIdentifiers;
-   }
-
-   public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> thirdPartyIdentifiers) {
-      this.thirdPartyIdentifiers = thirdPartyIdentifiers;
-   }
-
-   @Override
-   public boolean equals(java.lang.Object o) {
-      if (this == o) {
-         return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-         return false;
-      }
-      MoneyTransferConfirmation moneyTransferConfirmation = (MoneyTransferConfirmation) o;
-      return Objects.equals(this.id, moneyTransferConfirmation.id)
-            && Objects.equals(this.requestId, moneyTransferConfirmation.requestId)
-            && Objects.equals(this.time, moneyTransferConfirmation.time)
-            && Objects.equals(this.thirdPartyIdentifiers, moneyTransferConfirmation.thirdPartyIdentifiers);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(id, requestId, time, thirdPartyIdentifiers);
-   }
-
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class MoneyTransferConfirmation {\n");
 
-      sb.append("    id: ").append(toIndentedString(id)).append("\n");
-      sb.append("    requestId: ").append(toIndentedString(requestId)).append("\n");
-      sb.append("    time: ").append(toIndentedString(time)).append("\n");
-      sb.append("    thirdPartyIdentifiers: ").append(toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
+      sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
+      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
+      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(java.lang.Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

@@ -43,7 +43,8 @@ public interface IOrdersResource {
 
    void lookupOrderImpl(
          @NotNull String orderRedeemRef,
-         @NotNull String merchantId,
+         String merchantId,
+         @NotNull String originatorInstId,
          @NotNull String receiverId,
          SecurityContext securityContext,
          Request request,

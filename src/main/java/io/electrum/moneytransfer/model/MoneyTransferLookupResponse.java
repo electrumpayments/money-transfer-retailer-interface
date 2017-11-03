@@ -30,7 +30,6 @@ import io.swagger.annotations.ApiModelProperty;
  * Contains the data returned by a call to the lookupOrder operation.
  */
 @ApiModel(description = "Contains the data returned by a call to the lookupOrder operation.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2017-10-31T09:10:54.608Z")
 public class MoneyTransferLookupResponse {
    @JsonProperty("amount")
    private LedgerAmount amount = null;

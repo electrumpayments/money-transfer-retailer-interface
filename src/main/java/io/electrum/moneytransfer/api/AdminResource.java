@@ -78,7 +78,9 @@ public abstract class AdminResource implements IAdminResource {
    public final void getCustomerInfo(
          @ApiParam(value = "National identity number of the customer.", required = true) @QueryParam("idNumber") String idNumber,
 
-         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.", required = true) @QueryParam("merchantId") String merchantId,
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam("merchantId") String merchantId,
+         
+         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam("originatorInstId") String originatorInstId,
 
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam("receiverId") String receiverId,
 
@@ -91,6 +93,7 @@ public abstract class AdminResource implements IAdminResource {
       getResourceImplementation().getCustomerInfoImpl(
             idNumber,
             merchantId,
+            originatorInstId,
             receiverId,
             securityContext,
             request,

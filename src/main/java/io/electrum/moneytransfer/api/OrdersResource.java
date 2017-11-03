@@ -141,7 +141,9 @@ public abstract class OrdersResource implements IOrdersResource {
    public final void lookupOrder(
          @ApiParam(value = "Reference used by the recipient to redeem the order.", required = true) @QueryParam("orderRedeemRef") String orderRedeemRef,
 
-         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.", required = true) @QueryParam("merchantId") String merchantId,
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam("merchantId") String merchantId,
+
+         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam("originatorInstId") String originatorInstId,
 
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam("receiverId") String receiverId,
 
@@ -154,6 +156,7 @@ public abstract class OrdersResource implements IOrdersResource {
       getResourceImplementation().lookupOrderImpl(
             orderRedeemRef,
             merchantId,
+            originatorInstId,
             receiverId,
             securityContext,
             request,
