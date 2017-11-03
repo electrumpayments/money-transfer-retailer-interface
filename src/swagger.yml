@@ -44,7 +44,7 @@ paths:
         - name: merchantId
           in: query
           description: The assigned merchant identifier. Also known as card acceptor id.
-          required: true
+          required: false
           type: string
         - name: originatorInstId
           in: query
