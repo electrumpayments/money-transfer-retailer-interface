@@ -33,7 +33,7 @@ schemes:
 paths:
   /admin/customers:
     get:
-      description: Returns information of the customer's profile as registered on the service providers system.
+      description: Returns information of the customer's profile as registered on the service provider's system.
       operationId: getCustomerInfo
       parameters:
         - name: idNumber
