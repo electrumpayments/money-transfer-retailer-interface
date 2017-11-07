@@ -17,7 +17,7 @@ info:
     * Order redemption. (a dual message pair transaction consisting of an online redeem authorization followed by a store-and-forward confirmation or reversal).
 
     Note that because of the requirements of different service providers, some fields that are optional according to this specification may be mandatory for certain providers. For guidelines on how to implement this API, please contact both Electrum and the relevant service provider(s).
-  version: 1.0.1
+  version: 1.0.2
   title: Money Transfer Service Interface
   contact:
     name: Electrum Support
@@ -44,7 +44,12 @@ paths:
         - name: merchantId
           in: query
           description: The assigned merchant identifier. Also known as card acceptor id.
-          required: true
+          required: false
+          type: string
+        - name: originatorInstId
+          in: query
+          description: Identifies the institution from which the transaction originates. Value to be assigned by Electrum.
+          required: false
           type: string
         - name: receiverId
           in: query
@@ -175,7 +180,12 @@ paths:
         - name: merchantId
           in: query
           description: The assigned merchant identifier. Also known as card acceptor id.
-          required: true
+          required: false
+          type: string
+        - name: originatorInstId
+          in: query
+          description: Identifies the institution from which the transaction originates. Value to be assigned by Electrum.
+          required: false
           type: string
         - name: receiverId
           in: query
@@ -439,8 +449,7 @@ definitions:
       province:
         type: string
       country:
-        description: Country expressed as an ISO Alpha-2 code
-        type: string
+        description: Nationality expressed as an ISO Alpha-2 country code
         minLength: 2
         maxLength: 2
       postCode:
@@ -586,8 +595,6 @@ definitions:
     description: Used to transfer data in calls to the /admin/customers resource.
     type: object
     required:
-    - originator
-    - receiver
     - customerDetails
     properties:
       originator:
@@ -911,7 +918,20 @@ definitions:
         description: Date of birth
       contactNumber:
         type: string
-        description: The person's contact number
+        description: Mobile phone number of the customer to which the outcome of a transaction can be communicated. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).
+        pattern: '^\+?[1-9]\d{1,14}'
+      altContactHome:
+        type: string
+        description: An alternative home contact number. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).
+        pattern: '^\+?[1-9]\d{1,14}'
+      altContactWork:
+        type: string
+        description: An alternative work contact number. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).
+        pattern: '^\+?[1-9]\d{1,14}'
+      email:
+        type: string
+        format: email
+        description: The person's email address
   SlipData:
     description: Data that may be printed on the customer slip for information purposes.
     type: object
