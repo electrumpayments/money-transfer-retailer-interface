@@ -23,10 +23,10 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-@Path("/admin")
+@Path("/moneytransfer/v0/admin")
 
 @Api(description = "the admin API")
-public abstract class AdminResource implements IAdminResource {
+public abstract class AdminResource {
 
    protected abstract IAdminResource getResourceImplementation();
 
