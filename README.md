@@ -1,4 +1,4 @@
-lotto-service-interface
-=========================
+money-transfer-retailer-interface
+=================================
 
-Definition of messages for iThuba Lotto messaging.
+Definition of messages for Money transfer messaging.
