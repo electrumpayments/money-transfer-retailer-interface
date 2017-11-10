@@ -32,7 +32,7 @@ import io.swagger.annotations.Authorization;
 @Path("/moneytransfer/v0/orders")
 
 @Api(description = "the orders API")
-public abstract class OrdersResource implements IOrdersResource {
+public abstract class OrdersResource {
 
    protected abstract IOrdersResource getResourceImplementation();
 
