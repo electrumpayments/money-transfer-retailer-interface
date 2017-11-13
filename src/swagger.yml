@@ -17,7 +17,7 @@ info:
     * Order redemption. (a dual message pair transaction consisting of an online redeem authorization followed by a store-and-forward confirmation or reversal).
 
     Note that because of the requirements of different service providers, some fields that are optional according to this specification may be mandatory for certain providers. For guidelines on how to implement this API, please contact both Electrum and the relevant service provider(s).
-  version: 1.0.2
+  version: 1.0.3
   title: Money Transfer Service Interface
   contact:
     name: Electrum Support
