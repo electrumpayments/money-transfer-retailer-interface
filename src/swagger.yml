@@ -806,8 +806,6 @@ definitions:
     - receiver
     - thirdPartyIdentifiers
     - time
-    - paymentRef
-    - providerTranId
     properties:
       id:
         type: string
@@ -836,12 +834,9 @@ definitions:
         $ref: '#/definitions/Institution'
       slipData:
         $ref: "#/definitions/SlipData"
-      paymentRef:
+      orderId:
         type: string
-        description: Reference used by the service provider to identify the payment on their system.
-      providerTranId:
-        type: string
-        description: Reference used by the service provider to uniquely identify the money transfer order on their system.
+        description: Reference used by the service provider to uniquely identify the money transfer order on their system. This field can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef. Note that any reference issued by the provider that is specific to a particular leg of the order process should be set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own reference).
   MoneyTransferReversal:
     description: An advice that notifies that the outcome of an authorisation transaction be reversed. This can be either due to cashier cancellation, or upstream timeout.
     type: object
