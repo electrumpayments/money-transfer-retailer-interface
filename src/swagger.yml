@@ -489,9 +489,9 @@ definitions:
         - AUTHENTICATION_ERROR
       errorMessage:
         type: string
-        description: A short description of the error
+        description: A description of the error
         minLength: 0
-        maxLength: 40
+        maxLength: 80
       id:
         type: string
         description: The UUID of the message for which the error occurred.
