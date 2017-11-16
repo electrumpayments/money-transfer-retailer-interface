@@ -10,202 +10,204 @@
  * Do not edit the class manually.
  */
 
-
 package io.electrum.moneytransfer.model;
 
 import java.util.Objects;
+
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.*;
 
 /**
  * Details of a customer&#39;s address
  */
 @ApiModel(description = "Details of a customer's address")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2017-10-31T09:10:54.608Z")
-public class Address   {
-  @JsonProperty("addressLine1")
-  private String addressLine1 = null;
+public class Address {
+   @JsonProperty("addressLine1")
+   private String addressLine1 = null;
 
-  @JsonProperty("addressLine2")
-  private String addressLine2 = null;
+   @JsonProperty("addressLine2")
+   private String addressLine2 = null;
 
-  @JsonProperty("city")
-  private String city = null;
+   @JsonProperty("city")
+   private String city = null;
 
-  @JsonProperty("province")
-  private String province = null;
+   @JsonProperty("province")
+   private String province = null;
 
-  @JsonProperty("country")
-  private String country = null;
+   @JsonProperty("country")
+   private String country = null;
 
-  @JsonProperty("postCode")
-  private String postCode = null;
+   @JsonProperty("postCode")
+   private String postCode = null;
 
-  public Address addressLine1(String addressLine1) {
-    this.addressLine1 = addressLine1;
-    return this;
-  }
+   public Address addressLine1(String addressLine1) {
+      this.addressLine1 = addressLine1;
+      return this;
+   }
 
-  /**
-   * First line of street address.
-   * @return addressLine1
-   **/
-  @JsonProperty("addressLine1")
-  @ApiModelProperty(value = "First line of street address.")
-  public String getAddressLine1() {
-    return addressLine1;
-  }
+   /**
+    * First line of street address.
+    * 
+    * @return addressLine1
+    **/
+   @JsonProperty("addressLine1")
+   @ApiModelProperty(value = "First line of street address.")
+   public String getAddressLine1() {
+      return addressLine1;
+   }
 
-  public void setAddressLine1(String addressLine1) {
-    this.addressLine1 = addressLine1;
-  }
+   public void setAddressLine1(String addressLine1) {
+      this.addressLine1 = addressLine1;
+   }
 
-  public Address addressLine2(String addressLine2) {
-    this.addressLine2 = addressLine2;
-    return this;
-  }
+   public Address addressLine2(String addressLine2) {
+      this.addressLine2 = addressLine2;
+      return this;
+   }
 
-  /**
-   * Second line of street address (if required).
-   * @return addressLine2
-   **/
-  @JsonProperty("addressLine2")
-  @ApiModelProperty(value = "Second line of street address (if required).")
-  public String getAddressLine2() {
-    return addressLine2;
-  }
+   /**
+    * Second line of street address (if required).
+    * 
+    * @return addressLine2
+    **/
+   @JsonProperty("addressLine2")
+   @ApiModelProperty(value = "Second line of street address (if required).")
+   public String getAddressLine2() {
+      return addressLine2;
+   }
 
-  public void setAddressLine2(String addressLine2) {
-    this.addressLine2 = addressLine2;
-  }
+   public void setAddressLine2(String addressLine2) {
+      this.addressLine2 = addressLine2;
+   }
 
-  public Address city(String city) {
-    this.city = city;
-    return this;
-  }
+   public Address city(String city) {
+      this.city = city;
+      return this;
+   }
 
-  /**
-   * Get city
-   * @return city
-   **/
-  @JsonProperty("city")
-  @ApiModelProperty(value = "")
-  public String getCity() {
-    return city;
-  }
+   /**
+    * Get city
+    * 
+    * @return city
+    **/
+   @JsonProperty("city")
+   @ApiModelProperty(value = "")
+   public String getCity() {
+      return city;
+   }
 
-  public void setCity(String city) {
-    this.city = city;
-  }
+   public void setCity(String city) {
+      this.city = city;
+   }
 
-  public Address province(String province) {
-    this.province = province;
-    return this;
-  }
+   public Address province(String province) {
+      this.province = province;
+      return this;
+   }
 
-  /**
-   * Get province
-   * @return province
-   **/
-  @JsonProperty("province")
-  @ApiModelProperty(value = "")
-  public String getProvince() {
-    return province;
-  }
+   /**
+    * Get province
+    * 
+    * @return province
+    **/
+   @JsonProperty("province")
+   @ApiModelProperty(value = "")
+   public String getProvince() {
+      return province;
+   }
 
-  public void setProvince(String province) {
-    this.province = province;
-  }
+   public void setProvince(String province) {
+      this.province = province;
+   }
 
-  public Address country(String country) {
-    this.country = country;
-    return this;
-  }
+   public Address country(String country) {
+      this.country = country;
+      return this;
+   }
 
-  /**
-   * Country expressed as an ISO Alpha-2 code
-   * @return country
-   **/
-  @JsonProperty("country")
-  @ApiModelProperty(value = "Country expressed as an ISO Alpha-2 code")
- @Size(min=2,max=2)  public String getCountry() {
-    return country;
-  }
+   /**
+    * Country expressed as an ISO Alpha-2 code
+    * 
+    * @return country
+    **/
+   @JsonProperty("country")
+   @ApiModelProperty(value = "Country expressed as an ISO Alpha-2 code")
+   @Size(min = 2, max = 2)
+   public String getCountry() {
+      return country;
+   }
 
-  public void setCountry(String country) {
-    this.country = country;
-  }
+   public void setCountry(String country) {
+      this.country = country;
+   }
 
-  public Address postCode(String postCode) {
-    this.postCode = postCode;
-    return this;
-  }
+   public Address postCode(String postCode) {
+      this.postCode = postCode;
+      return this;
+   }
 
-  /**
-   * Get postCode
-   * @return postCode
-   **/
-  @JsonProperty("postCode")
-  @ApiModelProperty(value = "")
-  public String getPostCode() {
-    return postCode;
-  }
+   /**
+    * Get postCode
+    * 
+    * @return postCode
+    **/
+   @JsonProperty("postCode")
+   @ApiModelProperty(value = "")
+   public String getPostCode() {
+      return postCode;
+   }
 
-  public void setPostCode(String postCode) {
-    this.postCode = postCode;
-  }
+   public void setPostCode(String postCode) {
+      this.postCode = postCode;
+   }
 
+   @Override
+   public boolean equals(java.lang.Object o) {
+      if (this == o) {
+         return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+         return false;
+      }
+      Address address = (Address) o;
+      return Objects.equals(this.addressLine1, address.addressLine1)
+            && Objects.equals(this.addressLine2, address.addressLine2) && Objects.equals(this.city, address.city)
+            && Objects.equals(this.province, address.province) && Objects.equals(this.country, address.country)
+            && Objects.equals(this.postCode, address.postCode);
+   }
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Address address = (Address) o;
-    return Objects.equals(this.addressLine1, address.addressLine1) &&
-        Objects.equals(this.addressLine2, address.addressLine2) &&
-        Objects.equals(this.city, address.city) &&
-        Objects.equals(this.province, address.province) &&
-        Objects.equals(this.country, address.country) &&
-        Objects.equals(this.postCode, address.postCode);
-  }
+   @Override
+   public int hashCode() {
+      return Objects.hash(addressLine1, addressLine2, city, province, country, postCode);
+   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(addressLine1, addressLine2, city, province, country, postCode);
-  }
+   @Override
+   public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("class Address {\n");
 
+      sb.append("    addressLine1: ").append(toIndentedString(addressLine1)).append("\n");
+      sb.append("    addressLine2: ").append(toIndentedString(addressLine2)).append("\n");
+      sb.append("    city: ").append(toIndentedString(city)).append("\n");
+      sb.append("    province: ").append(toIndentedString(province)).append("\n");
+      sb.append("    country: ").append(toIndentedString(country)).append("\n");
+      sb.append("    postCode: ").append(toIndentedString(postCode)).append("\n");
+      sb.append("}");
+      return sb.toString();
+   }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Address {\n");
-    
-    sb.append("    addressLine1: ").append(toIndentedString(addressLine1)).append("\n");
-    sb.append("    addressLine2: ").append(toIndentedString(addressLine2)).append("\n");
-    sb.append("    city: ").append(toIndentedString(city)).append("\n");
-    sb.append("    province: ").append(toIndentedString(province)).append("\n");
-    sb.append("    country: ").append(toIndentedString(country)).append("\n");
-    sb.append("    postCode: ").append(toIndentedString(postCode)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+   /**
+    * Convert the given object to string with each line indented by 4 spaces (except the first line).
+    */
+   private String toIndentedString(java.lang.Object o) {
+      if (o == null) {
+         return "null";
+      }
+      return o.toString().replace("\n", "\n    ");
+   }
 }
-

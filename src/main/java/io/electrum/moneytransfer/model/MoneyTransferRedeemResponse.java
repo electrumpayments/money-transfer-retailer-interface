@@ -30,9 +30,7 @@ public class MoneyTransferRedeemResponse extends Transaction {
 
    private LedgerAmount amount = null;
 
-   private String paymentRef = null;
-
-   private String providerTranId = null;
+   private String orderId = null;
 
    /**
     * Get amount
@@ -50,46 +48,29 @@ public class MoneyTransferRedeemResponse extends Transaction {
       this.amount = amount;
    }
 
-   public MoneyTransferRedeemResponse paymentRef(String paymentRef) {
-      this.paymentRef = paymentRef;
+   public MoneyTransferRedeemResponse orderId(String orderId) {
+      this.orderId = orderId;
       return this;
    }
 
    /**
-    * Reference used by the service provider to identify the payment on their system.
+    * Reference used by the service provider to uniquely identify the money transfer order on their system. This field
+    * can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef.
+    * Note that any reference issued by the provider that is specific to a particular leg of the order process should be
+    * set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own
+    * reference).
     * 
-    * @return paymentRef
+    * @return orderId
     **/
-   @JsonProperty("paymentRef")
-   @ApiModelProperty(required = true, value = "Reference used by the service provider to identify the payment on their system.")
+   @JsonProperty("orderId")
+   @ApiModelProperty(required = true, value = "Reference used by the service provider to uniquely identify the money transfer order on their system. This field can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef. Note that any reference issued by the provider that is specific to a particular leg of the order process should be set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own reference).")
    @NotNull
-   public String getPaymentRef() {
-      return paymentRef;
+   public String getOrderId() {
+      return orderId;
    }
 
-   public void setPaymentRef(String paymentRef) {
-      this.paymentRef = paymentRef;
-   }
-
-   public MoneyTransferRedeemResponse providerTranId(String providerTranId) {
-      this.providerTranId = providerTranId;
-      return this;
-   }
-
-   /**
-    * Reference used by the service provider to uniquely identify the money transfer order on their system.
-    * 
-    * @return providerTranId
-    **/
-   @JsonProperty("providerTranId")
-   @ApiModelProperty(required = true, value = "Reference used by the service provider to uniquely identify the money transfer order on their system.")
-   @NotNull
-   public String getProviderTranId() {
-      return providerTranId;
-   }
-
-   public void setProviderTranId(String providerTranId) {
-      this.providerTranId = providerTranId;
+   public void setOrderId(String orderId) {
+      this.orderId = orderId;
    }
 
    @Override
@@ -107,8 +88,7 @@ public class MoneyTransferRedeemResponse extends Transaction {
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
-      sb.append("    paymentRef: ").append(Utils.toIndentedString(paymentRef)).append("\n");
-      sb.append("    providerTranId: ").append(Utils.toIndentedString(providerTranId)).append("\n");
+      sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

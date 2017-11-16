@@ -119,14 +119,14 @@ public class ErrorDetail {
    }
 
    /**
-    * A short description of the error
+    * A description of the error
     * 
     * @return errorMessage
     **/
    @JsonProperty("errorMessage")
-   @ApiModelProperty(required = true, value = "A short description of the error")
+   @ApiModelProperty(required = true, value = "A description of the error")
    @NotNull
-   @Size(min = 0, max = 40)
+   @Size(min = 0, max = 80)
    public String getErrorMessage() {
       return errorMessage;
    }

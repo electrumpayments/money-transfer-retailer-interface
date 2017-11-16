@@ -67,7 +67,7 @@ public abstract class AdminResource {
    @Path("/customers")
 
    @ApiOperation(value = "", notes = "Returns information of the customer's profile as "
-         + "registered on the service providers system.", response = MoneyTransferAdminMessage.class, authorizations = {
+         + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferAdminMessage.class),
          @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferAdminMessage.class),
