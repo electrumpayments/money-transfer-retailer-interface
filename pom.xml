@@ -205,7 +205,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin-->
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -227,7 +227,7 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
       <plugin>
         <groupId>org.jfrog.buildinfo</groupId>
         <artifactId>artifactory-maven-plugin</artifactId>
