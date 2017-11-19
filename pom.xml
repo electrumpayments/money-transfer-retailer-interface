@@ -6,7 +6,7 @@
   <artifactId>money-transfer-retailer-interface</artifactId>
   <version>${major-version}.${minor-version}.${patch-version}-RC1</version>
   <packaging>jar</packaging>
-  <name>Money Transfer Retailer Interface</name>
+  <name>money-transfer-retailer-interface</name>
   <description>Money Transfer Retailer Interface</description>
   <licenses>
     <license>
