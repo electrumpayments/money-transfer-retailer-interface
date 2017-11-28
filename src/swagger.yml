@@ -19,6 +19,7 @@ info:
     * Order redemption. (a dual message pair transaction consisting of an online redeem authorization followed by a store-and-forward confirmation or reversal).
     * [Optional] Creation and querying of customer profiles.
     * [Optional] Order lookup.
+    * [Optional] PIN changes.
 
     Note that because of the requirements of different service providers, some operations and fields that are optional according to this specification may be mandatory for certain providers. For guidelines on how to implement this API, please contact both Electrum and the relevant service provider(s).
   version: 1.1.0
@@ -411,6 +412,48 @@ paths:
           description: Accepted
           schema:
             $ref: '#/definitions/MoneyTransferReversal'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+        501:
+          description: Not implemented
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+        503:
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+        504:
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+      security:
+      - httpBasic: []
+  /orders/change-pin:
+    post:
+      description: Requests a change of the money transfer order's PIN, which will be delivered to customers by the service provider via a separate communication channel.
+      operationId: changePin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: A message containing the data required to change the money transfer order's PIN, as well as information about the point-of-sale from which the transaction originates.
+        required: true
+        schema:
+          $ref: '#/definitions/ChangePinRequest'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/ChangePinResponse'
         400:
           description: Bad request
           schema:
@@ -873,6 +916,60 @@ definitions:
         - TIMEOUT
         - CANCELLED
         - RESPONSE_NOT_FINAL
+  ChangePinRequest:
+    description: Used to submit data in a call to the changePin operation.
+    type: object
+    required:
+    - originator
+    - client
+    - receiver
+    - thirdPartyIdentifiers
+    - orderRedeemRef
+    - senderDetails
+    properties:
+      originator:
+        $ref: '#/definitions/Originator'
+      client:
+        $ref: '#/definitions/Institution'
+      receiver:
+        $ref: '#/definitions/Institution'
+      thirdPartyIdentifiers:
+        type: array
+        description: An array of identifiers which each identify the transaction within each entity's system.
+        items:
+          $ref: '#/definitions/ThirdPartyIdentifier'
+      orderRedeemRef:
+        type: string
+        description: Reference printed on the receipt on order creation.
+      senderDetails:
+        $ref: '#/definitions/PersonalDetails'
+  ChangePinResponse:
+    description: Contains the data returned by a call to the changePin operation.
+    type: object
+    required:
+    - originator
+    - client
+    - receiver
+    - thirdPartyIdentifiers
+    - orderRedeemRef
+    - senderDetails
+    properties:
+      originator:
+        $ref: '#/definitions/Originator'
+      client:
+        $ref: '#/definitions/Institution'
+      receiver:
+        $ref: '#/definitions/Institution'
+      thirdPartyIdentifiers:
+        type: array
+        description: An array of identifiers which each identify the transaction within each entity's system.
+        items:
+          $ref: '#/definitions/ThirdPartyIdentifier'
+      orderRedeemRef:
+        type: string
+        description: Reference printed on the receipt on order creation.
+      senderDetails:
+        $ref: '#/definitions/PersonalDetails'
   Originator:
     description: The Originator object encapsulates data relating to the originator of the transaction.
     type: object
