@@ -19,7 +19,7 @@ info:
     * Order redemption. (a dual message pair transaction consisting of an online redeem authorization followed by a store-and-forward confirmation or reversal).
     * [Optional] Creation and querying of customer profiles.
     * [Optional] Order lookup.
-    * [Optional] PIN changes.
+    * [Optional] PIN reset.
 
     Note that because of the requirements of different service providers, some operations and fields that are optional according to this specification may be mandatory for certain providers. For guidelines on how to implement this API, please contact both Electrum and the relevant service provider(s).
   version: 1.1.0
@@ -434,10 +434,10 @@ paths:
             $ref: '#/definitions/ErrorDetail'
       security:
       - httpBasic: []
-  /orders/change-pin:
+  /orders/pin-resets:
     post:
-      description: Requests a change of the money transfer order's PIN, which will be delivered to customers by the service provider via a separate communication channel.
-      operationId: changePin
+      description: Requests for a new PIN to be associated with an order. A randomly generated PIN will be delivered to the sending customer by the service provider via a separate communication channel. The original sending customer must initiate this process.
+      operationId: resetPin
       consumes:
       - application/json
       produces:
@@ -445,15 +445,15 @@ paths:
       parameters:
       - in: body
         name: body
-        description: A message containing the data required to change the money transfer order's PIN, as well as information about the point-of-sale from which the transaction originates.
+        description: A message containing the data required to reset the money transfer order's PIN, as well as information about the point-of-sale from which the transaction originates.
         required: true
         schema:
-          $ref: '#/definitions/ChangePinRequest'
+          $ref: '#/definitions/ResetPinRequest'
       responses:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/ChangePinResponse'
+            $ref: '#/definitions/ResetPinResponse'
         400:
           description: Bad request
           schema:
@@ -916,8 +916,8 @@ definitions:
         - TIMEOUT
         - CANCELLED
         - RESPONSE_NOT_FINAL
-  ChangePinRequest:
-    description: Used to submit data in a call to the changePin operation.
+  ResetPinRequest:
+    description: Used to submit data in a call to the resetPin operation.
     type: object
     required:
     - originator
@@ -942,9 +942,10 @@ definitions:
         type: string
         description: Reference printed on the receipt on order creation.
       senderDetails:
+        description: Personal details of the customer attempting the PIN reset, which should be the sending customer who originally created the order.
         $ref: '#/definitions/PersonalDetails'
-  ChangePinResponse:
-    description: Contains the data returned by a call to the changePin operation.
+  ResetPinResponse:
+    description: Contains the data returned by a call to the resetPin operation.
     type: object
     required:
     - originator
