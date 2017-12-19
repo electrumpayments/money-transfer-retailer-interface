@@ -38,6 +38,8 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    private String pinBlock = null;
 
+   private Boolean newCustomer = null;
+
    public MoneyTransferAuthRequest amount(LedgerAmount amount) {
       this.amount = amount;
       return this;
@@ -128,6 +130,26 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.pinBlock = pinBlock;
    }
 
+   public MoneyTransferAuthRequest newCustomer(Boolean newCustomer) {
+      this.newCustomer = newCustomer;
+      return this;
+   }
+
+   /**
+    * An optional flag indicating whether the customer placing the order is already registered on the provider's system.
+    * 
+    * @return newCustomer
+    **/
+   @JsonProperty("newCustomer")
+   @ApiModelProperty(value = "An optional flag indicating whether the customer placing the order is already registered on the provider's system.")
+   public Boolean getNewCustomer() {
+      return newCustomer;
+   }
+
+   public void setNewCustomer(Boolean newCustomer) {
+      this.newCustomer = newCustomer;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -146,6 +168,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
+      sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");
       sb.append("}");
       return sb.toString();
    }
