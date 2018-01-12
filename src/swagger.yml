@@ -656,7 +656,7 @@ definitions:
         description: Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
       newCustomer:
         type: boolean
-        description: An optional flag indicating whether the customer placing the order is already registered on the provider's system.
+        description: An optional flag indicating whether the customer placing the order has previously transacted with the provider.
   MoneyTransferAuthResponse:
     description: Contains the data returned by a call to the createOrder operation.
     type: object
