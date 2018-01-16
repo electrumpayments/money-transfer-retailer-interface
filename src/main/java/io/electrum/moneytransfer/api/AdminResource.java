@@ -65,7 +65,7 @@ public abstract class AdminResource {
 
    @GET
    @Path("/customers")
-
+   @Produces({ "application/json" })
    @ApiOperation(value = "", notes = "Returns information of the customer's profile as "
          + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
