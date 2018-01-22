@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>money-transfer-retailer-interface</artifactId>
-  <version>${major-version}.${minor-version}.${patch-version}-RC1</version>
+  <version>${major-version}.${minor-version}.${patch-version}</version>
   <packaging>jar</packaging>
   <name>money-transfer-retailer-interface</name>
   <description>Money Transfer Retailer Interface</description>
@@ -244,8 +244,7 @@
                 <contextUrl>${artifactory-url}/</contextUrl>
                 <username>${artifactory-username}</username>
                 <password>${artifactory-password}</password>
-                <repoKey>libs-release-local</repoKey>
-                <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
+                <repoKey>oss-local</repoKey>
               </publisher>
             </configuration>
           </execution>

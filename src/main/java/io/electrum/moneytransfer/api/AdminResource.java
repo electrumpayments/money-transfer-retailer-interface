@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-@Path("/moneytransfer/v0/admin")
+@Path("/moneytransfer/v1/admin")
 
 @Api(description = "the admin API")
 public abstract class AdminResource {
