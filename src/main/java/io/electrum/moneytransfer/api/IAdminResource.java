@@ -12,7 +12,7 @@ import javax.ws.rs.core.UriInfo;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 
 public interface IAdminResource {
-   void createOrUpdateCustomerImpl(
+   void createOrUpdateCustomer(
          MoneyTransferAdminMessage body,
          SecurityContext securityContext,
          Request request,
@@ -21,7 +21,7 @@ public interface IAdminResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void getCustomerInfoImpl(
+   void getCustomerInfo(
          @NotNull String idNumber,
          String merchantId,
          @NotNull String originatorInstId,
