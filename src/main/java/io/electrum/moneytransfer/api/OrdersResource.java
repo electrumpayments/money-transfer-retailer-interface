@@ -40,7 +40,7 @@ public abstract class OrdersResource {
    @Path("/confirmations")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Advises that a money transfer payment has been made successfully. "
+   @ApiOperation(value = "confirmPayment", notes = "Advises that a money transfer payment has been made successfully. "
          + "This is treated as a store-and-forward transaction. Upon receipt, the Electrum service will "
          + "respond immediately to acknowledge receipt and place the message on a queue for guaranteed "
          + "delivery to the service provider. If the service provider does not support positive advice "
@@ -74,7 +74,7 @@ public abstract class OrdersResource {
    @Path("/redemptions/confirmations")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Advises that a money transfer order has been successfully redeemed. "
+   @ApiOperation(value = "confirmRedeem", notes = "Advises that a money transfer order has been successfully redeemed. "
          + "This is treated as a store-and-forward transaction. Upon receipt, the Electrum service will "
          + "respond immediately to acknowledge receipt and place the message on a queue for guaranteed "
          + "delivery to the service provider. If the service provider does not support positive advice "
@@ -101,7 +101,7 @@ public abstract class OrdersResource {
    @POST
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Requests that an order be created for the specified payment amount. "
+   @ApiOperation(value = "createOrder", notes = "Requests that an order be created for the specified payment amount. "
          + "The request is treated as an online financial authorization message. If the client calling this "
          + "resource does not receive a response, then a `reversePayment` call must be made to the "
          + "`/orders/reversals` resource to ensure the transaction is cancelled with no financial "
@@ -129,7 +129,7 @@ public abstract class OrdersResource {
 
    @GET
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Queries the details of an existing money transfer "
+   @ApiOperation(value = "lookupOrder", notes = "Queries the details of an existing money transfer "
          + "order.", response = MoneyTransferLookupResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferLookupResponse.class),
@@ -170,7 +170,7 @@ public abstract class OrdersResource {
    @Path("/redemptions")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Requests that an existing order be paid out to the recipient. "
+   @ApiOperation(value = "redeemOrder", notes = "Requests that an existing order be paid out to the recipient. "
          + "The request is treated as an online financial authorization message. If the client "
          + "calling this resource does not receive a response, then a `reverseRedeem` call must "
          + "be made to the `/orders/redemptions/reversals` resource to ensure the transaction is "
@@ -200,7 +200,7 @@ public abstract class OrdersResource {
    @Path("/reversals")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Requests that a money transfer payment be reversed. "
+   @ApiOperation(value = "reversePayment", notes = "Requests that a money transfer payment be reversed. "
          + "This is treated as a store-and-forward transaction. Upon receipt, the Electrum "
          + "service will respond immediately to acknowledge receipt and place the message "
          + "on a queue for guaranteed delivery to the service provider.", response = MoneyTransferReversal.class, authorizations = {
@@ -233,7 +233,7 @@ public abstract class OrdersResource {
    @Path("/redemptions/reversals")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Requests that a money transfer redemption be reversed. "
+   @ApiOperation(value = "reverseRedeem", notes = "Requests that a money transfer redemption be reversed. "
          + "This is treated as a store-and-forward transaction. Upon receipt, the Electrum "
          + "service will respond immediately to acknowledge receipt and place the message on "
          + "a queue for guaranteed delivery to the service provider.", response = MoneyTransferReversal.class, authorizations = {

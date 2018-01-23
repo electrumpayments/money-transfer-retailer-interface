@@ -34,7 +34,7 @@ public abstract class AdminResource {
    @Path("/customers")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Request to create a new or update an existing customer "
+   @ApiOperation(value = "getCustomerInfo", notes = "Request to create a new or update an existing customer "
          + "profile on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 201, message = "Created", response = MoneyTransferAdminMessage.class),
@@ -66,7 +66,7 @@ public abstract class AdminResource {
    @GET
    @Path("/customers")
    @Produces({ "application/json" })
-   @ApiOperation(value = "", notes = "Returns information of the customer's profile as "
+   @ApiOperation(value = "createOrder", notes = "Returns information of the customer's profile as "
          + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferAdminMessage.class),
