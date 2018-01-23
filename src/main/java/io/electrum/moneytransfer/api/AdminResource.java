@@ -53,7 +53,7 @@ public abstract class AdminResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().createOrUpdateCustomerImpl(
+      getResourceImplementation().createOrUpdateCustomer(
             body,
             securityContext,
             request,
@@ -90,7 +90,7 @@ public abstract class AdminResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().getCustomerInfoImpl(
+      getResourceImplementation().getCustomerInfo(
             idNumber,
             merchantId,
             originatorInstId,
