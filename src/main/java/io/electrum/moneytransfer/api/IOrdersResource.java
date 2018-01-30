@@ -14,7 +14,7 @@ import io.electrum.moneytransfer.model.MoneyTransferRedeemRequest;
 import io.electrum.moneytransfer.model.MoneyTransferReversal;
 
 public interface IOrdersResource {
-   void confirmPaymentImpl(
+   void confirmPayment(
          MoneyTransferConfirmation body,
          SecurityContext securityContext,
          Request request,
@@ -23,7 +23,7 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void confirmRedeemImpl(
+   void confirmRedeem(
          MoneyTransferConfirmation body,
          SecurityContext securityContext,
          Request request,
@@ -32,7 +32,7 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void createOrderImpl(
+   void createOrder(
          MoneyTransferAuthRequest body,
          SecurityContext securityContext,
          Request request,
@@ -41,7 +41,7 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void lookupOrderImpl(
+   void lookupOrder(
          @NotNull String orderRedeemRef,
          String merchantId,
          @NotNull String originatorInstId,
@@ -53,7 +53,7 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void redeemOrderImpl(
+   void redeemOrder(
          MoneyTransferRedeemRequest body,
          SecurityContext securityContext,
          Request request,
@@ -62,7 +62,7 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void reversePaymentImpl(
+   void reversePayment(
          MoneyTransferReversal body,
          SecurityContext securityContext,
          Request request,
@@ -71,7 +71,7 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   void reverseRedeemImpl(
+   void reverseRedeem(
          MoneyTransferReversal body,
          SecurityContext securityContext,
          Request request,
