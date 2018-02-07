@@ -654,6 +654,9 @@ definitions:
         type: string
         pattern: "[a-fA-F0-9]{16}"
         description: Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
+      newCustomer:
+        type: boolean
+        description: An optional flag indicating whether the customer placing the order is already registered on the provider's system.
   MoneyTransferAuthResponse:
     description: Contains the data returned by a call to the createOrder operation.
     type: object
@@ -984,4 +987,3 @@ definitions:
       transactionIdentifier:
         type: string
         description: The identifier assigned to this transaction by the institution represented in institutionId. This value should be unique within the institution's system.
-
