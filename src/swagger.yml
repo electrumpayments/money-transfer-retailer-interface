@@ -604,6 +604,9 @@ definitions:
         $ref: '#/definitions/Institution'
       customerDetails:
         $ref: '#/definitions/PersonalDetails'
+      customerId:
+        type: string
+        description: Unique ID on the upstream Service Provider's system to identify a Customer.
   MoneyTransferAuthRequest:
     description: Used to submit data in a call to the createOrder operation.
     type: object
@@ -650,6 +653,9 @@ definitions:
         $ref: '#/definitions/PersonalDetails'
       recipientDetails:
         $ref: '#/definitions/PersonalDetails'
+      customerId:
+        type: string
+        description: Unique ID on the upstream Service Provider's system to identify a Customer.
       pinBlock:
         type: string
         pattern: "[a-fA-F0-9]{16}"
@@ -798,6 +804,9 @@ definitions:
         description: The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed. Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original request.
         items:
           $ref: '#/definitions/ThirdPartyIdentifier'
+      customerId:
+        type: string
+        description: Unique ID on the upstream Service Provider's system to identify a Customer.
   MoneyTransferRedeemResponse:
     description: Contains the data returned by a call to the redeemOrder operation.
     type: object
@@ -865,6 +874,9 @@ definitions:
         description: The unaltered thirdPartyIdentifiers array as supplied in the response message of the request to be reversed. Required if thirdPartyIdentifiers field was present in the response. If no thirdPartyIdentifiers was received in the response or no response was received then this should be set to the thirdPartyIdentifiers sent in the original request.
         items:
           $ref: '#/definitions/ThirdPartyIdentifier'
+      customerId:
+        type: string
+        description: Unique ID on the upstream Service Provider's system to identify a Customer.
       reversalReason:
         type: string
         description: The reason for the reversal

@@ -1,16 +1,14 @@
 package io.electrum.moneytransfer.model;
 
-import java.util.Objects;
-
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Used to transfer data in calls to the /admin/customers resource.
@@ -26,6 +24,9 @@ public class MoneyTransferAdminMessage {
    @JsonProperty("customerDetails")
    private PersonalDetails customerDetails = null;
 
+   @JsonProperty("customerId")
+   private String customerId = null;
+
    public MoneyTransferAdminMessage originator(Originator originator) {
       this.originator = originator;
       return this;
@@ -33,7 +34,7 @@ public class MoneyTransferAdminMessage {
 
    /**
     * Get originator
-    * 
+    *
     * @return originator
     **/
    @JsonProperty("originator")
@@ -54,7 +55,7 @@ public class MoneyTransferAdminMessage {
 
    /**
     * Get receiver
-    * 
+    *
     * @return receiver
     **/
    @JsonProperty("receiver")
@@ -75,7 +76,7 @@ public class MoneyTransferAdminMessage {
 
    /**
     * Get customerDetails
-    * 
+    *
     * @return customerDetails
     **/
    @JsonProperty("customerDetails")
@@ -89,6 +90,25 @@ public class MoneyTransferAdminMessage {
       this.customerDetails = customerDetails;
    }
 
+   /**
+    * Get customerDetails
+    *
+    * @return customerDetails
+    **/
+   @JsonProperty("customerDetails")
+   public String getCustomerId() {
+      return customerId;
+   }
+
+   public void setCustomerId(String customerId) {
+      this.customerId = customerId;
+   }
+
+   public MoneyTransferAdminMessage customerId(String customerId) {
+      this.customerId = customerId;
+      return this;
+   }
+
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -98,9 +118,10 @@ public class MoneyTransferAdminMessage {
          return false;
       }
       MoneyTransferAdminMessage moneyTransferAdminMessage = (MoneyTransferAdminMessage) o;
-      return Objects.equals(this.originator, moneyTransferAdminMessage.originator)
-            && Objects.equals(this.receiver, moneyTransferAdminMessage.receiver)
-            && Objects.equals(this.customerDetails, moneyTransferAdminMessage.customerDetails);
+      return Objects.equals(this.originator, moneyTransferAdminMessage.originator) && Objects.equals(
+            this.receiver, moneyTransferAdminMessage.receiver) && Objects.equals(
+            this.customerDetails, moneyTransferAdminMessage.customerDetails) && Objects.equals(
+            this.customerId, moneyTransferAdminMessage.customerId);
    }
 
    @Override
@@ -116,6 +137,7 @@ public class MoneyTransferAdminMessage {
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    customerDetails: ").append(Utils.toIndentedString(customerDetails)).append("\n");
+      sb.append("    customerId: ").append(Utils.toIndentedString(customerId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

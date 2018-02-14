@@ -1,19 +1,21 @@
 package io.electrum.moneytransfer.model;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicAdvice;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
+import org.joda.time.DateTime;
+
+import java.util.List;
 
 /**
  * An advice that notifies of the positive completion of a transaction.
  */
 @ApiModel(description = "An advice that notifies of the positive completion of a transaction.")
 public class MoneyTransferConfirmation extends BasicAdvice {
+
+   private String customerId = null;
 
    public MoneyTransferConfirmation id(String id) {
       this.id = id;
@@ -40,6 +42,25 @@ public class MoneyTransferConfirmation extends BasicAdvice {
       return this;
    }
 
+   /**
+    * Get customerDetails
+    *
+    * @return customerDetails
+    **/
+   @JsonProperty("customerDetails")
+   public String getCustomerId() {
+      return customerId;
+   }
+
+   public void setCustomerId(String customerId) {
+      this.customerId = customerId;
+   }
+
+   public MoneyTransferConfirmation customerId(String customerId) {
+      this.customerId = customerId;
+      return this;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -49,6 +70,7 @@ public class MoneyTransferConfirmation extends BasicAdvice {
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    customerId: ").append(Utils.toIndentedString(customerId)).append("\n");
       sb.append("}");
       return sb.toString();
    }
