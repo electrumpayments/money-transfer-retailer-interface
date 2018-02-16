@@ -179,12 +179,12 @@ public class PersonalDetails {
    }
 
    /**
-    * Nationality expressed as an ISO Alpha-2 country code
+    * Nationality expressed as an ISO 3166-1 Alpha-2 country code
     * 
     * @return nationality
     **/
    @JsonProperty("nationality")
-   @ApiModelProperty(value = "Nationality expressed as an ISO Alpha-2 country code")
+   @ApiModelProperty(value = "Nationality expressed as an ISO 3166-1 Alpha-2 country code")
    @Size(min = 2, max = 2)
    public String getNationality() {
       return nationality;

@@ -119,12 +119,12 @@ public class Address {
    }
 
    /**
-    * Country expressed as an ISO Alpha-2 code
+    * Country expressed as an ISO 3166-1 Alpha-2 code
     * 
     * @return country
     **/
    @JsonProperty("country")
-   @ApiModelProperty(value = "Country expressed as an ISO Alpha-2 code")
+   @ApiModelProperty(value = "Country expressed as an ISO 3166-1 Alpha-2 code")
    @Size(min = 2, max = 2)
    public String getCountry() {
       return country;
