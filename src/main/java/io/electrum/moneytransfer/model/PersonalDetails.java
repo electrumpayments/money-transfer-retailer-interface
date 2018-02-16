@@ -31,6 +31,9 @@ public class PersonalDetails {
    @JsonProperty("idType")
    private String idType = null;
 
+   @JsonProperty("idCountryCode")
+   private String idCountryCode = null;
+
    @JsonProperty("nationality")
    private String nationality = null;
 
@@ -147,6 +150,27 @@ public class PersonalDetails {
 
    public void setIdType(String idType) {
       this.idType = idType;
+   }
+
+   public PersonalDetails idCountryCode(String idCountryCode) {
+      this.idCountryCode = idCountryCode;
+      return this;
+   }
+
+   /**
+    * Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code
+    *
+    * @return idCountryCode
+    **/
+   @JsonProperty("idCountryCode")
+   @ApiModelProperty(value = "Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code")
+   @Size(min = 2, max = 2)
+   public String getIdCountryCode() {
+      return idCountryCode;
+   }
+
+   public void setIdCountryCode(String idCountryCode) {
+      this.idCountryCode = idCountryCode;
    }
 
    public PersonalDetails nationality(String nationality) {

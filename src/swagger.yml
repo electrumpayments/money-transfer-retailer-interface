@@ -907,6 +907,9 @@ definitions:
       idType:
         type: string
         description: Type of identification document
+      idCountryCode:
+        type: string
+        description: Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code
       nationality:
         type: string
         description: Nationality expressed as an ISO Alpha-2 country code
