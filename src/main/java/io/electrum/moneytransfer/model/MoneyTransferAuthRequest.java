@@ -25,7 +25,7 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    private String pinBlock = null;
 
-   private String customerId = null;
+   private String customerProfileId = null;
 
    private Boolean newCustomer = null;
 
@@ -125,17 +125,17 @@ public class MoneyTransferAuthRequest extends Transaction {
     *
     * @return customerDetails
     **/
-   @JsonProperty("customerDetails")
-   public String getCustomerId() {
-      return customerId;
+   @JsonProperty("customerProfileId")
+   public String getCustomerProfileId() {
+      return customerProfileId;
    }
 
-   public void setCustomerId(String customerId) {
-      this.customerId = customerId;
+   public void setCustomerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
    }
 
-   public MoneyTransferAuthRequest customerId(String customerId) {
-      this.customerId = customerId;
+   public MoneyTransferAuthRequest customerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
       return this;
    }
 
@@ -178,7 +178,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
-      sb.append("    customerId: ").append(Utils.toIndentedString(customerId)).append("\n");
+      sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");
       sb.append("}");
       return sb.toString();

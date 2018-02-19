@@ -24,8 +24,8 @@ public class MoneyTransferAdminMessage {
    @JsonProperty("customerDetails")
    private PersonalDetails customerDetails = null;
 
-   @JsonProperty("customerId")
-   private String customerId = null;
+   @JsonProperty("customerProfileId")
+   private String customerProfileId = null;
 
    public MoneyTransferAdminMessage originator(Originator originator) {
       this.originator = originator;
@@ -91,21 +91,21 @@ public class MoneyTransferAdminMessage {
    }
 
    /**
-    * Get customerDetails
+    * Get customerProfileId
     *
-    * @return customerDetails
+    * @return customerProfileId
     **/
-   @JsonProperty("customerDetails")
-   public String getCustomerId() {
-      return customerId;
+   @JsonProperty("customerProfileId")
+   public String getCustomerProfileId() {
+      return customerProfileId;
    }
 
-   public void setCustomerId(String customerId) {
-      this.customerId = customerId;
+   public void setCustomerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
    }
 
-   public MoneyTransferAdminMessage customerId(String customerId) {
-      this.customerId = customerId;
+   public MoneyTransferAdminMessage customerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
       return this;
    }
 
@@ -121,12 +121,12 @@ public class MoneyTransferAdminMessage {
       return Objects.equals(this.originator, moneyTransferAdminMessage.originator) && Objects.equals(
             this.receiver, moneyTransferAdminMessage.receiver) && Objects.equals(
             this.customerDetails, moneyTransferAdminMessage.customerDetails) && Objects.equals(
-            this.customerId, moneyTransferAdminMessage.customerId);
+            this.customerProfileId, moneyTransferAdminMessage.customerProfileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(originator, receiver, customerDetails);
+      return Objects.hash(originator, receiver, customerDetails, customerProfileId);
    }
 
    @Override
@@ -137,7 +137,7 @@ public class MoneyTransferAdminMessage {
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    customerDetails: ").append(Utils.toIndentedString(customerDetails)).append("\n");
-      sb.append("    customerId: ").append(Utils.toIndentedString(customerId)).append("\n");
+      sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

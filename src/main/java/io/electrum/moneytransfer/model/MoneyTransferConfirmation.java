@@ -15,8 +15,6 @@ import java.util.List;
 @ApiModel(description = "An advice that notifies of the positive completion of a transaction.")
 public class MoneyTransferConfirmation extends BasicAdvice {
 
-   private String customerId = null;
-
    public MoneyTransferConfirmation id(String id) {
       this.id = id;
       return this;
@@ -42,25 +40,6 @@ public class MoneyTransferConfirmation extends BasicAdvice {
       return this;
    }
 
-   /**
-    * Get customerDetails
-    *
-    * @return customerDetails
-    **/
-   @JsonProperty("customerDetails")
-   public String getCustomerId() {
-      return customerId;
-   }
-
-   public void setCustomerId(String customerId) {
-      this.customerId = customerId;
-   }
-
-   public MoneyTransferConfirmation customerId(String customerId) {
-      this.customerId = customerId;
-      return this;
-   }
-
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -70,7 +49,6 @@ public class MoneyTransferConfirmation extends BasicAdvice {
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    customerId: ").append(Utils.toIndentedString(customerId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

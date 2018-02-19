@@ -1,6 +1,5 @@
 package io.electrum.moneytransfer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicReversal;
 import io.electrum.vas.model.ThirdPartyIdentifier;
@@ -16,8 +15,6 @@ import java.util.List;
 @ApiModel(
       description = "An advice that notifies that the outcome of an authorisation transaction be reversed. This can be either due to cashier cancellation, or upstream timeout.")
 public class MoneyTransferReversal extends BasicReversal {
-
-   private String customerId = null;
 
    public MoneyTransferReversal id(String id) {
       this.id = id;
@@ -46,25 +43,6 @@ public class MoneyTransferReversal extends BasicReversal {
 
    public MoneyTransferReversal reversalReason(ReversalReason reversalReason) {
       this.reversalReason = reversalReason;
-      return this;
-   }
-
-   /**
-    * Get customerDetails
-    *
-    * @return customerDetails
-    **/
-   @JsonProperty("customerDetails")
-   public String getCustomerId() {
-      return customerId;
-   }
-
-   public void setCustomerId(String customerId) {
-      this.customerId = customerId;
-   }
-
-   public MoneyTransferReversal customerId(String customerId) {
-      this.customerId = customerId;
       return this;
    }
 
