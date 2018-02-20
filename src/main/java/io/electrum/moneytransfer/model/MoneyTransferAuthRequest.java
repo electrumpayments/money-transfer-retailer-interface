@@ -82,12 +82,12 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    /**
-    * Personal details of a customer.
+    * Personal details of a recipient.
     *
     * @return recipientDetails
     **/
    @JsonProperty("recipientDetails")
-   @ApiModelProperty(required = true, value = "Personal details of a customer.")
+   @ApiModelProperty(required = true, value = "Personal details of a recipient.")
    @NotNull
    public PersonalDetails getRecipientDetails() {
       return recipientDetails;
@@ -121,11 +121,12 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    /**
-    * Get customerDetails
+    * Uniquely identifies a customer's profile on the upstream entity's system.
     *
-    * @return customerDetails
+    * @return customerProfileId
     **/
    @JsonProperty("customerProfileId")
+   @ApiModelProperty(value = "Uniquely identifies customer's profile on the upstream entity's system.")
    public String getCustomerProfileId() {
       return customerProfileId;
    }

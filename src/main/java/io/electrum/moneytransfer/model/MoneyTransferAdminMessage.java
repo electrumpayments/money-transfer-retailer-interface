@@ -91,11 +91,12 @@ public class MoneyTransferAdminMessage {
    }
 
    /**
-    * Get customerProfileId
+    * Uniquely identifies customer's profile on the upstream entity's system.
     *
     * @return customerProfileId
     **/
    @JsonProperty("customerProfileId")
+   @ApiModelProperty(value = "Uniquely identifies customer's profile on the upstream entity's system.")
    public String getCustomerProfileId() {
       return customerProfileId;
    }
