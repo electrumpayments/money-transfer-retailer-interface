@@ -15,6 +15,7 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import io.electrum.moneytransfer.model.ErrorDetail;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,11 +56,11 @@ public abstract class AdminResource {
          + "profile on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 201, message = "Created", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferAdminMessage.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void createOrUpdateCustomer(
          @ApiParam(value = "A message containing the data required to carry out the admin "
                + "request, as well as information about the point-of-sale from which the "
@@ -87,11 +88,11 @@ public abstract class AdminResource {
          + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferAdminMessage.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferAdminMessage.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getCustomerInfo(
          @ApiParam(value = "National identity number of the customer.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.ID_NUMBER) String idNumber,
 
