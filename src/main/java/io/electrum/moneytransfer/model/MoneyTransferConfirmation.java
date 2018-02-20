@@ -1,13 +1,13 @@
 package io.electrum.moneytransfer.model;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicAdvice;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
+import org.joda.time.DateTime;
+
+import java.util.List;
 
 /**
  * An advice that notifies of the positive completion of a transaction.

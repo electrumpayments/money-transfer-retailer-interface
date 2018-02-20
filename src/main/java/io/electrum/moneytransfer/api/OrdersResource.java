@@ -15,6 +15,7 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import io.electrum.moneytransfer.model.ErrorDetail;
 import io.electrum.moneytransfer.model.MoneyTransferAuthRequest;
 import io.electrum.moneytransfer.model.MoneyTransferAuthResponse;
 import io.electrum.moneytransfer.model.MoneyTransferConfirmation;
@@ -88,11 +89,11 @@ public abstract class OrdersResource {
          + "messages, then this is simply stored for reporting purposes.", response = MoneyTransferConfirmation.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferConfirmation.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void confirmPayment(
          @ApiParam(value = "A payment confirmation.", required = true) MoneyTransferConfirmation body,
          @Context SecurityContext securityContext,
@@ -122,11 +123,11 @@ public abstract class OrdersResource {
          + "messages, then this is simply stored for reporting purposes.", response = MoneyTransferConfirmation.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = ConfirmRedeem.SUCCESS, message = "Accepted", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferConfirmation.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferConfirmation.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void confirmRedeem(
          @ApiParam(value = "A redemption confirmation.", required = true) MoneyTransferConfirmation body,
          @Context SecurityContext securityContext,
@@ -149,11 +150,11 @@ public abstract class OrdersResource {
          + "impact.", response = MoneyTransferAuthResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = CreateOrder.SUCCESS, message = "Created", response = MoneyTransferAuthResponse.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferAuthResponse.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferAuthResponse.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferAuthResponse.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferAuthResponse.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferAuthResponse.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void createOrder(
          @ApiParam(value = "A message containing the data required to carry out the payment order, as well as "
                + "information about the point-of-sale from which the transaction originates.", required = true) MoneyTransferAuthRequest body,
@@ -174,11 +175,11 @@ public abstract class OrdersResource {
          + "order.", response = MoneyTransferLookupResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = LookupOrder.SUCCESS, message = "OK", response = MoneyTransferLookupResponse.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferLookupResponse.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferLookupResponse.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferLookupResponse.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferLookupResponse.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferLookupResponse.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void lookupOrder(
          @ApiParam(value = "Reference used by the recipient to redeem the order.", required = true) @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) String orderRedeemRef,
 
@@ -218,11 +219,11 @@ public abstract class OrdersResource {
          + "cancelled with no financial impact.", response = MoneyTransferRedeemResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = RedeemOrder.SUCCESS, message = "OK", response = MoneyTransferRedeemResponse.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferRedeemResponse.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferRedeemResponse.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferRedeemResponse.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferRedeemResponse.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferRedeemResponse.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void redeemOrder(
          @ApiParam(value = "A message containing the data required to redeem the order, "
                + "as well as information about the point-of-sale from which the transaction "
@@ -247,11 +248,11 @@ public abstract class OrdersResource {
          + "on a queue for guaranteed delivery to the service provider.", response = MoneyTransferReversal.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = ReversePayment.SUCCESS, message = "Accepted", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferReversal.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void reversePayment(
          @ApiParam(value = "A payment reversal.", required = true) MoneyTransferReversal body,
          @Context SecurityContext securityContext,
@@ -280,11 +281,11 @@ public abstract class OrdersResource {
          + "a queue for guaranteed delivery to the service provider.", response = MoneyTransferReversal.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = ReverseRedeem.SUCCESS, message = "Accepted", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 400, message = "Bad request", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = MoneyTransferReversal.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = MoneyTransferReversal.class) })
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void reverseRedeem(
          @ApiParam(value = "A redemption reversal.", required = true) MoneyTransferReversal body,
          @Context SecurityContext securityContext,
