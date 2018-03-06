@@ -1,15 +1,16 @@
 package io.electrum.moneytransfer.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  * Used to submit data in a call to the createOrder operation.
@@ -29,18 +30,20 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    private Boolean newCustomer = null;
 
+   private LedgerAmount fee = null;
+
    public MoneyTransferAuthRequest amount(LedgerAmount amount) {
       this.amount = amount;
       return this;
    }
 
    /**
-    * Get amount
+    * The amount to be transferred.
     *
     * @return amount
     **/
    @JsonProperty("amount")
-   @ApiModelProperty(required = true, value = "")
+   @ApiModelProperty(required = true, value = "The amount to be transferred.")
    @NotNull
    public LedgerAmount getAmount() {
       return amount;
@@ -108,8 +111,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     * @return pinBlock
     **/
    @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true,
-         value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
+   @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
    @NotNull
    @Pattern(regexp = "[a-fA-F0-9]{16}")
    public String getPinBlock() {
@@ -151,8 +153,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     * @return newCustomer
     **/
    @JsonProperty("newCustomer")
-   @ApiModelProperty(
-         value = "An optional flag indicating whether the customer placing the order is already registered on the provider's system.")
+   @ApiModelProperty(value = "An optional flag indicating whether the customer placing the order is already registered on the provider's system.")
    public Boolean getNewCustomer() {
       return newCustomer;
    }
@@ -161,11 +162,25 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.newCustomer = newCustomer;
    }
 
+   /**
+    * The fee that will be charged on this transaction, as accepted by the sender.
+    *
+    * @return fee
+    **/
+   @JsonProperty("fee")
+   @ApiModelProperty(value = "The fee that will be charged on this transaction, as accepted by the sender.")
+   public LedgerAmount getFee() {
+      return fee;
+   }
+
+   public void setFee(LedgerAmount fee) {
+      this.fee = fee;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class MoneyTransferAuthRequest {\n");
-
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
@@ -181,6 +196,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");
+      sb.append("    fee: ").append(Utils.toIndentedString(fee)).append("\n");
       sb.append("}");
       return sb.toString();
    }

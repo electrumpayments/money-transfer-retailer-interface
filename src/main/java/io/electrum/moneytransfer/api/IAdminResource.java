@@ -32,4 +32,18 @@ public interface IAdminResource {
          AsyncResponse asyncResponse,
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest) throws NotFoundException;
+
+   void getFeeQuote(
+         @NotNull Long amount,
+         @NotNull Boolean amountIncludesFee,
+         String idNumber,
+         String merchantId,
+         @NotNull String originatorInstId,
+         @NotNull String receiverId,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest) throws NotFoundException;
 }

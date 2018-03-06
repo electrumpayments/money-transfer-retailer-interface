@@ -17,6 +17,7 @@ import javax.ws.rs.core.UriInfo;
 
 import io.electrum.moneytransfer.model.ErrorDetail;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
+import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,6 +47,20 @@ public abstract class AdminResource {
    public class CreateOrUpdateCustomer {
       public static final String CREATE_OR_UPDATE_CUSTOMER = "createOrUpdateCustomer";
       public static final int SUCCESS = 201;
+   }
+
+   public class GetFeeQuote {
+      public static final String GET_FEE_QUOTE = "getFeeQuote";
+      public static final int SUCCESS = 200;
+
+      public class QueryParameters {
+         public static final String AMOUNT = "amount";
+         public static final String AMOUNT_INCLUDES_FEE = "amountIncludesFee";
+         public static final String ID_NUMBER = "idNumber";
+         public static final String MERCHANT_ID = "merchantId";
+         public static final String ORIGINATOR_INST_ID = "originatorInstId";
+         public static final String RECEIVER_ID = "receiverId";
+      }
    }
 
    @POST
@@ -109,6 +124,51 @@ public abstract class AdminResource {
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
       getResourceImplementation().getCustomerInfo(
+            idNumber,
+            merchantId,
+            originatorInstId,
+            receiverId,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
+   }
+
+   @GET
+   @Path("/fees")
+   @Produces({ "application/json" })
+   @ApiOperation(value = GetFeeQuote.GET_FEE_QUOTE, notes = "Returns the fee that will be charged to the customer for the transfer.", response = MoneyTransferFeeQuote.class, authorizations = {
+         @Authorization(value = "httpBasic") }, tags = {})
+   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferFeeQuote.class),
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
+   public final void getFeeQuote(
+         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) Long amount,
+
+         @ApiParam(value = "Whether or not the amount is inclusive of the fee.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT_INCLUDES_FEE) Boolean amountIncludesFee,
+
+         @ApiParam(value = "National identity number of the customer.") @QueryParam(GetFeeQuote.QueryParameters.ID_NUMBER) String idNumber,
+
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(GetFeeQuote.QueryParameters.MERCHANT_ID) String merchantId,
+
+         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.", required = true) @QueryParam(GetFeeQuote.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
+
+         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.RECEIVER_ID) String receiverId,
+
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation().getFeeQuote(
+            amount,
+            amountIncludesFee,
             idNumber,
             merchantId,
             originatorInstId,
