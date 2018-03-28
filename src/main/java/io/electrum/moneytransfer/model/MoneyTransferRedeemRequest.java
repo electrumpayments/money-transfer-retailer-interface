@@ -1,14 +1,15 @@
 package io.electrum.moneytransfer.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  * Used to submit data in a call to the redeemOrder operation.
@@ -22,8 +23,6 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    private String orderRedeemRef = null;
 
-   private PersonalDetails recipient = null;
-
    public MoneyTransferRedeemRequest amount(LedgerAmount amount) {
       this.amount = amount;
       return this;
@@ -31,7 +30,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    /**
     * Get amount
-    *
+    * 
     * @return amount
     **/
    @JsonProperty("amount")
@@ -51,12 +50,11 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    /**
     * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
-    *
+    * 
     * @return pinBlock
     **/
    @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true,
-         value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
+   @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
    @NotNull
    @Pattern(regexp = "[a-fA-F0-9]{16}")
    public String getPinBlock() {
@@ -74,7 +72,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    /**
     * Reference used by the recipient to redeem the order.
-    *
+    * 
     * @return orderRedeemRef
     **/
    @JsonProperty("orderRedeemRef")
@@ -86,26 +84,6 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    public void setOrderRedeemRef(String orderRedeemRef) {
       this.orderRedeemRef = orderRedeemRef;
-   }
-
-   public MoneyTransferRedeemRequest recipient(PersonalDetails recipient) {
-      this.recipient = recipient;
-      return this;
-   }
-
-   /**
-    * Recipient who is redeeming the order. Optional.
-    *
-    * @return recipient
-    **/
-   @JsonProperty("recipient")
-   @ApiModelProperty(value = "Recipient who is redeeming the order. Optional.")
-   public PersonalDetails getRecipient() {
-      return recipient;
-   }
-
-   public void setRecipient(PersonalDetails recipient) {
-      this.recipient = recipient;
    }
 
    @Override
@@ -124,7 +102,6 @@ public class MoneyTransferRedeemRequest extends Transaction {
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
-      sb.append("    recipient: ").append(Utils.toIndentedString(recipient)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
       sb.append("}");
       return sb.toString();
