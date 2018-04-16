@@ -1,15 +1,13 @@
 package io.electrum.moneytransfer.model;
 
-import java.util.Objects;
-
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * Pesonal details of a customer.
@@ -29,7 +27,7 @@ public class PersonalDetails {
    private String idNumber = null;
 
    @JsonProperty("idType")
-   private String idType = null;
+   private IdType idType = null;
 
    @JsonProperty("idCountryCode")
    private String idCountryCode = null;
@@ -59,7 +57,7 @@ public class PersonalDetails {
 
    /**
     * The person's first name(s)
-    * 
+    *
     * @return firstName
     **/
    @JsonProperty("firstName")
@@ -79,7 +77,7 @@ public class PersonalDetails {
 
    /**
     * The person's last name
-    * 
+    *
     * @return lastName
     **/
    @JsonProperty("lastName")
@@ -99,7 +97,7 @@ public class PersonalDetails {
 
    /**
     * Get address
-    * 
+    *
     * @return address
     **/
    @JsonProperty("address")
@@ -119,7 +117,7 @@ public class PersonalDetails {
 
    /**
     * The person's ID Number
-    * 
+    *
     * @return idNumber
     **/
    @JsonProperty("idNumber")
@@ -132,23 +130,23 @@ public class PersonalDetails {
       this.idNumber = idNumber;
    }
 
-   public PersonalDetails idType(String idType) {
+   public PersonalDetails idType(IdType idType) {
       this.idType = idType;
       return this;
    }
 
    /**
     * Type of identification document
-    * 
+    *
     * @return idType
     **/
    @JsonProperty("idType")
    @ApiModelProperty(value = "Type of presented identification document")
-   public String getIdType() {
+   public IdType getIdType() {
       return idType;
    }
 
-   public void setIdType(String idType) {
+   public void setIdType(IdType idType) {
       this.idType = idType;
    }
 
@@ -180,7 +178,7 @@ public class PersonalDetails {
 
    /**
     * Nationality expressed as an ISO 3166-1 Alpha-2 country code
-    * 
+    *
     * @return nationality
     **/
    @JsonProperty("nationality")
@@ -201,7 +199,7 @@ public class PersonalDetails {
 
    /**
     * Date of birth
-    * 
+    *
     * @return dateOfBirth
     **/
    @JsonProperty("dateOfBirth")
@@ -217,7 +215,7 @@ public class PersonalDetails {
    /**
     * Mobile phone number of the customer to which the outcome of a transaction can be communicated. This must conform
     * to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).
-    * 
+    *
     * @return contactNumber
     **/
    @JsonProperty("contactNumber")
@@ -244,7 +242,7 @@ public class PersonalDetails {
    /**
     * An alternative home contact number. This must conform to the ITU E.164 numbering plan
     * (https://www.itu.int/rec/T-REC-E.164/en).
-    * 
+    *
     * @return altContactHome
     **/
    @JsonProperty("altContactHome")
@@ -266,7 +264,7 @@ public class PersonalDetails {
    /**
     * An alternative work contact number. This must conform to the ITU E.164 numbering plan
     * (https://www.itu.int/rec/T-REC-E.164/en).
-    * 
+    *
     * @return altContactWork
     **/
    @JsonProperty("altContactWork")
@@ -287,7 +285,7 @@ public class PersonalDetails {
 
    /**
     * The person's email address
-    * 
+    *
     * @return email
     **/
    @JsonProperty("email")
