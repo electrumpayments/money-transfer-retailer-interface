@@ -123,7 +123,7 @@ public class PersonalDetails {
     * @return idNumber
     **/
    @JsonProperty("idNumber")
-   @ApiModelProperty(value = "The person's ID Number")
+   @ApiModelProperty(value = "Individual's identification number as per presented identification document")
    public String getIdNumber() {
       return idNumber;
    }
@@ -143,7 +143,7 @@ public class PersonalDetails {
     * @return idType
     **/
    @JsonProperty("idType")
-   @ApiModelProperty(value = "Type of identification document")
+   @ApiModelProperty(value = "Type of presented identification document")
    public String getIdType() {
       return idType;
    }
@@ -315,6 +315,7 @@ public class PersonalDetails {
             && Objects.equals(this.idNumber, personalDetails.idNumber)
             && Objects.equals(this.idType, personalDetails.idType)
             && Objects.equals(this.nationality, personalDetails.nationality)
+             && Objects.equals(this.idCountryCode, personalDetails.idCountryCode)
             && Objects.equals(this.dateOfBirth, personalDetails.dateOfBirth)
             && Objects.equals(this.contactNumber, personalDetails.contactNumber)
             && Objects.equals(this.altContactHome, personalDetails.altContactHome)
@@ -331,6 +332,7 @@ public class PersonalDetails {
             idNumber,
             idType,
             nationality,
+            idCountryCode,
             dateOfBirth,
             contactNumber,
             altContactHome,
@@ -342,13 +344,13 @@ public class PersonalDetails {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class PersonalDetails {\n");
-
       sb.append("    firstName: ").append(Utils.toIndentedString(firstName)).append("\n");
       sb.append("    lastName: ").append(Utils.toIndentedString(lastName)).append("\n");
       sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
       sb.append("    idNumber: ").append(Utils.toIndentedString(idNumber)).append("\n");
       sb.append("    idType: ").append(Utils.toIndentedString(idType)).append("\n");
       sb.append("    nationality: ").append(Utils.toIndentedString(nationality)).append("\n");
+      sb.append("    idCountryCode: ").append(Utils.toIndentedString(idCountryCode)).append("\n");
       sb.append("    dateOfBirth: ").append(Utils.toIndentedString(dateOfBirth)).append("\n");
       sb.append("    contactNumber: ").append(Utils.toIndentedString(contactNumber)).append("\n");
       sb.append("    altContactHome: ").append(Utils.toIndentedString(altContactHome)).append("\n");
