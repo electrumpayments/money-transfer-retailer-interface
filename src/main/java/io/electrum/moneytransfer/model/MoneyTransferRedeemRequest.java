@@ -21,8 +21,8 @@ public class MoneyTransferRedeemRequest extends Transaction {
    private String pinBlock = null;
 
    private String orderRedeemRef = null;
-   
-   private PersonalDetails recipient = null;
+
+   private PersonalDetails recipientDetails = null;
 
    public MoneyTransferRedeemRequest amount(LedgerAmount amount) {
       this.amount = amount;
@@ -50,13 +50,12 @@ public class MoneyTransferRedeemRequest extends Transaction {
    }
 
    /**
-    * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
+    * Hexadecimal string representing the encrypted PIN to be used by the recipientDetails to redeem the order.
     *
     * @return pinBlock
     **/
    @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true,
-         value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
+   @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used by the recipientDetails to redeem the order.")
    @NotNull
    @Pattern(regexp = "[a-fA-F0-9]{16}")
    public String getPinBlock() {
@@ -73,12 +72,12 @@ public class MoneyTransferRedeemRequest extends Transaction {
    }
 
    /**
-    * Reference used by the recipient to redeem the order.
+    * Reference used by the recipientDetails to redeem the order.
     *
     * @return orderRedeemRef
     **/
    @JsonProperty("orderRedeemRef")
-   @ApiModelProperty(required = true, value = "Reference used by the recipient to redeem the order.")
+   @ApiModelProperty(required = true, value = "Reference used by the recipientDetails to redeem the order.")
    @NotNull
    public String getOrderRedeemRef() {
       return orderRedeemRef;
@@ -88,24 +87,25 @@ public class MoneyTransferRedeemRequest extends Transaction {
       this.orderRedeemRef = orderRedeemRef;
    }
 
-   public MoneyTransferRedeemRequest recipient(PersonalDetails recipient) {
-      this.recipient = recipient;
+   public MoneyTransferRedeemRequest recipientDetails(PersonalDetails recipientDetails) {
+      this.recipientDetails = recipientDetails;
       return this;
    }
 
    /**
-    * Recipient who is redeeming the order. Optional.
+    * Personal details of the intended recipient.
+    * Conditionally optional - please confirm with your integration partner whether this is required.
     *
-    * @return recipient
+    * @return recipientDetails
     **/
-   @JsonProperty("recipient")
-   @ApiModelProperty(value = "Recipient who is redeeming the order. Optional.")
-   public PersonalDetails getRecipient() {
-      return recipient;
+   @JsonProperty("recipientDetails")
+   @ApiModelProperty(value = "Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner whether this is required.")
+   public PersonalDetails getRecipientDetails() {
+      return recipientDetails;
    }
 
-   public void setRecipient(PersonalDetails recipient) {
-      this.recipient = recipient;
+   public void setRecipientDetails(PersonalDetails recipientDetails) {
+      this.recipientDetails = recipientDetails;
    }
 
    @Override
@@ -124,7 +124,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
-      sb.append("    recipient: ").append(Utils.toIndentedString(recipient)).append("\n");
+      sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
       sb.append("}");
       return sb.toString();
