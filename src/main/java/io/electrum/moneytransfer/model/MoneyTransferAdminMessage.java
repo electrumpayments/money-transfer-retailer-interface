@@ -26,6 +26,9 @@ public class MoneyTransferAdminMessage {
    @JsonProperty("customerDetails")
    private PersonalDetails customerDetails = null;
 
+   @JsonProperty("customerProfileId")
+   private String customerProfileId = null;
+
    public MoneyTransferAdminMessage originator(Originator originator) {
       this.originator = originator;
       return this;
@@ -33,7 +36,7 @@ public class MoneyTransferAdminMessage {
 
    /**
     * Get originator
-    * 
+    *
     * @return originator
     **/
    @JsonProperty("originator")
@@ -54,7 +57,7 @@ public class MoneyTransferAdminMessage {
 
    /**
     * Get receiver
-    * 
+    *
     * @return receiver
     **/
    @JsonProperty("receiver")
@@ -75,18 +78,37 @@ public class MoneyTransferAdminMessage {
 
    /**
     * Get customerDetails
-    * 
+    *
     * @return customerDetails
     **/
    @JsonProperty("customerDetails")
-   @ApiModelProperty(required = true, value = "")
-   @NotNull
+   @ApiModelProperty(value = "")
    public PersonalDetails getCustomerDetails() {
       return customerDetails;
    }
 
    public void setCustomerDetails(PersonalDetails customerDetails) {
       this.customerDetails = customerDetails;
+   }
+
+   public MoneyTransferAdminMessage customerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+      return this;
+   }
+
+   /**
+    * Uniquely identifies customer's profile on the upstream entity's system.
+    *
+    * @return customerProfileId
+    **/
+   @JsonProperty("customerProfileId")
+   @ApiModelProperty(value = "Uniquely identifies customer's profile on the upstream entity's system.")
+   public String getCustomerProfileId() {
+      return customerProfileId;
+   }
+
+   public void setCustomerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
    }
 
    @Override
@@ -100,22 +122,23 @@ public class MoneyTransferAdminMessage {
       MoneyTransferAdminMessage moneyTransferAdminMessage = (MoneyTransferAdminMessage) o;
       return Objects.equals(this.originator, moneyTransferAdminMessage.originator)
             && Objects.equals(this.receiver, moneyTransferAdminMessage.receiver)
-            && Objects.equals(this.customerDetails, moneyTransferAdminMessage.customerDetails);
+            && Objects.equals(this.customerDetails, moneyTransferAdminMessage.customerDetails)
+            && Objects.equals(this.customerProfileId, moneyTransferAdminMessage.customerProfileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(originator, receiver, customerDetails);
+      return Objects.hash(originator, receiver, customerDetails, customerProfileId);
    }
 
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class MoneyTransferAdminMessage {\n");
-
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    customerDetails: ").append(Utils.toIndentedString(customerDetails)).append("\n");
+      sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }
