@@ -82,13 +82,13 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    /**
-    * Personal details of a recipient.
+    * Personal details of the intended recipient.
+    * Conditionally optional - please confirm with your integration partner whether this is required.
     *
     * @return recipientDetails
     **/
    @JsonProperty("recipientDetails")
-   @ApiModelProperty(required = true, value = "Personal details of a recipient.")
-   @NotNull
+   @ApiModelProperty(value = "Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner whether this is required.")
    public PersonalDetails getRecipientDetails() {
       return recipientDetails;
    }
@@ -108,8 +108,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     * @return pinBlock
     **/
    @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true,
-         value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
+   @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
    @NotNull
    @Pattern(regexp = "[a-fA-F0-9]{16}")
    public String getPinBlock() {
@@ -151,8 +150,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     * @return newCustomer
     **/
    @JsonProperty("newCustomer")
-   @ApiModelProperty(
-         value = "An optional flag indicating whether the customer placing the order is already registered on the provider's system.")
+   @ApiModelProperty(value = "An optional flag indicating whether the customer placing the order is already registered on the provider's system.")
    public Boolean getNewCustomer() {
       return newCustomer;
    }
