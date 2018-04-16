@@ -10,6 +10,8 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Objects;
+
 /**
  * Contains the data returned by a call to the createOrder operation.
  */
@@ -109,6 +111,25 @@ public class MoneyTransferAuthResponse extends Transaction {
 
    public void setOrderId(String orderId) {
       this.orderId = orderId;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      final MoneyTransferAuthResponse that = (MoneyTransferAuthResponse) o;
+      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(
+            orderRedeemRef,
+            that.orderRedeemRef) && Objects.equals(orderId, that.orderId);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amount, senderDetails, orderRedeemRef, orderId);
    }
 
    @Override

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 /**
  * Used to submit data in a call to the redeemOrder operation.
@@ -106,6 +107,25 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    public void setRecipientDetails(PersonalDetails recipientDetails) {
       this.recipientDetails = recipientDetails;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      final MoneyTransferRedeemRequest that = (MoneyTransferRedeemRequest) o;
+      return Objects.equals(amount, that.amount) && Objects.equals(pinBlock, that.pinBlock) && Objects.equals(
+            orderRedeemRef,
+            that.orderRedeemRef) && Objects.equals(recipientDetails, that.recipientDetails);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amount, pinBlock, orderRedeemRef, recipientDetails);
    }
 
    @Override

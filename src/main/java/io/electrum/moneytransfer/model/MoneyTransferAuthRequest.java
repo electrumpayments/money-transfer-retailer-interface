@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 /**
  * Used to submit data in a call to the createOrder operation.
@@ -157,6 +158,35 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    public void setNewCustomer(Boolean newCustomer) {
       this.newCustomer = newCustomer;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      final MoneyTransferAuthRequest that = (MoneyTransferAuthRequest) o;
+      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(
+            recipientDetails,
+            that.recipientDetails) && Objects.equals(pinBlock, that.pinBlock) && Objects.equals(
+            customerProfileId,
+            that.customerProfileId) && Objects.equals(
+            newCustomer,
+            that.newCustomer);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(),
+            amount,
+            senderDetails,
+            recipientDetails,
+            pinBlock,
+            customerProfileId,
+            newCustomer);
    }
 
    @Override
