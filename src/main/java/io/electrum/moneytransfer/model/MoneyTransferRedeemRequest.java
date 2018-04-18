@@ -62,8 +62,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
     * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
     **/
    @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true, value = "DEPRECATED - see field 'pin'. Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
-   @NotNull
+   @ApiModelProperty(value = "DEPRECATED - see field 'pin'. Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
    @Pattern(regexp = "[a-fA-F0-9]{16}")
    @Deprecated
    public String getPinBlock() {
