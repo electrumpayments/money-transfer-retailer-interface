@@ -89,13 +89,13 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    /**
-    * Personal details of a recipient.
+    * Personal details of the intended recipient.
+    * Conditionally optional - please confirm with your integration partner whether this is required.
     *
     * @return recipientDetails
     **/
    @JsonProperty("recipientDetails")
-   @ApiModelProperty(required = true, value = "Personal details of a recipient.")
-   @NotNull
+   @ApiModelProperty(value = "Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner whether this is required.")
    public PersonalDetails getRecipientDetails() {
       return recipientDetails;
    }
