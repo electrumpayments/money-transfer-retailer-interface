@@ -1,16 +1,17 @@
 package io.electrum.moneytransfer.model;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.EncryptedPin;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 /**
  * Used to submit data in a call to the createOrder operation.
@@ -24,7 +25,10 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    private PersonalDetails recipientDetails = null;
 
+   @Deprecated
    private String pinBlock = null;
+
+   private EncryptedPin pin;
 
    private String customerProfileId = null;
 
@@ -100,26 +104,56 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.recipientDetails = recipientDetails;
    }
 
+   /**
+    * @deprecated Prefer {@link #pin(EncryptedPin)}.
+    */
+   @Deprecated
    public MoneyTransferAuthRequest pinBlock(String pinBlock) {
       this.pinBlock = pinBlock;
       return this;
    }
 
    /**
+    * @deprecated Prefer {@link #getPin()}.
     * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
     *
     * @return pinBlock
     **/
    @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
-   @NotNull
+   @ApiModelProperty(value = "DEPRECATED - see field 'pin'. Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
    @Pattern(regexp = "[a-fA-F0-9]{16}")
+   @Deprecated
    public String getPinBlock() {
       return pinBlock;
    }
 
+   /**
+    * @deprecated Prefer {@link #setPin(EncryptedPin)}.
+    */
+   @Deprecated
    public void setPinBlock(String pinBlock) {
       this.pinBlock = pinBlock;
+   }
+
+   public MoneyTransferAuthRequest pin(EncryptedPin pin) {
+      this.pin = pin;
+      return this;
+   }
+
+   /**
+    * The encrypted PIN to be used by the recipient to redeem the order. This PIN object should be set in preference to
+    * the deprecated pinBlock string, as it offers more utility than purely as a passthrough to another system.
+    *
+    * @return pin
+    **/
+   @JsonProperty("pin")
+   @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order. This PIN object should be set in preference to the deprecated pinBlock string, as it offers more utility than purely as a passthrough to another system.")
+   public EncryptedPin getPin() {
+      return pin;
+   }
+
+   public void setPin(EncryptedPin pin) {
+      this.pin = pin;
    }
 
    /**
@@ -178,6 +212,34 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      final MoneyTransferAuthRequest that = (MoneyTransferAuthRequest) o;
+      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(recipientDetails,
+            that.recipientDetails) && Objects.equals(pinBlock, that.pinBlock) && Objects.equals(pin, that.pin)
+             && Objects.equals(customerProfileId, that.customerProfileId) && Objects.equals(newCustomer,
+            that.newCustomer) && Objects.equals(fee, that.fee);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(),
+            amount,
+            senderDetails,
+            recipientDetails,
+            pinBlock,
+            pin,
+            customerProfileId,
+            newCustomer,
+            fee);
+   }
+
+   @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class MoneyTransferAuthRequest {\n");
@@ -194,6 +256,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");
       sb.append("    fee: ").append(Utils.toIndentedString(fee)).append("\n");
