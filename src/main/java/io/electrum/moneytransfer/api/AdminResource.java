@@ -1,5 +1,16 @@
 package io.electrum.moneytransfer.api;
 
+import io.electrum.moneytransfer.model.ErrorDetail;
+import io.electrum.moneytransfer.model.IdType;
+import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
+import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,16 +26,6 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-import io.electrum.moneytransfer.model.ErrorDetail;
-import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
-import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
-
 @Path("/moneytransfer/v1/admin")
 
 @Api(description = "the admin API")
@@ -38,6 +39,8 @@ public abstract class AdminResource {
 
       public class QueryParameters {
          public static final String ID_NUMBER = "idNumber";
+         public static final String ID_TYPE = "idType";
+         public static final String ID_COUNTRY_CODE = "idCountryCode";
          public static final String MERCHANT_ID = "merchantId";
          public static final String ORIGINATOR_INST_ID = "originatorInstId";
          public static final String RECEIVER_ID = "receiverId";
@@ -67,9 +70,10 @@ public abstract class AdminResource {
    @Path("/customers")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = CreateOrUpdateCustomer.CREATE_OR_UPDATE_CUSTOMER, notes = "Request to create a new or update an existing customer "
+   @ApiOperation(value = CreateOrUpdateCustomer.CREATE_OR_UPDATE_CUSTOMER, notes =
+         "Request to create a new or update an existing customer "
          + "profile on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
-               @Authorization(value = "httpBasic") }, tags = {})
+         @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 201, message = "Created", response = MoneyTransferAdminMessage.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
@@ -78,16 +82,15 @@ public abstract class AdminResource {
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void createOrUpdateCustomer(
          @ApiParam(value = "A message containing the data required to carry out the admin "
-               + "request, as well as information about the point-of-sale from which the "
-               + "transaction originates.", required = true) MoneyTransferAdminMessage body,
+                           + "request, as well as information about the point-of-sale from which the "
+                           + "transaction originates.", required = true) MoneyTransferAdminMessage body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().createOrUpdateCustomer(
-            body,
+      getResourceImplementation().createOrUpdateCustomer(body,
             securityContext,
             request,
             httpHeaders,
@@ -100,8 +103,8 @@ public abstract class AdminResource {
    @Path("/customers")
    @Produces({ "application/json" })
    @ApiOperation(value = GetCustomerInfo.GET_CUSTOMER_INFO, notes = "Returns information of the customer's profile as "
-         + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
-               @Authorization(value = "httpBasic") }, tags = {})
+                                                                    + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
+         @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferAdminMessage.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
@@ -109,22 +112,21 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getCustomerInfo(
-         @ApiParam(value = "National identity number of the customer.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.ID_NUMBER) String idNumber,
-
+         @ApiParam(value = "Customer's identification number as per presented identification document.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.ID_NUMBER) String idNumber,
+         @ApiParam(value = "Type of presented identification document.") @QueryParam(GetCustomerInfo.QueryParameters.ID_TYPE) IdType idType,
+         @ApiParam(value = "Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code.") @QueryParam(GetCustomerInfo.QueryParameters.ID_COUNTRY_CODE) String idCountryCode,
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(GetCustomerInfo.QueryParameters.MERCHANT_ID) String merchantId,
-
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerInfo.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
-
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.RECEIVER_ID) String receiverId,
-
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().getCustomerInfo(
-            idNumber,
+      getResourceImplementation().getCustomerInfo(idNumber,
+            idType,
+            idCountryCode,
             merchantId,
             originatorInstId,
             receiverId,
@@ -166,8 +168,7 @@ public abstract class AdminResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().getFeeQuote(
-            amount,
+      getResourceImplementation().getFeeQuote(amount,
             amountIncludesFee,
             idNumber,
             merchantId,

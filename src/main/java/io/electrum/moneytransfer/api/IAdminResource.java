@@ -1,5 +1,8 @@
 package io.electrum.moneytransfer.api;
 
+import io.electrum.moneytransfer.model.IdType;
+import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.NotFoundException;
@@ -8,8 +11,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
-
-import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 
 public interface IAdminResource {
    void createOrUpdateCustomer(
@@ -23,6 +24,8 @@ public interface IAdminResource {
 
    void getCustomerInfo(
          @NotNull String idNumber,
+         IdType idType,
+         String idCountryCode,
          String merchantId,
          @NotNull String originatorInstId,
          @NotNull String receiverId,
