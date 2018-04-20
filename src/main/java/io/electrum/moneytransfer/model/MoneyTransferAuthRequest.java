@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 /**
@@ -24,9 +23,6 @@ public class MoneyTransferAuthRequest extends Transaction {
    private PersonalDetails senderDetails = null;
 
    private PersonalDetails recipientDetails = null;
-
-   @Deprecated
-   private String pinBlock = null;
 
    private EncryptedPin pin;
 
@@ -104,50 +100,18 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.recipientDetails = recipientDetails;
    }
 
-   /**
-    * @deprecated Prefer {@link #pin(EncryptedPin)}.
-    */
-   @Deprecated
-   public MoneyTransferAuthRequest pinBlock(String pinBlock) {
-      this.pinBlock = pinBlock;
-      return this;
-   }
-
-   /**
-    * @deprecated Prefer {@link #getPin()}.
-    * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
-    *
-    * @return pinBlock
-    **/
-   @JsonProperty("pinBlock")
-   @ApiModelProperty(value = "DEPRECATED - see field 'pin'. Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
-   @Pattern(regexp = "[a-fA-F0-9]{16}")
-   @Deprecated
-   public String getPinBlock() {
-      return pinBlock;
-   }
-
-   /**
-    * @deprecated Prefer {@link #setPin(EncryptedPin)}.
-    */
-   @Deprecated
-   public void setPinBlock(String pinBlock) {
-      this.pinBlock = pinBlock;
-   }
-
    public MoneyTransferAuthRequest pin(EncryptedPin pin) {
       this.pin = pin;
       return this;
    }
 
    /**
-    * The encrypted PIN to be used by the recipient to redeem the order. This PIN object should be set in preference to
-    * the deprecated pinBlock string, as it offers more utility than purely as a passthrough to another system.
+    * The encrypted PIN to be used by the recipient to redeem the order.
     *
     * @return pin
     **/
    @JsonProperty("pin")
-   @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order. This PIN object should be set in preference to the deprecated pinBlock string, as it offers more utility than purely as a passthrough to another system.")
+   @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order.")
    public EncryptedPin getPin() {
       return pin;
    }
@@ -221,9 +185,8 @@ public class MoneyTransferAuthRequest extends Transaction {
          return false;
       final MoneyTransferAuthRequest that = (MoneyTransferAuthRequest) o;
       return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(recipientDetails,
-            that.recipientDetails) && Objects.equals(pinBlock, that.pinBlock) && Objects.equals(pin, that.pin)
-             && Objects.equals(customerProfileId, that.customerProfileId) && Objects.equals(newCustomer,
-            that.newCustomer) && Objects.equals(fee, that.fee);
+            that.recipientDetails) && Objects.equals(pin, that.pin) && Objects.equals(customerProfileId,
+            that.customerProfileId) && Objects.equals(newCustomer, that.newCustomer) && Objects.equals(fee, that.fee);
    }
 
    @Override
@@ -232,7 +195,6 @@ public class MoneyTransferAuthRequest extends Transaction {
             amount,
             senderDetails,
             recipientDetails,
-            pinBlock,
             pin,
             customerProfileId,
             newCustomer,
@@ -255,7 +217,6 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
-      sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
       sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");

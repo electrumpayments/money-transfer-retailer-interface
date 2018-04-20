@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 /**
@@ -19,9 +18,6 @@ import java.util.Objects;
 public class MoneyTransferRedeemRequest extends Transaction {
 
    private LedgerAmount amount = null;
-
-   @Deprecated
-   private String pinBlock = null;
 
    private EncryptedPin pin;
 
@@ -47,38 +43,6 @@ public class MoneyTransferRedeemRequest extends Transaction {
 
    public void setAmount(LedgerAmount amount) {
       this.amount = amount;
-   }
-
-   /**
-    * @deprecated Prefer {@link #pin(EncryptedPin)}.
-    */
-   @Deprecated
-   public MoneyTransferRedeemRequest pinBlock(String pinBlock) {
-      this.pinBlock = pinBlock;
-      return this;
-   }
-
-   /**
-    * Hexadecimal string representing the encrypted PIN to be used by the recipientDetails to redeem the order.
-    *
-    * @return pinBlock
-    * @deprecated Prefer {@link #getPin()}.
-    * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
-    **/
-   @JsonProperty("pinBlock")
-   @ApiModelProperty(value = "DEPRECATED - see field 'pin'. Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
-   @Pattern(regexp = "[a-fA-F0-9]{16}")
-   @Deprecated
-   public String getPinBlock() {
-      return pinBlock;
-   }
-
-   /**
-    * @deprecated Prefer {@link #setPin(EncryptedPin)}.
-    */
-   @Deprecated
-   public void setPinBlock(String pinBlock) {
-      this.pinBlock = pinBlock;
    }
 
    public MoneyTransferRedeemRequest pin(EncryptedPin pin) {
@@ -153,14 +117,13 @@ public class MoneyTransferRedeemRequest extends Transaction {
       if (!super.equals(o))
          return false;
       final MoneyTransferRedeemRequest that = (MoneyTransferRedeemRequest) o;
-      return Objects.equals(amount, that.amount) && Objects.equals(pinBlock, that.pinBlock) && Objects.equals(pin,
-            that.pin) && Objects.equals(orderRedeemRef, that.orderRedeemRef) && Objects.equals(recipientDetails,
-            that.recipientDetails);
+      return Objects.equals(amount, that.amount) && Objects.equals(pin, that.pin) && Objects.equals(recipientDetails,
+            that.recipientDetails) && Objects.equals(orderRedeemRef, that.orderRedeemRef);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), amount, pinBlock, pin, orderRedeemRef, recipientDetails);
+      return Objects.hash(super.hashCode(), amount, pin, recipientDetails, orderRedeemRef);
    }
 
    @Override
@@ -177,7 +140,6 @@ public class MoneyTransferRedeemRequest extends Transaction {
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
-      sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
       sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
