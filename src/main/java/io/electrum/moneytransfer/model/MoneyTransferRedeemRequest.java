@@ -49,13 +49,12 @@ public class MoneyTransferRedeemRequest extends Transaction {
    }
 
    /**
-    * The encrypted PIN to be used by the recipient to redeem the order. This PIN object should be set in preference to
-    * the deprecated pinBlock string, as it offers more utility than purely as a passthrough to another system.
+    * The encrypted PIN to be used by the recipient to redeem the order.
     *
     * @return pin
     **/
    @JsonProperty("pin")
-   @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order. This PIN object should be set in preference to the deprecated pinBlock string, as it offers more utility than purely as a passthrough to another system.")
+   @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order.")
    public EncryptedPin getPin() {
       return pin;
    }
