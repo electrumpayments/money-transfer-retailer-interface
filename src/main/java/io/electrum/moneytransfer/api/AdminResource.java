@@ -60,6 +60,8 @@ public abstract class AdminResource {
          public static final String MERCHANT_ID = "merchantId";
          public static final String ORIGINATOR_INST_ID = "originatorInstId";
          public static final String RECEIVER_ID = "receiverId";
+         public static final String SENDER_CELL = "senderCell";
+         public static final String RECIPIENT_CELL = "recipientCell";
       }
    }
 
@@ -158,7 +160,11 @@ public abstract class AdminResource {
 
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.", required = true) @QueryParam(GetFeeQuote.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
 
-         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.RECEIVER_ID) String receiverId,
+         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetFeeQuote.QueryParameters.RECEIVER_ID) String receiverId,
+
+         @ApiParam(value = "The cellphone number of the sender of the funds. This field is required by some providers.") @QueryParam(GetFeeQuote.QueryParameters.SENDER_CELL) String senderCell,
+
+         @ApiParam(value = "The cellphone number of the recipient of the funds. This field is required by some providers.") @QueryParam(GetFeeQuote.QueryParameters.RECIPIENT_CELL) String recipientCell,
 
          @Context SecurityContext securityContext,
          @Context Request request,
@@ -173,6 +179,8 @@ public abstract class AdminResource {
             merchantId,
             originatorInstId,
             receiverId,
+            senderCell,
+            recipientCell,
             securityContext,
             request,
             httpHeaders,
