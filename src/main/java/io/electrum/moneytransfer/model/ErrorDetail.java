@@ -229,7 +229,7 @@ public class ErrorDetail {
    }
 
    @Override
-   public boolean equals(java.lang.Object o) {
+   public boolean equals(Object o) {
       if (this == o) {
          return true;
       }
