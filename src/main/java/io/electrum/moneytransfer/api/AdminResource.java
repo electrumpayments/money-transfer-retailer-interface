@@ -162,9 +162,9 @@ public abstract class AdminResource {
 
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetFeeQuote.QueryParameters.RECEIVER_ID) String receiverId,
 
-         @ApiParam(value = "The cellphone number of the sender of the funds. This field is required by some providers.") @QueryParam(GetFeeQuote.QueryParameters.SENDER_CELL) String senderCell,
+         @ApiParam(value = "The cellphone number of the sender of the funds. This field is required by some providers. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en) e.g. 27821234567 for a South Africa number.") @QueryParam(GetFeeQuote.QueryParameters.SENDER_CELL) String senderCell,
 
-         @ApiParam(value = "The cellphone number of the recipient of the funds. This field is required by some providers.") @QueryParam(GetFeeQuote.QueryParameters.RECIPIENT_CELL) String recipientCell,
+         @ApiParam(value = "The cellphone number of the recipient of the funds. This field is required by some providers. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en) e.g. 27821234567 for a South Africa number.") @QueryParam(GetFeeQuote.QueryParameters.RECIPIENT_CELL) String recipientCell,
 
          @Context SecurityContext securityContext,
          @Context Request request,
