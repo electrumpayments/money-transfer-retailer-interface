@@ -26,7 +26,7 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/moneytransfer/v1/admin")
+@Path("/moneytransfer/v2/admin")
 
 @Api(description = "the admin API")
 public abstract class AdminResource {
