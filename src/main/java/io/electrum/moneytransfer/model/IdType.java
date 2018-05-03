@@ -7,7 +7,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Type of an individual's presented identification document
  */
 public enum IdType {
-   NATIONAL_ID("NATIONAL_ID");
+   NATIONAL_ID("NATIONAL_ID"),
+   PASSPORT("PASSPORT"),
+   DRIVERS_LICENCE("DRIVERS_LICENCE"),
+   ASYLUM_DOCUMENT("ASYLUM_DOCUMENT");
 
    private final String value;
 
