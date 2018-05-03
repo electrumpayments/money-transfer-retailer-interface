@@ -1,16 +1,16 @@
 package io.electrum.moneytransfer.model;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.EncryptedPin;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Used to submit data in a call to the createOrder operation.
@@ -24,7 +24,7 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    private PersonalDetails recipientDetails = null;
 
-   private String pinBlock = null;
+   private EncryptedPin pin;
 
    private String customerProfileId = null;
 
@@ -85,13 +85,13 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    /**
-    * Personal details of a recipient.
+    * Personal details of the intended recipient.
+    * Conditionally optional - please confirm with your integration partner whether this is required.
     *
     * @return recipientDetails
     **/
    @JsonProperty("recipientDetails")
-   @ApiModelProperty(required = true, value = "Personal details of a recipient.")
-   @NotNull
+   @ApiModelProperty(value = "Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner whether this is required.")
    public PersonalDetails getRecipientDetails() {
       return recipientDetails;
    }
@@ -100,26 +100,24 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.recipientDetails = recipientDetails;
    }
 
-   public MoneyTransferAuthRequest pinBlock(String pinBlock) {
-      this.pinBlock = pinBlock;
+   public MoneyTransferAuthRequest pin(EncryptedPin pin) {
+      this.pin = pin;
       return this;
    }
 
    /**
-    * Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.
+    * The encrypted PIN to be used by the recipient to redeem the order.
     *
-    * @return pinBlock
+    * @return pin
     **/
-   @JsonProperty("pinBlock")
-   @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used by the recipient to redeem the order.")
-   @NotNull
-   @Pattern(regexp = "[a-fA-F0-9]{16}")
-   public String getPinBlock() {
-      return pinBlock;
+   @JsonProperty("pin")
+   @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order.")
+   public EncryptedPin getPin() {
+      return pin;
    }
 
-   public void setPinBlock(String pinBlock) {
-      this.pinBlock = pinBlock;
+   public void setPin(EncryptedPin pin) {
+      this.pin = pin;
    }
 
    /**
@@ -178,6 +176,32 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      final MoneyTransferAuthRequest that = (MoneyTransferAuthRequest) o;
+      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(recipientDetails,
+            that.recipientDetails) && Objects.equals(pin, that.pin) && Objects.equals(customerProfileId,
+            that.customerProfileId) && Objects.equals(newCustomer, that.newCustomer) && Objects.equals(fee, that.fee);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(),
+            amount,
+            senderDetails,
+            recipientDetails,
+            pin,
+            customerProfileId,
+            newCustomer,
+            fee);
+   }
+
+   @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class MoneyTransferAuthRequest {\n");
@@ -193,7 +217,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
-      sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");
       sb.append("    fee: ").append(Utils.toIndentedString(fee)).append("\n");

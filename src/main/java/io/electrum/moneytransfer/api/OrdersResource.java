@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-@Path("/moneytransfer/v1/orders")
+@Path("/moneytransfer/v2/orders")
 
 @Api(description = "the orders API")
 public abstract class OrdersResource {

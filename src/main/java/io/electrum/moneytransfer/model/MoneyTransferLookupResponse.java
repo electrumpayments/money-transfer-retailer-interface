@@ -31,7 +31,9 @@ public class MoneyTransferLookupResponse {
 
       REDEEMED("REDEEMED"),
 
-      CANCELLED("CANCELLED");
+      CANCELLED("CANCELLED"),
+
+      EXPIRED("EXPIRED");
 
       private String value;
 
