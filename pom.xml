@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>money-transfer-retailer-interface</artifactId>
-  <version>${major-version}-${minor-version}-${patch-version}-RC2</version>
+  <version>${major-version}.${minor-version}.${patch-version}-RC2</version>
   <packaging>jar</packaging>
   <name>money-transfer-retailer-interface</name>
   <description>Money Transfer Retailer Interface</description>
