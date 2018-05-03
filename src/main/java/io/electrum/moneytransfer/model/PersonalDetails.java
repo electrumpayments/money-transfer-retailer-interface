@@ -313,7 +313,7 @@ public class PersonalDetails {
             && Objects.equals(this.idNumber, personalDetails.idNumber)
             && Objects.equals(this.idType, personalDetails.idType)
             && Objects.equals(this.nationality, personalDetails.nationality)
-             && Objects.equals(this.idCountryCode, personalDetails.idCountryCode)
+            && Objects.equals(this.idCountryCode, personalDetails.idCountryCode)
             && Objects.equals(this.dateOfBirth, personalDetails.dateOfBirth)
             && Objects.equals(this.contactNumber, personalDetails.contactNumber)
             && Objects.equals(this.altContactHome, personalDetails.altContactHome)

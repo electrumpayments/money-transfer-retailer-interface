@@ -180,7 +180,7 @@
               <locations>io.electrum.moneytransfer.api</locations>
               <schemes>https</schemes>
               <host>sandbox.electrum.io</host>
-              <basePath>/moneytransfer/v${parsedVersion.majorVersion}</basePath>
+              <basePath>/moneytransfer/v${majorVersion}</basePath>
               <info>
                 <title>Money Transfer Retailer Interface</title>
                 <version>${project.version}</version>
