@@ -43,6 +43,8 @@ public interface IAdminResource {
          String merchantId,
          @NotNull String originatorInstId,
          @NotNull String receiverId,
+         String senderCell,
+         String recipientCell,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,

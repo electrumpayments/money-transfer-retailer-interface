@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Contains a fee quote for the money transfer.
  */
 public class MoneyTransferFeeQuote {
+
    @JsonProperty("originator")
    private Originator originator = null;
 
@@ -23,6 +24,12 @@ public class MoneyTransferFeeQuote {
 
    @JsonProperty("feeQuote")
    private FeeQuote feeQuote = null;
+
+   @JsonProperty("senderDetails")
+   private PersonalDetails senderDetails;
+
+   @JsonProperty("recipientDetails")
+   private PersonalDetails recipientDetails;
 
    public MoneyTransferFeeQuote originator(Originator originator) {
       this.originator = originator;
@@ -86,6 +93,46 @@ public class MoneyTransferFeeQuote {
       this.feeQuote = feeQuote;
    }
 
+   public MoneyTransferFeeQuote senderDetails(PersonalDetails senderDetails) {
+      this.senderDetails = senderDetails;
+      return this;
+   }
+
+   /**
+    * Contains details of the sender of the money transfer funds.
+    *
+    * @return feeQuote
+    **/
+   @JsonProperty("senderDetails")
+   @ApiModelProperty(value = "Contains details of the sender of the money transfer funds.")
+   public PersonalDetails getSenderDetails() {
+      return senderDetails;
+   }
+
+   public void setSenderDetails(PersonalDetails senderDetails) {
+      this.senderDetails = senderDetails;
+   }
+
+   public MoneyTransferFeeQuote recipientDetails(PersonalDetails recipientDetails) {
+      this.recipientDetails = recipientDetails;
+      return this;
+   }
+
+   /**
+    * Contains details of the recipient of the money transfer funds.
+    *
+    * @return feeQuote
+    **/
+   @JsonProperty("recipientDetails")
+   @ApiModelProperty(value = "Contains details of the recipient of the money transfer funds.")
+   public PersonalDetails getRecipientDetails() {
+      return recipientDetails;
+   }
+
+   public void setRecipientDetails(PersonalDetails recipientDetails) {
+      this.recipientDetails = recipientDetails;
+   }
+
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -97,12 +144,14 @@ public class MoneyTransferFeeQuote {
       MoneyTransferFeeQuote moneyTransferFeeQuote = (MoneyTransferFeeQuote) o;
       return Objects.equals(this.originator, moneyTransferFeeQuote.originator)
             && Objects.equals(this.receiver, moneyTransferFeeQuote.receiver)
-            && Objects.equals(this.feeQuote, moneyTransferFeeQuote.feeQuote);
+            && Objects.equals(this.feeQuote, moneyTransferFeeQuote.feeQuote)
+            && Objects.equals(this.senderDetails, moneyTransferFeeQuote.senderDetails)
+            && Objects.equals(this.recipientDetails, moneyTransferFeeQuote.recipientDetails);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(originator, receiver, feeQuote);
+      return Objects.hash(originator, receiver, feeQuote, senderDetails, recipientDetails);
    }
 
    @Override
@@ -112,6 +161,8 @@ public class MoneyTransferFeeQuote {
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    feeQuote: ").append(Utils.toIndentedString(feeQuote)).append("\n");
+      sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
+      sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("}");
       return sb.toString();
    }
