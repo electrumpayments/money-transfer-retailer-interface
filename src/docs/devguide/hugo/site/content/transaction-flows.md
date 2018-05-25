@@ -62,7 +62,7 @@ If the Create Or Update Customer call is not supported by the upstream entity, t
 
 A fee quote is used to query the amount the customer will be charged for the transfer. This lookup is typically done before the an order is created. The customer can choose whether the amount they have given is inclusive of the fee or not.
 
-The below diagram depicts the typical usage of feeQuote when it is successful. If not implemented a 501 will be sent back to the client.
+The below diagram depicts the typical usage of feeQuote when it is successful. If the request is not implemented a `501` HTTP status code will be sent back to the downstream entity.
 
 ![Successful Fee Quote](/images/sequence-successful-get-fee-quote.png "Successful Customer Fee Quote")
 
@@ -138,6 +138,6 @@ The below diagram depicts the flow when the lookup is successful but the initial
 
 ### Successful Lookup and Reversed Redeem
 
-The below diagrams depict the case where a negative advice (Reversal) is sent from the downstream entity to ensure that the previously requested redeem is not confirmed. As with a [Reversed Create Order](/transaction-flows/#ReversedCreateOrder), both an automatic (timeout) and manual (cancellation) reversal are shown.
+The below diagrams depict the case where a negative advice (Reversal) is sent from the downstream entity to ensure that the previously requested redeem is not confirmed. As with a [Reversed Create Order](/transaction-flows/#reversed-create-order), both an automatic (timeout) and manual (cancellation) reversal are shown.
 
 ![Successful Lookup and Reversed Redeem](/images/sequence-reversed-redeem-order.png "Successful Lookup and Reversed Redeem")

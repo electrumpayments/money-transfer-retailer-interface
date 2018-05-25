@@ -1,6 +1,6 @@
 # Money Transfer Retailer Interface
 
-The Money Transfer Retailer Interface documents the messaging interface used by Electrum to connect retailers and retail banks together for performing money transfer schemes.
+The Money Transfer Retailer Interface documents the messaging interface used by Electrum to connect acquirers, processors, and money transfer service providers together for performing money transfers.
 
 You can find documentation for this project [here](https://electrumpayments.github.io/money-transfer-retailer-interface-docs/).
 
