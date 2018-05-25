@@ -11,8 +11,8 @@ To include the service interface into your maven project, include the below depe
 ```xml
 <dependency>
     <groupId>io.electrum</groupId>
-    <artifactId>airtime-service-interface</artifactId>
-    <version>5.7.1</version>
+    <artifactId>money-transfer-service-interface</artifactId>
+    <version>2.0.0</version>
 </dependency>
 ```
 
