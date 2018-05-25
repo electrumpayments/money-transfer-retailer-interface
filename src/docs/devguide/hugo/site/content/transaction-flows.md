@@ -40,7 +40,7 @@ Please note that a decline (which will occur in cases such as where the requeste
 
 If the Get Customer Info call is not supported by the upstream entity, this call will return a 501 (Not Implemented) status code.
 
-![Get Customer Info Not Supported](/images/sequence-get-customer-info-not-supported.png "Get Customer Info Not Supported")
+![Get Customer Info Not Supported](/images/sequence-not-supported-get-customer-info.png "Get Customer Info Not Supported")
 
 ## Create Or Update Customer
 
@@ -58,11 +58,19 @@ If the Create Or Update Customer call is not supported by the upstream entity, t
 
 ![Create Or Update Customer Not Supported](/images/sequence-not-supported-create-or-update-customer.png "Create Or Update Customer Not Supported")
 
+## Fee Quote
+
+A fee quote is used to query the amount the customer will be charged for the transfer. This lookup is typically done before the an order is created. The customer can choose whether the amount they have given is inclusive of the fee or not.
+
+The below diagram depicts the typical usage of feeQuote when it is successful. If not implemented a 501 will be sent back to the client.
+
+![Successful Fee Quote](/images/sequence-successful-get-fee-quote.png "Successful Customer Fee Quote")
+
 # Financial Transactions
 
 Financial transactions are so named because they have a financial impact. They will always consist of (at least) a request leg, followed by a confirmation / reversal leg to advise on the completion or failure of the transaction. This kind of flow is commonly referred to as "dual messaging", since the confirmation is always required, even for positive completions.
 
-In some cases (such as with a [Redeem Order](/transaction-flows/#RedeemOrder)) an initial lookup message is also required as part of the flow.
+In some cases (such as with a [Redeem Order](/transaction-flows/#redeem-order)) an initial lookup message is also required as part of the flow.
 
 In order to maintain system consistency, it is important that all advice messages are queued in persistent storage and repeated until a _final_ response is received from the service. Refer to the section on [store-and-forward](/protocol-basics/#store-and-forward) for more details.
 
