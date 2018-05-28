@@ -19,7 +19,7 @@ In order to maintain system consistency, it is important that all advice message
 
 # Admin Operations
 
-Admin operations are always processed as request type messages, and should be considered complete only on receipt of a corresponding response (be it an approval or a decline). Admin operations have no financial impact and are not automatically retied if no response is received thus the downstream party should re-send the request until a response is received. They are also not required to be followed by a financial transaction.
+Admin operations are always processed as request type messages, and should be considered complete only on receipt of a corresponding response (be it an approval or a decline). Admin operations have no financial impact and are not automatically retried if no response is received thus the downstream party should re-send the request until a response is received. They are also not required to be followed by a financial transaction.
 
 ## Get Customer Info
 
@@ -45,7 +45,7 @@ A Create or Update Customer call will create a new or update an existing custome
 
 ### Successful Create or Update Customer Operation
 
-The sequence diagram below shows a successful createOrUpdateCustomer operation. The response contains information regarding the success of the requested operation.
+The sequence diagram below shows a successful Create or Update Customer operation. The response contains information regarding the success of the requested operation.
 
 ![Successful Create or Update Customer](/images/sequence-successful-create-or-update-customer.png "Successful Create or Update Customer")
 
