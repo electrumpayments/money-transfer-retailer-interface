@@ -93,19 +93,21 @@ In this case, the initial request from the downstream entity is processed and th
 
 ### Reversed Create Order
 
-The below diagram depicts the flow for both a cancellation and a timeout reversal.
+The below diagram depicts the flow for a cancellation.
 
-A Cancellation is a manual process that occurs when the downstream entity initiates a reversal despite receiving a successful response to their original request. A timeout is an automatic process that occurs when the Money Transfer Retailer Service does not receive a response to the request in the configured time limit. The Money Transfer Retailer Service will notify both the downstream and upstream entities that the transaction was not completed.
+A cancellation is a manual process that occurs when the downstream entity initiates a reversal despite receiving a successful response to their original request.
 
 A Reversal may take time to be processed, the customer could exceed account limits if the reversal has not yet been processed and the downstream entity may re-attempts the order creation.
 
 ![Reversed Create Order](/images/sequence-reversed-create-order.png "Reversed Create Order")
 
-### Timeout Create Order
+### Timeout Reversal Create Order
 
-The below diagram depicts the flow of a Create Order response getting lost and the transaction timing out. The diagram further shows the flow of the timeout reversal and the downstream entity retrying the Create Order transaction.
+The below diagram depicts the flow of a Create Order transaction timing out. Further the diagram shows the flow of the timeout reversal and the downstream entity retrying the Create Order transaction.
 
-![Timeout Create Order](/images/sequence-timeout-create-order.png "Timeout Create Order")
+A timeout is an automatic process that occurs when the Money Transfer Retailer Service does not receive a response to the request in the configured time limit. The Money Transfer Retailer Service will notify both the downstream and upstream entities that the transaction was not completed.
+
+![Timeout Reversal Create Order](/images/sequence-timeout-create-order.png "Timeout Reversal Create Order")
 
 ## Lookup Order
 
@@ -149,12 +151,12 @@ The below diagram depicts the flow when the Redeem Order request receives a nega
 
 ### Reversed Redeem
 
-The below diagram depicts the case where a negative advice (Reversal) is sent from the downstream entity to ensure that the previously requested redeem is not confirmed. As with a [Reversed Create Order](/transaction-flows/#reversed-create-order), both an automatic (timeout) and manual (cancellation) reversal are shown.
+The below diagram depicts the case where a negative advice (Reversal) is sent from the downstream entity to ensure that the previously requested redeem is not confirmed. As with a [Reversed Create Order](/transaction-flows/#reversed-create-order) the manual (cancellation) reversal is shown.
 
 ![Reversed Redeem](/images/sequence-reversed-redeem-order.png "Reversed Redeem")
 
 ### Timeout Redeem
 
-The below diagram depicts a timeout scenario when a Redeem Order request times out, then the redemption is reversed and retry of the redemption is tried.
+The below diagram depicts a timeout scenario when a Redeem Order request times out, then the redemption is reversed and the redemption is retried.
 
 ![Timeout Redeem](/images/sequence-timeout-redeem-order.png "Timeout Redeem")
