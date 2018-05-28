@@ -155,8 +155,10 @@ The below diagram depicts the case where a negative advice (Reversal) is sent fr
 
 ![Reversed Redeem](/images/sequence-reversed-redeem-order.png "Reversed Redeem")
 
-### Timeout Redeem
+### Timeout Redeem Reversal
 
 The below diagram depicts a timeout scenario when a Redeem Order request times out, then the redemption is reversed and the redemption is retried.
 
-![Timeout Redeem](/images/sequence-timeout-redeem-order.png "Timeout Redeem")
+This is an automatic procedure to reverse the transaction, as seen with the [Timeout Reversal Create Order](/transaction-flows/#timeout-reversed-create-order). The retry of the redemption is done by the downstream entity.
+
+![Timeout Redeem Reversal](/images/sequence-timeout-redeem-order.png "Timeout Redeem Reversal")
