@@ -12,10 +12,11 @@ Released 3 May 2018
   - UNKNOWN
 - Added new fields to the following messages:
   - Added `recipientDetails` to `MoneyTransferRedeemRequest`, optional field
-  - Added `EncryptedPin` to `MoneyTransferAuthRequest` and `MoneyTransferRedeemRequest` and removed `pinBlock` field
   - Added `idType` and `idCountryCode` to the query parameters of `getCustomerInfoCall`
+  - Added `idType` to the PersonalDetails object
 - The following fields have been updated:
-  - Added Expired to `Status` enum of a `MoneyTransferLookupResponse`
+  - Simple `pinBlock` String field in `MoneyTransferAuthRequest` and `MoneyTransferRedeemRequest` has been replaced with a complex `EncryptedPin` object. The simple `pinBlock` field now resides in the `EncryptedPin` object.
+  - Added `EXPIRED` to `Status` enum of a `MoneyTransferLookupResponse`
   - Added `idCountryCode` to `PersonalDetails`
 
 ## v1.0.1
