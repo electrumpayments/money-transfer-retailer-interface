@@ -2,7 +2,9 @@ machine:
   timezone:
     Africa/Johannesburg
   java:
-    version: oraclejdk7
+    version: oraclejdk8
+  services:
+    - docker
 
 general:
   artifacts:
@@ -32,6 +34,8 @@ deployment:
     # run on all branches (but check individual scripts - some only run on master)
     branch: /.*/
     commands:
+      # deploy docs to github-pages
+      - ~/circlecitools/bin/deployGithubPages.sh target/devguide/site money-transfer-retailer-interface-docs
       # release to artifactory
       - ~/circlecitools/bin/releaseJavaSource.sh
       # commit the release artifacts and create a tag for the release
