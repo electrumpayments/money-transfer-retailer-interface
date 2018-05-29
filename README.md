@@ -22,7 +22,7 @@ To include the service interface into your maven project, include the below depe
 </dependency>
 ```
 
-Alternatively, you can download the jar from [Bintray](https://bintray.com/electrumpayments/java-open-source/money-transfer-retailer-interface).
+Alternatively, you can download the Money Transfer Retailer Interface jar from [Bintray](https://bintray.com/electrumpayments/java-open-source/money-transfer-retailer-interface) and the Service Interface Base jar from [Bintray](https://bintray.com/electrumpayments/java-open-source/service-interface-base).
 
 ## Other languages
 
