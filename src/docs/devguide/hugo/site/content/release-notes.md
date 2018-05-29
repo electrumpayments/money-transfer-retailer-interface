@@ -21,8 +21,6 @@ Released 3 May 2018
 
 ## v1.0.1
 
-Deprecated, replaced with v2.0.0
-
 Released 2 May 2018
 
 - Added MSISDN to quotes.
