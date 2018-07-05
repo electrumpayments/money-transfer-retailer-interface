@@ -5,7 +5,7 @@ menu:
     weight: 0
 ---
 
-The Money Transfer Retailer Interface is an apache licensed RESTful HTTP based messaging protocol, intended to enable interoperability between money transfer service providers and retailers.
+The Money Transfer Retailer Interface is an [Apache-licensed](https://www.apache.org/licenses/LICENSE-2.0) RESTful HTTP based messaging protocol, intended to enable interoperability between money transfer service providers and retailers.
 
 Using the Money Transfer Retailer Interface enables retailers to access an established and growing group of money transfer service providers who support the interface. At the same time, the Money Transfer Retailer Interface is made available to allow money transfer service providers a quick, well defined route towards integrating into retailers.
 
