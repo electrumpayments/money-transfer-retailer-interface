@@ -6,6 +6,7 @@ jobs:
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: jojomi/hugo
     steps:
       - setup_remote_docker
       - checkout
@@ -27,6 +28,9 @@ jobs:
       - run:
           name: Compile, Test, and Release
           command: /electrum/bin/simpleTestAndReleaseJava.sh
+      - run:
+          name: Build Hugo Documentation
+          command: $CIRCLE_WORKING_DIRECTORY/src/docs/devguide/hugo/run.sh $CIRCLE_WORKING_DIRECTORY
       - run:
           name: Deploy docs to Github Pages
           command: /electrum/bin/deployGithubPages.sh $CIRCLE_WORKING_DIRECTORY/target/devguide/site money-transfer-retailer-interface-docs
