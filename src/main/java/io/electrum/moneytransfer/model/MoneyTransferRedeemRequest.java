@@ -8,6 +8,7 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -37,6 +38,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
     **/
    @JsonProperty("amount")
    @ApiModelProperty(value = "")
+   @Valid
    public LedgerAmount getAmount() {
       return amount;
    }
@@ -57,6 +59,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
     **/
    @JsonProperty("pin")
    @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order.")
+   @Valid
    public EncryptedPin getPin() {
       return pin;
    }
@@ -77,6 +80,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
     **/
    @JsonProperty("orderRedeemRef")
    @ApiModelProperty(required = true, value = "Reference used by the recipient to redeem the order.")
+   @Valid
    @NotNull
    public String getOrderRedeemRef() {
       return orderRedeemRef;
@@ -99,6 +103,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
     **/
    @JsonProperty("recipientDetails")
    @ApiModelProperty(value = "Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner whether this is required.")
+   @Valid
    public PersonalDetails getRecipientDetails() {
       return recipientDetails;
    }

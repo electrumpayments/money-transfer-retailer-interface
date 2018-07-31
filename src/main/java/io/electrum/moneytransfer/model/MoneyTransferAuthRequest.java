@@ -9,6 +9,7 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -44,6 +45,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     **/
    @JsonProperty("amount")
    @ApiModelProperty(required = true, value = "The amount to be transferred.")
+   @Valid
    @NotNull
    public LedgerAmount getAmount() {
       return amount;
@@ -70,6 +72,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     **/
    @JsonProperty("senderDetails")
    @ApiModelProperty(required = true, value = "Personal details of a customer.")
+   @Valid
    @NotNull
    public PersonalDetails getSenderDetails() {
       return senderDetails;
@@ -92,6 +95,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     **/
    @JsonProperty("recipientDetails")
    @ApiModelProperty(value = "Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner whether this is required.")
+   @Valid
    public PersonalDetails getRecipientDetails() {
       return recipientDetails;
    }
@@ -112,6 +116,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     **/
    @JsonProperty("pin")
    @ApiModelProperty(value = "The encrypted PIN to be used by the recipient to redeem the order.")
+   @Valid
    public EncryptedPin getPin() {
       return pin;
    }
@@ -167,6 +172,7 @@ public class MoneyTransferAuthRequest extends Transaction {
     **/
    @JsonProperty("fee")
    @ApiModelProperty(value = "The fee that will be charged on this transaction, as accepted by the sender.")
+   @Valid
    public LedgerAmount getFee() {
       return fee;
    }

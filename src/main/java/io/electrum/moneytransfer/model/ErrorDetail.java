@@ -2,6 +2,7 @@ package io.electrum.moneytransfer.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -92,6 +93,7 @@ public class ErrorDetail {
     **/
    @JsonProperty("errorType")
    @ApiModelProperty(required = true, value = "The type of error that occurred")
+   @Valid
    @NotNull
    public ErrorTypeEnum getErrorType() {
       return errorType;
@@ -113,6 +115,7 @@ public class ErrorDetail {
     **/
    @JsonProperty("errorMessage")
    @ApiModelProperty(required = true, value = "A description of the error")
+   @Valid
    @NotNull
    @Size(min = 0, max = 80)
    public String getErrorMessage() {
@@ -135,6 +138,7 @@ public class ErrorDetail {
     **/
    @JsonProperty("id")
    @ApiModelProperty(required = true, value = "The UUID of the message for which the error occurred.")
+   @Valid
    @NotNull
    public String getId() {
       return id;
