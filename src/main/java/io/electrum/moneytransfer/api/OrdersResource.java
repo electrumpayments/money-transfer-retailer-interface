@@ -1,6 +1,8 @@
 package io.electrum.moneytransfer.api;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -95,7 +97,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void confirmPayment(
-         @ApiParam(value = "A payment confirmation.", required = true) MoneyTransferConfirmation body,
+         @ApiParam(value = "A payment confirmation.", required = true) @NotNull @Valid MoneyTransferConfirmation body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -129,7 +131,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void confirmRedeem(
-         @ApiParam(value = "A redemption confirmation.", required = true) MoneyTransferConfirmation body,
+         @ApiParam(value = "A redemption confirmation.", required = true) @NotNull @Valid MoneyTransferConfirmation body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -157,7 +159,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void createOrder(
          @ApiParam(value = "A message containing the data required to carry out the payment order, as well as "
-               + "information about the point-of-sale from which the transaction originates.", required = true) MoneyTransferAuthRequest body,
+               + "information about the point-of-sale from which the transaction originates.", required = true) @NotNull @Valid MoneyTransferAuthRequest body,
 
          @Context SecurityContext securityContext,
          @Context Request request,
@@ -181,13 +183,13 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void lookupOrder(
-         @ApiParam(value = "Reference used by the recipient to redeem the order.", required = true) @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) String orderRedeemRef,
+         @ApiParam(value = "Reference used by the recipient to redeem the order.", required = true) @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) @NotNull String orderRedeemRef,
 
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(LookupOrder.QueryParameters.MERCHANT_ID) String merchantId,
 
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(LookupOrder.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
 
-         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrder.QueryParameters.RECEIVER_ID) String receiverId,
+         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrder.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
 
          @Context SecurityContext securityContext,
          @Context Request request,
@@ -227,7 +229,7 @@ public abstract class OrdersResource {
    public final void redeemOrder(
          @ApiParam(value = "A message containing the data required to redeem the order, "
                + "as well as information about the point-of-sale from which the transaction "
-               + "originates.", required = true) MoneyTransferRedeemRequest body,
+               + "originates.", required = true) @NotNull @Valid MoneyTransferRedeemRequest body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -254,7 +256,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void reversePayment(
-         @ApiParam(value = "A payment reversal.", required = true) MoneyTransferReversal body,
+         @ApiParam(value = "A payment reversal.", required = true) @NotNull @Valid MoneyTransferReversal body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -287,7 +289,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void reverseRedeem(
-         @ApiParam(value = "A redemption reversal.", required = true) MoneyTransferReversal body,
+         @ApiParam(value = "A redemption reversal.", required = true) @NotNull @Valid MoneyTransferReversal body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,

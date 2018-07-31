@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -85,7 +87,7 @@ public abstract class AdminResource {
    public final void createOrUpdateCustomer(
          @ApiParam(value = "A message containing the data required to carry out the admin "
                            + "request, as well as information about the point-of-sale from which the "
-                           + "transaction originates.", required = true) MoneyTransferAdminMessage body,
+                           + "transaction originates.", required = true) @Valid MoneyTransferAdminMessage body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -114,12 +116,12 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getCustomerInfo(
-         @ApiParam(value = "Customer's identification number as per presented identification document.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.ID_NUMBER) String idNumber,
+         @ApiParam(value = "Customer's identification number as per presented identification document.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.ID_NUMBER) @NotNull String idNumber,
          @ApiParam(value = "Type of presented identification document.") @QueryParam(GetCustomerInfo.QueryParameters.ID_TYPE) IdType idType,
          @ApiParam(value = "Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code.") @QueryParam(GetCustomerInfo.QueryParameters.ID_COUNTRY_CODE) String idCountryCode,
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(GetCustomerInfo.QueryParameters.MERCHANT_ID) String merchantId,
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerInfo.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
-         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.RECEIVER_ID) String receiverId,
+         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -152,17 +154,17 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getFeeQuote(
-         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) Long amount,
+         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) @Valid @NotNull Long amount,
 
-         @ApiParam(value = "Whether or not the amount is inclusive of the fee.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT_INCLUDES_FEE) Boolean amountIncludesFee,
+         @ApiParam(value = "Whether or not the amount is inclusive of the fee.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT_INCLUDES_FEE) @Valid @NotNull Boolean amountIncludesFee,
 
          @ApiParam(value = "National identity number of the customer.") @QueryParam(GetFeeQuote.QueryParameters.ID_NUMBER) String idNumber,
 
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(GetFeeQuote.QueryParameters.MERCHANT_ID) String merchantId,
 
-         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.", required = true) @QueryParam(GetFeeQuote.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
+         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.", required = true) @QueryParam(GetFeeQuote.QueryParameters.ORIGINATOR_INST_ID) @NotNull String originatorInstId,
 
-         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetFeeQuote.QueryParameters.RECEIVER_ID) String receiverId,
+         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetFeeQuote.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
 
          @ApiParam(value = "The cellphone number of the sender of the funds. This field is required by some providers. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en) e.g. 27821234567 for a South Africa number.") @QueryParam(GetFeeQuote.QueryParameters.SENDER_CELL) String senderCell,
 
