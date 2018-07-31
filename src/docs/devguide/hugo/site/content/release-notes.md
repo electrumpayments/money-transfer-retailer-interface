@@ -1,5 +1,10 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.0.1
+
+Released TBC
+ - Added `@Valid` annotations to resources and model objects.
+
 ## v2.0.0
 
 Released 3 May 2018
