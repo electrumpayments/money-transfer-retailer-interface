@@ -1,0 +1,42 @@
+machine:
+  timezone:
+    Africa/Johannesburg
+  java:
+    version: oraclejdk8
+  services:
+    - docker
+
+general:
+  artifacts:
+    - target/site/cobertura
+    - log
+
+dependencies:
+  pre:
+    # copy some utilities over from github
+    - git clone git@github.com:electrumpayments/circlecitools.git ~/circlecitools
+    - chmod +x ~/circlecitools/bin/*.sh
+    # a custom maven settings file ensures we can talk to our artifactory
+    - cp ~/circlecitools/config/maven/settings.xml ~/.m2/settings.xml
+    # setup our git account
+    - git config --global user.email "circleci@electrum.co.za"
+    - git config --global user.name "Another Electrum Robot"
+test:
+  override:
+    # run mvn integration-test
+    - ~/circlecitools/bin/mavenTest.sh
+  post:
+    # generate code coverage report
+    - mvn cobertura:cobertura
+
+deployment:
+  release:
+    # run on all branches (but check individual scripts - some only run on master)
+    branch: /.*/
+    commands:
+      # deploy docs to github-pages
+      - ~/circlecitools/bin/deployGithubPages.sh target/devguide/site money-transfer-retailer-interface-docs
+      # release to artifactory
+      - ~/circlecitools/bin/releaseJavaSource.sh
+      # commit the release artifacts and create a tag for the release
+      - ~/circlecitools/bin/commitAndTagBinaries.sh
