@@ -28,6 +28,12 @@ jobs:
           name: Compile, Test, and Release
           command: /electrum/bin/simpleTestAndReleaseJava.sh
       - run:
+          name: Checking path
+          command: pwd
+      - run:
+          name: Checking site if it exists
+          command: ls $CIRCLE_WORKING_DIRECTORY/target/devguide/site
+      - run:
           name: Deploy docs to Github Pages
           command: /electrum/bin/deployGithubPages.sh $CIRCLE_WORKING_DIRECTORY/target/devguide/site money-transfer-retailer-interface-docs
       - run:
