@@ -44,17 +44,17 @@ docker run \
   -e "HUGO_THEME=hugo-material-docs" \
   -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-interface-docs/" \
   jojomi/hugo
+#docker run \
+#  --volumes-from configs \
+#  --name hugo \
+#  -e "HUGO_THEME=hugo-material-docs" \
+#  -e "HUGO_BASEURL=/" \
+#  jojomi/hugo
 docker cp hugo:/output/. ${BASE_DIR}/target/devguide/site
 
 docker stop hugo &> /dev/null
 docker rm hugo &> /dev/null
 docker rm configs &> /dev/null
-
-#docker run --name "hugo" -v ${BASE_DIR}/target/devguide/hugo:/src -v ${BASE_DIR}/target/devguide/site:/output -e "HUGO_THEME=hugo-material-docs" -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-interface-docs/" jojomi/hugo
-#docker run --name "hugo" -v ${BASE_DIR}/target/devguide/hugo:/src -v ${BASE_DIR}/target/devguide/site:/output -e "HUGO_THEME=hugo-material-docs" -e "HUGO_BASEURL=/" jojomi/hugo
-#
-#docker stop hugo &> /dev/null
-#docker rm hugo &> /dev/null
 
 if [ -z $CI ]; then
   echo ''
