@@ -51,6 +51,8 @@ docker run \
 #  -e "HUGO_BASEURL=/" \
 #  jojomi/hugo
 docker cp hugo:/output/. ${BASE_DIR}/target/devguide/site
+echo 'Copied hugo output to target'
+echo ${BASE_DIR}/target/devguide/site
 
 docker stop hugo &> /dev/null
 docker rm hugo &> /dev/null
