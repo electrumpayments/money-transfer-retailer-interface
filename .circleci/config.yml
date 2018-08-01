@@ -32,10 +32,10 @@ jobs:
           command: pwd
       - run:
           name: Checking site if it exists
-          command: ls /home/circleci/project/target/devguide/site
+          command: ls $CIRCLE_WORKING_DIRECTORY/target/devguide/site
       - run:
           name: Deploy docs to Github Pages
-          command: /electrum/bin/deployGithubPages.sh $CIRCLE_WORKING_DIRECTORY/target/devguide/site money-transfer-retailer-interface-docs
+          command: /electrum/bin/deployGithubPages.sh "$CIRCLE_WORKING_DIRECTORY/target/devguide/site" money-transfer-retailer-interface-docs
       - run:
           name: Release failed! Revert any release steps that might have been taken
           command: /electrum/bin/revertReleaseJava.sh
