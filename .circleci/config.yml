@@ -27,9 +27,9 @@ jobs:
       - run:
           name: Compile, Test, and Release
           command: /electrum/bin/simpleTestAndReleaseJava.sh
-      - run:
-          name: Build Hugo Documentation
-          command: /home/circleci/project/src/docs/devguide/hugo/run.sh /home/circleci/project
+#      - run:
+#          name: Build Hugo Documentation
+#          command: /home/circleci/project/src/docs/devguide/hugo/run.sh /home/circleci/project
       - run:
           name: Deploy docs to Github Pages
           command: /electrum/bin/deployGithubPages.sh $CIRCLE_WORKING_DIRECTORY/target/devguide/site money-transfer-retailer-interface-docs

@@ -221,28 +221,28 @@
           </execution>
         </executions>
       </plugin>
-      <!--<plugin>-->
-        <!--<groupId>org.codehaus.mojo</groupId>-->
-        <!--<artifactId>exec-maven-plugin</artifactId>-->
-        <!--<version>1.4.0</version>-->
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<id>build-devguide</id>-->
-            <!--<goals>-->
-              <!--<goal>exec</goal>-->
-            <!--</goals>-->
-            <!--<phase>post-integration-test</phase>-->
-            <!--<configuration>-->
-              <!--<executable>bash</executable>-->
-              <!--<arguments>-->
-                <!--<argument>run.sh</argument>-->
-                <!--<argument>${basedir}</argument>-->
-              <!--</arguments>-->
-              <!--<workingDirectory>${basedir}/src/docs/devguide/hugo/</workingDirectory>-->
-            <!--</configuration>-->
-          <!--</execution>-->
-        <!--</executions>-->
-      <!--</plugin>-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <id>build-devguide</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>post-integration-test</phase>
+            <configuration>
+              <executable>bash</executable>
+              <arguments>
+                <argument>run.sh</argument>
+                <argument>${basedir}</argument>
+              </arguments>
+              <workingDirectory>${basedir}/src/docs/devguide/hugo/</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.jfrog.buildinfo</groupId>
         <artifactId>artifactory-maven-plugin</artifactId>
