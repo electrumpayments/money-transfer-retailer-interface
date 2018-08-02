@@ -2,6 +2,7 @@ package io.electrum.moneytransfer.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -125,6 +126,7 @@ public class Address {
     **/
    @JsonProperty("country")
    @ApiModelProperty(value = "Country expressed as an ISO 3166-1 Alpha-2 code")
+   @Valid
    @Size(min = 2, max = 2)
    public String getCountry() {
       return country;

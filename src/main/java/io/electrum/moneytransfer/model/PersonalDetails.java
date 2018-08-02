@@ -5,6 +5,8 @@ import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -102,6 +104,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("address")
    @ApiModelProperty(value = "")
+   @Valid
    public Address getAddress() {
       return address;
    }
@@ -162,6 +165,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("idCountryCode")
    @ApiModelProperty(value = "Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code")
+   @Valid
    @Size(min = 2, max = 2)
    public String getIdCountryCode() {
       return idCountryCode;
@@ -183,6 +187,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("nationality")
    @ApiModelProperty(value = "Nationality expressed as an ISO 3166-1 Alpha-2 country code")
+   @Valid
    @Size(min = 2, max = 2)
    public String getNationality() {
       return nationality;
@@ -220,6 +225,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("contactNumber")
    @ApiModelProperty(value = "Mobile phone number of the customer to which the outcome of a transaction can be communicated. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).")
+   @Valid
    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
    public String getContactNumber() {
       return contactNumber;
@@ -247,6 +253,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("altContactHome")
    @ApiModelProperty(value = "An alternative home contact number. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).")
+   @Valid
    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
    public String getAltContactHome() {
       return altContactHome;
@@ -269,6 +276,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("altContactWork")
    @ApiModelProperty(value = "An alternative work contact number. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).")
+   @Valid
    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
    public String getAltContactWork() {
       return altContactWork;

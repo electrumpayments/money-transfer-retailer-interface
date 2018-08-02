@@ -1,5 +1,6 @@
 package io.electrum.moneytransfer.model;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,6 +39,7 @@ public class MoneyTransferAuthResponse extends Transaction {
     **/
    @JsonProperty("amount")
    @ApiModelProperty(required = true, value = "")
+   @Valid
    @NotNull
    public LedgerAmount getAmount() {
       return amount;
@@ -59,6 +61,7 @@ public class MoneyTransferAuthResponse extends Transaction {
     **/
    @JsonProperty("senderDetails")
    @ApiModelProperty(required = true, value = "")
+   @Valid
    @NotNull
    public PersonalDetails getSenderDetails() {
       return senderDetails;
@@ -80,6 +83,7 @@ public class MoneyTransferAuthResponse extends Transaction {
     **/
    @JsonProperty("orderRedeemRef")
    @ApiModelProperty(required = true, value = "Reference used by the recipient to redeem the order. This must be printed on the receipt.")
+   @Valid
    @NotNull
    public String getOrderRedeemRef() {
       return orderRedeemRef;

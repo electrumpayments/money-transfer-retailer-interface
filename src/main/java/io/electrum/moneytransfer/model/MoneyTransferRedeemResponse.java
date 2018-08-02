@@ -1,5 +1,6 @@
 package io.electrum.moneytransfer.model;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,6 +30,7 @@ public class MoneyTransferRedeemResponse extends Transaction {
     **/
    @JsonProperty("amount")
    @ApiModelProperty(required = true, value = "")
+   @Valid
    @NotNull
    public LedgerAmount getAmount() {
       return amount;
@@ -54,6 +56,7 @@ public class MoneyTransferRedeemResponse extends Transaction {
     **/
    @JsonProperty("orderId")
    @ApiModelProperty(required = true, value = "Reference used by the service provider to uniquely identify the money transfer order on their system. This field can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef. Note that any reference issued by the provider that is specific to a particular leg of the order process should be set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own reference).")
+   @Valid
    @NotNull
    public String getOrderId() {
       return orderId;

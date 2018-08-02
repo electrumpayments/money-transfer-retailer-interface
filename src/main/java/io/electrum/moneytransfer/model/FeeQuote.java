@@ -2,6 +2,7 @@ package io.electrum.moneytransfer.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,6 +35,7 @@ public class FeeQuote {
     * @return feeAmount
     **/
    @ApiModelProperty(required = true, value = "The fee to be charged for the transaction.")
+   @Valid
    @NotNull
    public LedgerAmount getFeeAmount() {
       return feeAmount;
@@ -54,6 +56,7 @@ public class FeeQuote {
     * @return transferAmount
     **/
    @ApiModelProperty(required = true, value = "The amount to be transferred to the recipient.")
+   @Valid
    @NotNull
    public LedgerAmount getTransferAmount() {
       return transferAmount;
@@ -74,6 +77,7 @@ public class FeeQuote {
     * @return totalAmount
     **/
    @ApiModelProperty(required = true, value = "Total amount payable by the sender, including fee.")
+   @Valid
    @NotNull
    public LedgerAmount getTotalAmount() {
       return totalAmount;

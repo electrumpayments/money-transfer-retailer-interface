@@ -2,6 +2,7 @@ package io.electrum.moneytransfer.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -41,6 +42,7 @@ public class MoneyTransferAdminMessage {
     **/
    @JsonProperty("originator")
    @ApiModelProperty(required = true, value = "")
+   @Valid
    @NotNull
    public Originator getOriginator() {
       return originator;
@@ -62,6 +64,7 @@ public class MoneyTransferAdminMessage {
     **/
    @JsonProperty("receiver")
    @ApiModelProperty(required = true, value = "")
+   @Valid
    @NotNull
    public Institution getReceiver() {
       return receiver;
@@ -83,6 +86,7 @@ public class MoneyTransferAdminMessage {
     **/
    @JsonProperty("customerDetails")
    @ApiModelProperty(value = "")
+   @Valid
    public PersonalDetails getCustomerDetails() {
       return customerDetails;
    }
