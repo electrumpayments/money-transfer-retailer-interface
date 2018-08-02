@@ -154,9 +154,9 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getFeeQuote(
-         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) @Valid @NotNull Long amount,
+         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) @NotNull Long amount,
 
-         @ApiParam(value = "Whether or not the amount is inclusive of the fee.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT_INCLUDES_FEE) @Valid @NotNull Boolean amountIncludesFee,
+         @ApiParam(value = "Whether or not the amount is inclusive of the fee.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT_INCLUDES_FEE) @NotNull Boolean amountIncludesFee,
 
          @ApiParam(value = "National identity number of the customer.") @QueryParam(GetFeeQuote.QueryParameters.ID_NUMBER) String idNumber,
 

@@ -2,8 +2,8 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.0.1
 
-Released TBC
- - Added `@Valid` annotations to resources and model objects. 
+Released 2 August 2018
+ - Added `@Valid` annotations to resources and model objects, which allows the object to be recursively validated. 
 
 ## v2.0.0
 
