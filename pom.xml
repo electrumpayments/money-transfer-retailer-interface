@@ -8,6 +8,7 @@
   <packaging>jar</packaging>
   <name>money-transfer-retailer-interface</name>
   <description>Money Transfer Retailer Interface</description>
+  <url>https://github.com/electrumpayments/money-transfer-retailer-interface</url>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -24,9 +25,9 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:git@github.com:electrumpayments/money-tranfer-retailer-interface.git</connection>
-    <developerConnection>scm:git:git@github.com:electrumpayments/money-tranfer-retailer-interface.git</developerConnection>
-    <url>git@github.com:electrumpayments/money-tranfer-retailer-interface.git</url>
+    <connection>scm:git:git@github.com:electrumpayments/money-transfer-retailer-interface.git</connection>
+    <developerConnection>scm:git:git@github.com:electrumpayments/money-transfer-retailer-interface.git</developerConnection>
+    <url>git@github.com:electrumpayments/money-transfer-retailer-interface.git</url>
   </scm>
 
   <properties>
@@ -43,7 +44,7 @@
     <logback-version>1.0.13</logback-version>
     <major-version>2</major-version>
     <minor-version>0</minor-version>
-    <patch-version>1</patch-version>
+    <patch-version>2</patch-version>
   </properties>
 
   <dependencies>
