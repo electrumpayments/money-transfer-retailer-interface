@@ -5,7 +5,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 Released 27 August 2018
  - Deprecated TRANSACTION_NOT_ALLOWED_FOR_MERCHANT ErrorType. Provided INVALID_MERCHANT ErrorType for use instead.
 
- ## v2.0.2
+## v2.0.2
 
  Released 8 August 2018
   - No code changes. Changes to release process only.
