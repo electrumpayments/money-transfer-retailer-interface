@@ -23,6 +23,10 @@ public class ErrorDetail {
     * The type of error that occurred
     */
    public enum ErrorTypeEnum {
+      @Deprecated
+      /**
+       * @deprecated - As of v 2.1.0 Use {@link #INVALID_MERCHANT} instead.
+       */
       TRANSACTION_NOT_ALLOWED_FOR_MERCHANT("TRANSACTION_NOT_ALLOWED_FOR_MERCHANT"),
       ALREADY_REDEEMED("ALREADY_REDEEMED"),
       PIN_RETRIES_EXCEEDED("PIN_RETRIES_EXCEEDED"),
@@ -42,7 +46,8 @@ public class ErrorDetail {
       TRANSACTION_NOT_SUPPORTED("TRANSACTION_NOT_SUPPORTED"),
       UNABLE_TO_LOCATE_RECORD("UNABLE_TO_LOCATE_RECORD"),
       UPSTREAM_UNAVAILABLE("UPSTREAM_UNAVAILABLE"),
-      AUTHENTICATION_ERROR("AUTHENTICATION_ERROR");
+      AUTHENTICATION_ERROR("AUTHENTICATION_ERROR"),
+      INVALID_MERCHANT("INVALID_MERCHANT");
 
       private String value;
 
