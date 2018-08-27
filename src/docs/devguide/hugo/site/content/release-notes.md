@@ -1,9 +1,19 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.1.0
+
+Released 27 August 2018
+ - Deprecated TRANSACTION_NOT_ALLOWED_FOR_MERCHANT ErrorType. Provided INVALID_MERCHANT ErrorType for use instead.
+
+ ## v2.0.2
+
+ Released 8 August 2018
+  - No code changes. Changes to release process only.
+
 ## v2.0.1
 
 Released 2 August 2018
- - Added `@Valid` annotations to resources and model objects, which allows the object to be recursively validated. 
+ - Added `@Valid` annotations to resources and model objects, which allows the object to be recursively validated.
 
 ## v2.0.0
 
