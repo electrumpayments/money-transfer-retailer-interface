@@ -18,14 +18,20 @@ echo ''
 echo '  + Running hugo build'
 echo ''
 
+docker create -v /src --name src-vol alpine:3.4 /bin/true
+
+# Copy the content of the hugo directory into the /src directory of the volume container
+# The /. is required otherwise it creates a /src/hugo directory
+docker cp "${BASE_DIR}/target/devguide/hugo/." src-vol:/src
+
 docker run \
-  -v "${BASE_DIR}"/target/devguide/hugo:/src \
+  --volumes-from src-vol \
   --name hugo \
   -e "HUGO_THEME=hugo-material-docs" \
   -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-docs/" \
   jojomi/hugo:0.29
 
-docker cp hugo:/output/. "${BASE_DIR}"/target/devguide/site
+docker cp hugo:/output/. "${BASE_DIR}/target/devguide/site"
 
 docker stop hugo &> /dev/null
 docker rm hugo &> /dev/null
