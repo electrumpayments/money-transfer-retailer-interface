@@ -1,6 +1,7 @@
 package io.electrum.moneytransfer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,6 +27,7 @@ public class PersonalDetails {
    private Address address = null;
 
    @JsonProperty("idNumber")
+   @Masked
    private String idNumber = null;
 
    @JsonProperty("idType")
