@@ -1,16 +1,18 @@
 package io.electrum.moneytransfer.model;
 
+import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.EncryptedPin;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 /**
  * Used to submit data in a call to the redeemOrder operation.
@@ -25,6 +27,8 @@ public class MoneyTransferRedeemRequest extends Transaction {
    private String orderRedeemRef = null;
 
    private PersonalDetails recipientDetails = null;
+
+   private String customerProfileId = null;
 
    public MoneyTransferRedeemRequest amount(LedgerAmount amount) {
       this.amount = amount;
@@ -96,8 +100,8 @@ public class MoneyTransferRedeemRequest extends Transaction {
    }
 
    /**
-    * Personal details of the intended recipient.
-    * Conditionally optional - please confirm with your integration partner whether this is required.
+    * Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner
+    * whether this is required.
     *
     * @return recipientDetails
     **/
@@ -112,6 +116,26 @@ public class MoneyTransferRedeemRequest extends Transaction {
       this.recipientDetails = recipientDetails;
    }
 
+   public MoneyTransferRedeemRequest customerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+      return this;
+   }
+
+   /**
+    * Get customer profile id
+    *
+    * @return customer profile id
+    */
+   @JsonProperty("customerProfileId")
+   @ApiModelProperty(value = "Uniquely identifies customer's profile on the upstream entity's system.")
+   public String getCustomerProfileId() {
+      return customerProfileId;
+   }
+
+   public void setCustomerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -121,8 +145,9 @@ public class MoneyTransferRedeemRequest extends Transaction {
       if (!super.equals(o))
          return false;
       final MoneyTransferRedeemRequest that = (MoneyTransferRedeemRequest) o;
-      return Objects.equals(amount, that.amount) && Objects.equals(pin, that.pin) && Objects.equals(recipientDetails,
-            that.recipientDetails) && Objects.equals(orderRedeemRef, that.orderRedeemRef);
+      return Objects.equals(amount, that.amount) && Objects.equals(pin, that.pin)
+            && Objects.equals(recipientDetails, that.recipientDetails)
+            && Objects.equals(orderRedeemRef, that.orderRedeemRef);
    }
 
    @Override
@@ -147,6 +172,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
       sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
+      sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

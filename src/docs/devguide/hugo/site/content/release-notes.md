@@ -2,8 +2,9 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.1.1
 
-Released 11 September 2018
- - Added `@Masked` annotation to the IdNumber field of PersonalDetails model.
+Released 13 September 2018
+ - Added `@Masked` annotation to the `IdNumber` field of `PersonalDetails` model.
+ - Added `customerIdProfile` in `MoneyTransferRedeemRequest`
 
 ## v2.1.0
 
