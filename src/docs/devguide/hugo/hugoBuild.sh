@@ -22,7 +22,7 @@ docker run \
   -v "${BASE_DIR}"/target/devguide/hugo:/src \
   --name hugo \
   -e "HUGO_THEME=hugo-material-docs" \
-  -e "HUGO_BASEURL=https://electrumpayments.github.io/airtime-service-interface-docs/" \
+  -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-docs/" \
   jojomi/hugo:0.29
 
 docker cp hugo:/output/. "${BASE_DIR}"/target/devguide/site
