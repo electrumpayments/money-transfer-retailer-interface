@@ -119,6 +119,8 @@ workflows:
           context: java
       - code-coverage-report:
           context: java
+          requires:
+            - build-and-release
   nightly:
     jobs:
       - build-with-latest-deps:
