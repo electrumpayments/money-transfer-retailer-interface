@@ -1,16 +1,19 @@
 package io.electrum.moneytransfer.model;
 
+import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.sdk.masking2.DoNotPersist;
+import io.electrum.sdk.masking2.MaskAll;
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.Objects;
 
 /**
  * Pesonal details of a customer.
@@ -28,6 +31,7 @@ public class PersonalDetails {
 
    @JsonProperty("idNumber")
    @Masked
+   @DoNotPersist(replacementValue = "000000000000")
    private String idNumber = null;
 
    @JsonProperty("idType")
@@ -355,7 +359,7 @@ public class PersonalDetails {
       sb.append("    firstName: ").append(Utils.toIndentedString(firstName)).append("\n");
       sb.append("    lastName: ").append(Utils.toIndentedString(lastName)).append("\n");
       sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
-      sb.append("    idNumber: ").append(Utils.toIndentedString(idNumber)).append("\n");
+      sb.append("    idNumber: ").append(Utils.toIndentedString(new MaskAll().mask(idNumber))).append("\n");
       sb.append("    idType: ").append(Utils.toIndentedString(idType)).append("\n");
       sb.append("    nationality: ").append(Utils.toIndentedString(nationality)).append("\n");
       sb.append("    idCountryCode: ").append(Utils.toIndentedString(idCountryCode)).append("\n");
