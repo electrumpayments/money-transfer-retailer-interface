@@ -1,5 +1,10 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.2.1
+
+Released 18 September 2018
+ - Added `@DoNotPersist` annotation to the `IdNumber` field of `PersonalDetails` model.
+ - Masked the `IdNumber` field in the `PersonalDetails` models `toString()` method. 
 ## v2.2.0
 
 Released 14 September 2018
