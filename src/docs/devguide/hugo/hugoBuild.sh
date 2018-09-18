@@ -37,7 +37,7 @@ else
       --volumes-from src-vol \
       --name hugo \
       -e "HUGO_THEME=hugo-material-docs" \
-      -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-docs/" \
+      -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-interface-docs/" \
       jojomi/hugo
 fi
 
