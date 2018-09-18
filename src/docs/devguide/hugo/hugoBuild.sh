@@ -24,22 +24,21 @@ docker create -v /src --name src-vol alpine:3.4 /bin/true
 # The /. is required otherwise it creates a /src/hugo directory
 docker cp "${BASE_DIR}/target/devguide/hugo/." src-vol:/src
 
-if [ -z $CI ]; then
-    echo "local"
-    docker run \
-      --volumes-from src-vol \
-      --name hugo \
-      -e "HUGO_THEME=hugo-material-docs" \
-      -e "HUGO_BASEURL=/" \
-      jojomi/hugo
-else
-    docker run \
-      --volumes-from src-vol \
-      --name hugo \
-      -e "HUGO_THEME=hugo-material-docs" \
-      -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-docs/" \
-      jojomi/hugo
-fi
+#    echo "local"
+#   docker run \
+#      --volumes-from src-vol \
+#      --name hugo \
+#      -e "HUGO_THEME=hugo-material-docs" \
+#      -e "HUGO_BASEURL=/" \
+#      jojomi/hugo
+
+docker run \
+--volumes-from src-vol \
+--name hugo \
+-e "HUGO_THEME=hugo-material-docs" \
+-e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-docs/" \
+jojomi/hugo:0.29
+
 
 docker cp hugo:/output/. "${BASE_DIR}/target/devguide/site"
 
