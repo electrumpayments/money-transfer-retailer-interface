@@ -13,6 +13,7 @@ import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * Used to submit data in a call to the redeemOrder operation.
@@ -29,6 +30,8 @@ public class MoneyTransferRedeemRequest extends Transaction {
    private PersonalDetails recipientDetails = null;
 
    private String customerProfileId = null;
+
+   private String cashierComment = null;
 
    public MoneyTransferRedeemRequest amount(LedgerAmount amount) {
       this.amount = amount;
@@ -136,6 +139,28 @@ public class MoneyTransferRedeemRequest extends Transaction {
       this.customerProfileId = customerProfileId;
    }
 
+   public MoneyTransferRedeemRequest cashierComment(String cashierComment) {
+      this.cashierComment = cashierComment;
+      return this;
+   }
+
+   /**
+    * Get the cashier comment. This field may be used by the cashier to comment on any suspicious behaviour observed
+    * during the redemption.
+    *
+    * @return cashier comment
+    */
+   @JsonProperty("cashierComment")
+   @Length(max = 256)
+   @ApiModelProperty(value = "This field may be used by the cashier to comment on any suspicious behaviour observed during the redemption.")
+   public String getCashierComment() {
+      return cashierComment;
+   }
+
+   public void setCashierComment(String cashierComment) {
+      this.cashierComment = cashierComment;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -147,12 +172,13 @@ public class MoneyTransferRedeemRequest extends Transaction {
       final MoneyTransferRedeemRequest that = (MoneyTransferRedeemRequest) o;
       return Objects.equals(amount, that.amount) && Objects.equals(pin, that.pin)
             && Objects.equals(recipientDetails, that.recipientDetails)
-            && Objects.equals(orderRedeemRef, that.orderRedeemRef);
+            && Objects.equals(orderRedeemRef, that.orderRedeemRef)
+            && Objects.equals(cashierComment, that.cashierComment);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), amount, pin, recipientDetails, orderRedeemRef);
+      return Objects.hash(super.hashCode(), amount, pin, recipientDetails, orderRedeemRef, cashierComment);
    }
 
    @Override
@@ -173,6 +199,7 @@ public class MoneyTransferRedeemRequest extends Transaction {
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
+      sb.append("    cashierComment: ").append(Utils.toIndentedString(cashierComment)).append("\n");
       sb.append("}");
       return sb.toString();
    }

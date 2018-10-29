@@ -1,5 +1,10 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.3.0
+
+Released 29 October 2018
+ - Added `cashierComment` to `MoneyTransferRedeemRequest`. This field may be used to describe suspicious behaviour observed by the cashier. 
+
 ## v2.2.1
 
 Released 18 September 2018
