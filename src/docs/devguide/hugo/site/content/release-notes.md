@@ -1,5 +1,10 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.4.0
+
+Released 6 November 2018
+ - Added `TRANSACTION_LIMIT_EXCEEDED` to the `ErrorTypeEnum`. This may be used to indicate if a single transaction's limit was exceeded.
+
 ## v2.3.0
 
 Released 29 October 2018
