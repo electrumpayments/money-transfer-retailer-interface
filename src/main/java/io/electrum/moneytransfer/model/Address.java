@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.sdk.masking2.MaskAll;
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -46,6 +48,7 @@ public class Address {
     **/
    @JsonProperty("addressLine1")
    @ApiModelProperty(value = "First line of street address.")
+   @Masked
    public String getAddressLine1() {
       return addressLine1;
    }
@@ -66,6 +69,7 @@ public class Address {
     **/
    @JsonProperty("addressLine2")
    @ApiModelProperty(value = "Second line of street address (if required).")
+   @Masked
    public String getAddressLine2() {
       return addressLine2;
    }
@@ -86,6 +90,7 @@ public class Address {
     **/
    @JsonProperty("city")
    @ApiModelProperty(value = "")
+   @Masked
    public String getCity() {
       return city;
    }
@@ -106,6 +111,7 @@ public class Address {
     **/
    @JsonProperty("province")
    @ApiModelProperty(value = "")
+   @Masked
    public String getProvince() {
       return province;
    }
@@ -128,6 +134,7 @@ public class Address {
    @ApiModelProperty(value = "Country expressed as an ISO 3166-1 Alpha-2 code")
    @Valid
    @Size(min = 2, max = 2)
+   @Masked
    public String getCountry() {
       return country;
    }
@@ -148,6 +155,7 @@ public class Address {
     **/
    @JsonProperty("postCode")
    @ApiModelProperty(value = "")
+   @Masked
    public String getPostCode() {
       return postCode;
    }
@@ -181,12 +189,12 @@ public class Address {
       StringBuilder sb = new StringBuilder();
       sb.append("class Address {\n");
 
-      sb.append("    addressLine1: ").append(Utils.toIndentedString(addressLine1)).append("\n");
-      sb.append("    addressLine2: ").append(Utils.toIndentedString(addressLine2)).append("\n");
-      sb.append("    city: ").append(Utils.toIndentedString(city)).append("\n");
-      sb.append("    province: ").append(Utils.toIndentedString(province)).append("\n");
-      sb.append("    country: ").append(Utils.toIndentedString(country)).append("\n");
-      sb.append("    postCode: ").append(Utils.toIndentedString(postCode)).append("\n");
+      sb.append("    addressLine1: ").append(Utils.toIndentedString(new MaskAll().mask(addressLine1))).append("\n");
+      sb.append("    addressLine2: ").append(Utils.toIndentedString(new MaskAll().mask(addressLine2))).append("\n");
+      sb.append("    city: ").append(Utils.toIndentedString(new MaskAll().mask(city))).append("\n");
+      sb.append("    province: ").append(Utils.toIndentedString(new MaskAll().mask(province))).append("\n");
+      sb.append("    country: ").append(Utils.toIndentedString(new MaskAll().mask(country))).append("\n");
+      sb.append("    postCode: ").append(Utils.toIndentedString(new MaskAll().mask(postCode))).append("\n");
       sb.append("}");
       return sb.toString();
    }
