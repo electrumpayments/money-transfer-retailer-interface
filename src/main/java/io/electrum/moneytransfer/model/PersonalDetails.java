@@ -70,6 +70,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("firstName")
    @ApiModelProperty(value = "The person's first name(s)")
+   @Masked
    public String getFirstName() {
       return firstName;
    }
@@ -90,6 +91,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("lastName")
    @ApiModelProperty(value = "The person's last name")
+   @Masked
    public String getLastName() {
       return lastName;
    }
@@ -131,6 +133,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("idNumber")
    @ApiModelProperty(value = "Individual's identification number as per presented identification document")
+   @Masked
    public String getIdNumber() {
       return idNumber;
    }
@@ -195,6 +198,7 @@ public class PersonalDetails {
    @ApiModelProperty(value = "Nationality expressed as an ISO 3166-1 Alpha-2 country code")
    @Valid
    @Size(min = 2, max = 2)
+   @Masked
    public String getNationality() {
       return nationality;
    }
@@ -215,6 +219,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("dateOfBirth")
    @ApiModelProperty(value = "Date of birth")
+   @Masked
    public String getDateOfBirth() {
       return dateOfBirth;
    }
@@ -233,6 +238,7 @@ public class PersonalDetails {
    @ApiModelProperty(value = "Mobile phone number of the customer to which the outcome of a transaction can be communicated. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).")
    @Valid
    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
+   @Masked
    public String getContactNumber() {
       return contactNumber;
    }
@@ -261,6 +267,7 @@ public class PersonalDetails {
    @ApiModelProperty(value = "An alternative home contact number. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).")
    @Valid
    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
+   @Masked
    public String getAltContactHome() {
       return altContactHome;
    }
@@ -284,6 +291,7 @@ public class PersonalDetails {
    @ApiModelProperty(value = "An alternative work contact number. This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en).")
    @Valid
    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
+   @Masked
    public String getAltContactWork() {
       return altContactWork;
    }
@@ -304,6 +312,7 @@ public class PersonalDetails {
     **/
    @JsonProperty("email")
    @ApiModelProperty(value = "The person's email address")
+   @Masked
    public String getEmail() {
       return email;
    }
@@ -356,18 +365,18 @@ public class PersonalDetails {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class PersonalDetails {\n");
-      sb.append("    firstName: ").append(Utils.toIndentedString(firstName)).append("\n");
-      sb.append("    lastName: ").append(Utils.toIndentedString(lastName)).append("\n");
+      sb.append("    firstName: ").append(Utils.toIndentedString(new MaskAll().mask(firstName))).append("\n");
+      sb.append("    lastName: ").append(Utils.toIndentedString(new MaskAll().mask(lastName))).append("\n");
       sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
       sb.append("    idNumber: ").append(Utils.toIndentedString(new MaskAll().mask(idNumber))).append("\n");
       sb.append("    idType: ").append(Utils.toIndentedString(idType)).append("\n");
-      sb.append("    nationality: ").append(Utils.toIndentedString(nationality)).append("\n");
-      sb.append("    idCountryCode: ").append(Utils.toIndentedString(idCountryCode)).append("\n");
-      sb.append("    dateOfBirth: ").append(Utils.toIndentedString(dateOfBirth)).append("\n");
-      sb.append("    contactNumber: ").append(Utils.toIndentedString(contactNumber)).append("\n");
-      sb.append("    altContactHome: ").append(Utils.toIndentedString(altContactHome)).append("\n");
-      sb.append("    altContactWork: ").append(Utils.toIndentedString(altContactWork)).append("\n");
-      sb.append("    email: ").append(Utils.toIndentedString(email)).append("\n");
+      sb.append("    nationality: ").append(Utils.toIndentedString(new MaskAll().mask(nationality))).append("\n");
+      sb.append("    idCountryCode: ").append(Utils.toIndentedString(new MaskAll().mask(idCountryCode))).append("\n");
+      sb.append("    dateOfBirth: ").append(Utils.toIndentedString(new MaskAll().mask(dateOfBirth))).append("\n");
+      sb.append("    contactNumber: ").append(Utils.toIndentedString(new MaskAll().mask(contactNumber))).append("\n");
+      sb.append("    altContactHome: ").append(Utils.toIndentedString(new MaskAll().mask(altContactHome))).append("\n");
+      sb.append("    altContactWork: ").append(Utils.toIndentedString(new MaskAll().mask(altContactWork))).append("\n");
+      sb.append("    email: ").append(Utils.toIndentedString(new MaskAll().mask(email))).append("\n");
       sb.append("}");
       return sb.toString();
    }
