@@ -34,7 +34,11 @@ public class MoneyTransferLookupResponse {
 
       CANCELLED("CANCELLED"),
 
-      EXPIRED("EXPIRED");
+      EXPIRED("EXPIRED"),
+
+      ON_HOLD("ON_HOLD"),
+
+      UNCONFIRMED("UNCONFIRMED");
 
       private String value;
 
