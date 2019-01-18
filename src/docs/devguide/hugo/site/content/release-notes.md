@@ -1,5 +1,10 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.5.0
+
+Released 18 January 2019
+ - Added `ON_HOLD` and `UNCONFIRMED` to the `StatusEnum` in the `MoneyTransferLookupResponse`. These may be used when a transaction has entered a frozen/on hold state, or if only the first leg of a dual leg transaction has completed respectively.
+
 ## v2.4.0
 
 Released 6 November 2018
