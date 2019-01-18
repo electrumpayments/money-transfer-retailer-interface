@@ -39,3 +39,4 @@ The test server listens on https://money-transfer-test-pack.herokuapp.com for Mo
 ### Validation
 
 The test server will validate the format of received messages. If the received message fails validation the test server will return a list of fields which failed validation.
+
