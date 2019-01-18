@@ -5,7 +5,7 @@ menu:
     weight: 0
 ---
 
-When developing a server or client implementation of the Money Transfer Retailer Interface it is important to verify that the implementation conforms to the Money Transfer Retailer Interface specification. To test client implementations a test server is available at https://suv-service-test-pack.herokuapp.com. To test server implementations a test pack containing Postman scripts is available [here](https://github.com/electrumpayments/money-transfer-retailer-test-pack/tree/master/test/postman).
+When developing a server or client implementation of the Money Transfer Retailer Interface it is important to verify that the implementation conforms to the Money Transfer Retailer Interface specification. To test client implementations a test server is available at https://money-transfer-test-pack.herokuapp.com. To test server implementations a test pack containing Postman scripts is available [here](https://github.com/electrumpayments/money-transfer-retailer-test-pack/tree/master/test/postman).
 
 Note that the test pack is made available simply as a tool to help test and investigate common implementation issues. However, the test pack is not intended to imply certification of the tested implementation's conformance to the Money Transfer Retailer Interface.
 
