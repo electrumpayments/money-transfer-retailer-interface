@@ -32,53 +32,69 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-@Path("/moneytransfer/v2/orders")
-
+@Path(OrdersResource.PATH)
 @Api(description = "the orders API")
 public abstract class OrdersResource {
-   
-   public class ConfirmPayment{
-      public static final String CONFIRM_PAYMENT = "confirmPayment";
-      public static final int SUCCESS = 202;
-   }
-   
-   public class ConfirmRedeem{
-      public static final String CONFIRM_REDEEM = "confirmRedeem";
-      public static final int SUCCESS = 202;
-   }
-   
-   public class CreateOrder{
+
+   public class CreateOrder {
       public static final String CREATE_ORDER = "createOrder";
       public static final int SUCCESS = 201;
+      public static final String RELATIVE_PATH = "/";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
-   
-   public class LookupOrder{
+
+   public class LookupOrder {
       public static final String LOOKUP_ORDER = "lookupOrder";
       public static final int SUCCESS = 200;
-      public class QueryParameters{
+      public static final String RELATIVE_PATH = "/";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
+
+      public class QueryParameters {
          public static final String ORDER_REDEEM_REF = "orderRedeemRef";
          public static final String MERCHANT_ID = "merchantId";
          public static final String ORIGINATOR_INST_ID = "originatorInstId";
          public static final String RECEIVER_ID = "receiverId";
       }
    }
-   
-   public class RedeemOrder{
+
+   public class RedeemOrder {
       public static final String REDEEM_ORDER = "redeemOrder";
       public static final int SUCCESS = 201;
+      public static final String RELATIVE_PATH = "/redemptions";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
-   
-   public class ReversePayment{
+
+   public class ConfirmPayment {
+      public static final String CONFIRM_PAYMENT = "confirmPayment";
+      public static final int SUCCESS = 202;
+      public static final String RELATIVE_PATH = CreateOrder.RELATIVE_PATH + "/confirmations";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
+   }
+
+   public class ConfirmRedeem {
+      public static final String CONFIRM_REDEEM = "confirmRedeem";
+      public static final int SUCCESS = 202;
+      public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
+   }
+
+   public class ReversePayment {
       public static final String REVERSE_PAYMENT = "reversePayment";
       public static final int SUCCESS = 202;
+      public static final String RELATIVE_PATH = CreateOrder.RELATIVE_PATH + "/reversals";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
-   
-   public class ReverseRedeem{
+
+   public class ReverseRedeem {
       public static final String REVERSE_REDEEM = "reverseRedeem";
       public static final int SUCCESS = 202;
+      public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/reversals";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
 
    protected abstract IOrdersResource getResourceImplementation();
+
+   public static final String PATH = "/orders";
 
    @POST
    @Path("/confirmations")
@@ -90,7 +106,8 @@ public abstract class OrdersResource {
          + "delivery to the service provider. If the service provider does not support positive advice "
          + "messages, then this is simply stored for reporting purposes.", response = MoneyTransferConfirmation.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = MoneyTransferConfirmation.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = MoneyTransferConfirmation.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -104,14 +121,8 @@ public abstract class OrdersResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().confirmPayment(
-            body,
-            securityContext,
-            request,
-            httpHeaders,
-            asyncResponse,
-            uriInfo,
-            httpServletRequest);
+      getResourceImplementation()
+            .confirmPayment(body, securityContext, request, httpHeaders, asyncResponse, uriInfo, httpServletRequest);
    }
 
    @POST
@@ -124,7 +135,8 @@ public abstract class OrdersResource {
          + "delivery to the service provider. If the service provider does not support positive advice "
          + "messages, then this is simply stored for reporting purposes.", response = MoneyTransferConfirmation.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = ConfirmRedeem.SUCCESS, message = "Accepted", response = MoneyTransferConfirmation.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = ConfirmRedeem.SUCCESS, message = "Accepted", response = MoneyTransferConfirmation.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -151,7 +163,8 @@ public abstract class OrdersResource {
          + "`/orders/reversals` resource to ensure the transaction is cancelled with no financial "
          + "impact.", response = MoneyTransferAuthResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = CreateOrder.SUCCESS, message = "Created", response = MoneyTransferAuthResponse.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = CreateOrder.SUCCESS, message = "Created", response = MoneyTransferAuthResponse.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -176,7 +189,8 @@ public abstract class OrdersResource {
    @ApiOperation(value = LookupOrder.LOOKUP_ORDER, notes = "Queries the details of an existing money transfer "
          + "order.", response = MoneyTransferLookupResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = LookupOrder.SUCCESS, message = "OK", response = MoneyTransferLookupResponse.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = LookupOrder.SUCCESS, message = "OK", response = MoneyTransferLookupResponse.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -220,7 +234,8 @@ public abstract class OrdersResource {
          + "be made to the `/orders/redemptions/reversals` resource to ensure the transaction is "
          + "cancelled with no financial impact.", response = MoneyTransferRedeemResponse.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = RedeemOrder.SUCCESS, message = "OK", response = MoneyTransferRedeemResponse.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = RedeemOrder.SUCCESS, message = "OK", response = MoneyTransferRedeemResponse.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -249,7 +264,8 @@ public abstract class OrdersResource {
          + "service will respond immediately to acknowledge receipt and place the message "
          + "on a queue for guaranteed delivery to the service provider.", response = MoneyTransferReversal.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = ReversePayment.SUCCESS, message = "Accepted", response = MoneyTransferReversal.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = ReversePayment.SUCCESS, message = "Accepted", response = MoneyTransferReversal.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -263,14 +279,8 @@ public abstract class OrdersResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().reversePayment(
-            body,
-            securityContext,
-            request,
-            httpHeaders,
-            asyncResponse,
-            uriInfo,
-            httpServletRequest);
+      getResourceImplementation()
+            .reversePayment(body, securityContext, request, httpHeaders, asyncResponse, uriInfo, httpServletRequest);
    }
 
    @POST
@@ -282,7 +292,8 @@ public abstract class OrdersResource {
          + "service will respond immediately to acknowledge receipt and place the message on "
          + "a queue for guaranteed delivery to the service provider.", response = MoneyTransferReversal.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = ReverseRedeem.SUCCESS, message = "Accepted", response = MoneyTransferReversal.class),
+   @ApiResponses(value = {
+         @ApiResponse(code = ReverseRedeem.SUCCESS, message = "Accepted", response = MoneyTransferReversal.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
