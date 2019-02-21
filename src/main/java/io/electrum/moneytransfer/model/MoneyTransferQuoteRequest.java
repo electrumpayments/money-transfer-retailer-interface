@@ -5,19 +5,18 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Institution;
+import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Originator;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Contains a fee quote for the money transfer.
+ * Contains information necessary to obtain a quote for the money transfer.
  */
-public class MoneyTransferFeeQuote {
+public class MoneyTransferQuoteRequest {
 
    @JsonProperty("originator")
    private Originator originator = null;
@@ -25,33 +24,30 @@ public class MoneyTransferFeeQuote {
    @JsonProperty("receiver")
    private Institution receiver = null;
 
-   @JsonProperty("feeQuote")
-   private FeeQuote feeQuote = null;
-
    @JsonProperty("senderDetails")
    private PersonalDetails senderDetails;
 
    @JsonProperty("recipientDetails")
    private PersonalDetails recipientDetails;
 
-   @JsonProperty("quoteId")
-   private String quoteId;
+   @JsonProperty("amount")
+   private LedgerAmount amount;
 
-   @JsonProperty("expiryDateTime")
-   private DateTime expiryDateTime;
+   @JsonProperty("amountIncludesFees")
+   private boolean amountIncludesFees;
 
-   public MoneyTransferFeeQuote originator(Originator originator) {
+   public MoneyTransferQuoteRequest originator(Originator originator) {
       this.originator = originator;
       return this;
    }
 
    /**
-    * Get originator
+    * The location where the money transfer is being initiated.
     *
     * @return originator
     **/
    @JsonProperty("originator")
-   @ApiModelProperty(required = true, value = "")
+   @ApiModelProperty(required = true, value = "The location where the money transfer is being initiated.")
    @Valid
    @NotNull
    public Originator getOriginator() {
@@ -62,18 +58,18 @@ public class MoneyTransferFeeQuote {
       this.originator = originator;
    }
 
-   public MoneyTransferFeeQuote receiver(Institution receiver) {
+   public MoneyTransferQuoteRequest receiver(Institution receiver) {
       this.receiver = receiver;
       return this;
    }
 
    /**
-    * Get receiver
+    * The service provider who is to effect the money transfer.
     *
     * @return receiver
     **/
    @JsonProperty("receiver")
-   @ApiModelProperty(required = true, value = "")
+   @ApiModelProperty(required = true, value = "The service provider who is to effect the money transfer.")
    @Valid
    @NotNull
    public Institution getReceiver() {
@@ -84,28 +80,7 @@ public class MoneyTransferFeeQuote {
       this.receiver = receiver;
    }
 
-   public MoneyTransferFeeQuote feeQuote(FeeQuote feeQuote) {
-      this.feeQuote = feeQuote;
-      return this;
-   }
-
-   /**
-    * Contains details of the fee that will be charged for the transfer.
-    *
-    * @return feeQuote
-    **/
-   @JsonProperty("feeQuote")
-   @ApiModelProperty(value = "Contains details of the fee that will be charged for the transfer.")
-   @Valid
-   public FeeQuote getFeeQuote() {
-      return feeQuote;
-   }
-
-   public void setFeeQuote(FeeQuote feeQuote) {
-      this.feeQuote = feeQuote;
-   }
-
-   public MoneyTransferFeeQuote senderDetails(PersonalDetails senderDetails) {
+   public MoneyTransferQuoteRequest senderDetails(PersonalDetails senderDetails) {
       this.senderDetails = senderDetails;
       return this;
    }
@@ -126,7 +101,7 @@ public class MoneyTransferFeeQuote {
       this.senderDetails = senderDetails;
    }
 
-   public MoneyTransferFeeQuote recipientDetails(PersonalDetails recipientDetails) {
+   public MoneyTransferQuoteRequest recipientDetails(PersonalDetails recipientDetails) {
       this.recipientDetails = recipientDetails;
       return this;
    }
@@ -147,46 +122,50 @@ public class MoneyTransferFeeQuote {
       this.recipientDetails = recipientDetails;
    }
 
-   public MoneyTransferFeeQuote quoteId(String quoteId) {
-      this.quoteId = quoteId;
+   public MoneyTransferQuoteRequest amount(LedgerAmount amount) {
+      this.amount = amount;
       return this;
    }
 
    /**
-    * A reference to this quote. This maybe provided when an order is created to link an order to a specific quote.
+    * The amount to be transferred. Whether this is the amount the sender pays or the amount the recipient is to receive
+    * is determined by the amountIncludesFees flag.
     *
-    * @return quoteId
+    * @return amount
     **/
-   @JsonProperty("quoteId")
-   @ApiModelProperty(value = "A reference to this quote. This maybe provided when an order is created to link an order to a specific quote.")
+   @JsonProperty("amount")
+   @ApiModelProperty(required = true, value = "The amount to be transferred. Whether this is the amount the sender pays or the amount the recipient is to receive is determined by the amountIncludesFees flag.")
    @Valid
-   public String getQuoteId() {
-      return quoteId;
+   @NotNull
+   public LedgerAmount getAmount() {
+      return amount;
    }
 
-   public void setQuoteId(String quoteId) {
-      this.quoteId = quoteId;
+   public void setAmount(LedgerAmount amount) {
+      this.amount = amount;
    }
 
-   public MoneyTransferFeeQuote expiryDateTime(DateTime expiryDateTime) {
-      this.expiryDateTime = expiryDateTime;
+   public MoneyTransferQuoteRequest amountIncludesFees(boolean amountIncludesFees) {
+      this.amountIncludesFees = amountIncludesFees;
       return this;
    }
 
    /**
-    * The date and time when the quote expires.
+    * Indicates whether the amount in this MoneyTransferQuoteRequest is the amount the sender is willing to pay
+    * ({@code false}) or the amount the recipient is to receive ({@code true}).
     *
-    * @return quoteId
+    * @return amountIncludesFees
     **/
-   @JsonProperty("expiryDateTime")
-   @ApiModelProperty(value = "The date and time when the quote expires.")
+   @JsonProperty("amountIncludesFees")
+   @ApiModelProperty(required = true, value = "Indicates whether the amount in this MoneyTransferQuoteRequest is the amount the sender is willing to pay (false) or the amount the recipient is to receive (true).")
    @Valid
-   public DateTime getExpiryDateTime() {
-      return expiryDateTime;
+   @NotNull
+   public boolean getAmountIncludesFees() {
+      return amountIncludesFees;
    }
 
-   public void setExpiryDateTime(DateTime expiryDateTime) {
-      this.expiryDateTime = expiryDateTime;
+   public void setAmountIncludesFees(boolean amountIncludesFees) {
+      this.amountIncludesFees = amountIncludesFees;
    }
 
    @Override
@@ -197,32 +176,30 @@ public class MoneyTransferFeeQuote {
       if (o == null || getClass() != o.getClass()) {
          return false;
       }
-      MoneyTransferFeeQuote moneyTransferFeeQuote = (MoneyTransferFeeQuote) o;
+      MoneyTransferQuoteRequest moneyTransferFeeQuote = (MoneyTransferQuoteRequest) o;
       return Objects.equals(this.originator, moneyTransferFeeQuote.originator)
             && Objects.equals(this.receiver, moneyTransferFeeQuote.receiver)
-            && Objects.equals(this.feeQuote, moneyTransferFeeQuote.feeQuote)
             && Objects.equals(this.senderDetails, moneyTransferFeeQuote.senderDetails)
             && Objects.equals(this.recipientDetails, moneyTransferFeeQuote.recipientDetails)
-            && Objects.equals(this.quoteId, moneyTransferFeeQuote.quoteId)
-            && Objects.equals(this.expiryDateTime, moneyTransferFeeQuote.expiryDateTime);
+            && Objects.equals(this.amount, moneyTransferFeeQuote.amount)
+            && Objects.equals(this.amountIncludesFees, moneyTransferFeeQuote.amountIncludesFees);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(originator, receiver, feeQuote, senderDetails, recipientDetails, quoteId, expiryDateTime);
+      return Objects.hash(originator, receiver, senderDetails, recipientDetails, amount, amountIncludesFees);
    }
 
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class MoneyTransferFeeQuote {\n");
+      sb.append("class MoneyTransferQuoteRequest {\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
-      sb.append("    feeQuote: ").append(Utils.toIndentedString(feeQuote)).append("\n");
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
-      sb.append("    quoteId: ").append(Utils.toIndentedString(quoteId)).append("\n");
-      sb.append("    expiryDateTime: ").append(Utils.toIndentedString(expiryDateTime)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    amountIncludesFees: ").append(Utils.toIndentedString(amountIncludesFees)).append("\n");
       sb.append("}");
       return sb.toString();
    }

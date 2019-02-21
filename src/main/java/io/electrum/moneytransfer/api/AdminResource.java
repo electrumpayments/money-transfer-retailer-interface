@@ -21,6 +21,7 @@ import io.electrum.moneytransfer.model.ErrorDetail;
 import io.electrum.moneytransfer.model.IdType;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
+import io.electrum.moneytransfer.model.MoneyTransferQuoteRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -78,6 +79,19 @@ public abstract class AdminResource {
       }
    }
 
+   public class GetExchangeRate {
+      public static final String RELATIVE_PATH = "/exchangerate";
+      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+      public static final String GET_EXCHANGE_RATE = "getExchangeRate";
+      public static final int SUCCESS = 200;
+
+      public class QueryParameters {
+         public static final String FROM_CURRENCY = "fromCurrency";
+         public static final String TO_CURRENCY = "toCurrency";
+         public static final String RECEIVER_ID = "receiverId";
+      }
+   }
+
    @POST
    @Path(CreateOrUpdateCustomer.RELATIVE_PATH)
    @Consumes({ "application/json" })
@@ -85,7 +99,7 @@ public abstract class AdminResource {
    @ApiOperation(value = CreateOrUpdateCustomer.CREATE_OR_UPDATE_CUSTOMER, notes = "Request to create a new or update an existing customer "
          + "profile on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = 201, message = "Created", response = MoneyTransferAdminMessage.class),
+   @ApiResponses(value = { @ApiResponse(code = CreateOrUpdateCustomer.SUCCESS, message = "Created", response = MoneyTransferAdminMessage.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -117,7 +131,7 @@ public abstract class AdminResource {
    @ApiOperation(value = GetCustomerInfo.GET_CUSTOMER_INFO, notes = "Returns information of the customer's profile as "
          + "registered on the service provider's system.", response = MoneyTransferAdminMessage.class, authorizations = {
                @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferAdminMessage.class),
+   @ApiResponses(value = { @ApiResponse(code = GetCustomerInfo.SUCCESS, message = "OK", response = MoneyTransferAdminMessage.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -156,7 +170,7 @@ public abstract class AdminResource {
    @Produces({ "application/json" })
    @ApiOperation(value = GetFeeQuote.GET_FEE_QUOTE, notes = "Returns the fee that will be charged to the customer for the transfer.", response = MoneyTransferFeeQuote.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = MoneyTransferFeeQuote.class),
+   @ApiResponses(value = { @ApiResponse(code = GetFeeQuote.SUCCESS, message = "OK", response = MoneyTransferFeeQuote.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -194,6 +208,72 @@ public abstract class AdminResource {
             receiverId,
             senderCell,
             recipientCell,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
+   }
+
+   @POST
+   @Path(GetFeeQuote.RELATIVE_PATH)
+   @Consumes({ "application/json" })
+   @Produces({ "application/json" })
+   @ApiOperation(value = GetFeeQuote.GET_FEE_QUOTE, notes = "Returns the fee that will be charged to the customer for the transfer.", response = MoneyTransferFeeQuote.class, authorizations = {
+         @Authorization(value = "httpBasic") }, tags = {})
+   @ApiResponses(value = { @ApiResponse(code = GetFeeQuote.SUCCESS, message = "OK", response = MoneyTransferFeeQuote.class),
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
+   public final void getFeeQuote(
+         @ApiParam(value = "Details necessary to provide a quote.") @Valid MoneyTransferQuoteRequest body,
+
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation().getFeeQuote(
+            body,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
+   }
+
+   @GET
+   @Path(GetExchangeRate.RELATIVE_PATH)
+   @Produces({ "application/json" })
+   @ApiOperation(value = GetExchangeRate.GET_EXCHANGE_RATE, notes = "Returns an exchange rate between two currencies.", response = MoneyTransferFeeQuote.class, authorizations = {
+         @Authorization(value = "httpBasic") }, tags = {})
+   @ApiResponses(value = { @ApiResponse(code = GetExchangeRate.SUCCESS, message = "OK", response = MoneyTransferFeeQuote.class),
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
+   public final void getExchangeRate(
+         @ApiParam(value = "The currency which amounts are converted from. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the toCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.FROM_CURRENCY) @NotNull String fromCurrency,
+
+         @ApiParam(value = "The currency which amounts are converted to. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the fromCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.TO_CURRENCY) String toCurrency,
+
+         @ApiParam(value = "The ID of the receiver who would process such a currency exchange. In the case where the receiver only has a single 'toCurrency', their ID may be supplied in lieu of the toCurrency 'parameter'.") @QueryParam(GetExchangeRate.QueryParameters.RECEIVER_ID) String receiverId,
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation().getExchangeRate(
+            fromCurrency,
+            toCurrency,
+            receiverId,
             securityContext,
             request,
             httpHeaders,

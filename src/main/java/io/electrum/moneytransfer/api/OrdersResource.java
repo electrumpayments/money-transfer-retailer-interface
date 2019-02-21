@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -22,6 +23,7 @@ import io.electrum.moneytransfer.model.MoneyTransferAuthRequest;
 import io.electrum.moneytransfer.model.MoneyTransferAuthResponse;
 import io.electrum.moneytransfer.model.MoneyTransferConfirmation;
 import io.electrum.moneytransfer.model.MoneyTransferLookupResponse;
+import io.electrum.moneytransfer.model.MoneyTransferOrderStatusUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemResponse;
 import io.electrum.moneytransfer.model.MoneyTransferReversal;
@@ -51,6 +53,7 @@ public abstract class OrdersResource {
 
       public class QueryParameters {
          public static final String ORDER_REDEEM_REF = "orderRedeemRef";
+         public static final String REMITTANCE_REF = "remittanceRef";
          public static final String MERCHANT_ID = "merchantId";
          public static final String ORIGINATOR_INST_ID = "originatorInstId";
          public static final String RECEIVER_ID = "receiverId";
@@ -89,6 +92,13 @@ public abstract class OrdersResource {
       public static final String REVERSE_REDEEM = "reverseRedeem";
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/reversals";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
+   }
+
+   public class OrderStatus {
+      public static final String ORDER_STATUS = "orderStatus";
+      public static final int SUCCESS = 204;
+      public static final String RELATIVE_PATH = CreateOrder.RELATIVE_PATH + "/status";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
 
@@ -184,6 +194,32 @@ public abstract class OrdersResource {
             .createOrder(body, securityContext, request, httpHeaders, asyncResponse, uriInfo, httpServletRequest);
    }
 
+   @Deprecated
+   public final void lookupOrder(
+         String orderRedeemRef,
+         String merchantId,
+         String originatorInstId,
+         String receiverId,
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation().lookupOrder(
+            orderRedeemRef,
+            merchantId,
+            originatorInstId,
+            receiverId,
+            null,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
+   }
+
    @GET
    @Produces({ "application/json" })
    @ApiOperation(value = LookupOrder.LOOKUP_ORDER, notes = "Queries the details of an existing money transfer "
@@ -197,13 +233,15 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void lookupOrder(
-         @ApiParam(value = "Reference used by the recipient to redeem the order.", required = true) @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) @NotNull String orderRedeemRef,
+         @ApiParam(value = "Reference used by the recipient to redeem the order.") @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) String orderRedeemRef,
 
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(LookupOrder.QueryParameters.MERCHANT_ID) String merchantId,
 
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(LookupOrder.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
 
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrder.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
+
+         @ApiParam(value = "Reference used by the recipient to refer to the order when no redemption is to occur (e.g. direct account deposits).") @QueryParam(LookupOrder.QueryParameters.REMITTANCE_REF) String remittanceRef,
 
          @Context SecurityContext securityContext,
          @Context Request request,
@@ -216,6 +254,7 @@ public abstract class OrdersResource {
             merchantId,
             originatorInstId,
             receiverId,
+            remittanceRef,
             securityContext,
             request,
             httpHeaders,
@@ -225,7 +264,7 @@ public abstract class OrdersResource {
    }
 
    @POST
-   @Path("/redemptions")
+   @Path(RedeemOrder.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = RedeemOrder.REDEEM_ORDER, notes = "Requests that an existing order be paid out to the recipient. "
@@ -256,7 +295,7 @@ public abstract class OrdersResource {
    }
 
    @POST
-   @Path("/reversals")
+   @Path(ReversePayment.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = ReversePayment.REVERSE_PAYMENT, notes = "Requests that a money transfer payment be reversed. "
@@ -284,7 +323,7 @@ public abstract class OrdersResource {
    }
 
    @POST
-   @Path("/redemptions/reversals")
+   @Path(ReverseRedeem.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = ReverseRedeem.REVERSE_REDEEM, notes = "Requests that a money transfer redemption be reversed. "
@@ -309,5 +348,29 @@ public abstract class OrdersResource {
          @Context HttpServletRequest httpServletRequest) {
       getResourceImplementation()
             .reverseRedeem(body, securityContext, request, httpHeaders, asyncResponse, uriInfo, httpServletRequest);
+   }
+
+   @PUT
+   @Path(OrderStatus.RELATIVE_PATH)
+   @Consumes({ "application/json" })
+   @ApiOperation(value = OrderStatus.ORDER_STATUS, notes = "Advises of a change in an order's status.", authorizations = {
+         @Authorization(value = "httpBasic") }, tags = {})
+   @ApiResponses(value = {
+         @ApiResponse(code = OrderStatus.SUCCESS, message = "No Content", response = MoneyTransferConfirmation.class),
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
+   public final void updateOrderStatus(
+         @ApiParam(value = "The new status of the order.", required = true) @NotNull @Valid MoneyTransferOrderStatusUpdateRequest body,
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation()
+            .updateOrderStatus(body, securityContext, request, httpHeaders, asyncResponse, uriInfo, httpServletRequest);
    }
 }

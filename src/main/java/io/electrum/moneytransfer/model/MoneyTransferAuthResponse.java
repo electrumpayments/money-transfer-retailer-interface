@@ -1,5 +1,7 @@
 package io.electrum.moneytransfer.model;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -10,8 +12,6 @@ import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.util.Objects;
 
 /**
  * Contains the data returned by a call to the createOrder operation.
@@ -24,6 +24,8 @@ public class MoneyTransferAuthResponse extends Transaction {
    private PersonalDetails senderDetails = null;
 
    private String orderRedeemRef = null;
+
+   private String orderRedeemRefAlt = null;
 
    private String orderId = null;
 
@@ -82,15 +84,35 @@ public class MoneyTransferAuthResponse extends Transaction {
     * @return orderRedeemRef
     **/
    @JsonProperty("orderRedeemRef")
-   @ApiModelProperty(required = true, value = "Reference used by the recipient to redeem the order. This must be printed on the receipt.")
+   @ApiModelProperty(value = "Reference used by the recipient to redeem the order. This must be printed on the receipt.")
    @Valid
-   @NotNull
    public String getOrderRedeemRef() {
       return orderRedeemRef;
    }
 
    public void setOrderRedeemRef(String orderRedeemRef) {
       this.orderRedeemRef = orderRedeemRef;
+   }
+
+   public MoneyTransferAuthResponse orderRedeemRefAlt(String orderRedeemRefAlt) {
+      this.orderRedeemRefAlt = orderRedeemRefAlt;
+      return this;
+   }
+
+   /**
+    * An alternate reference used by the recipient to redeem the order. This must be printed on the receipt.
+    * 
+    * @return orderRedeemRefAlt
+    **/
+   @JsonProperty("orderRedeemRefAlt")
+   @ApiModelProperty(value = "An alternate reference used by the recipient to redeem the order. This must be printed on the receipt.")
+   @Valid
+   public String getOrderRedeemRefAlt() {
+      return orderRedeemRefAlt;
+   }
+
+   public void setOrderRedeemRefAlt(String orderRedeemRefAlt) {
+      this.orderRedeemRefAlt = orderRedeemRefAlt;
    }
 
    public MoneyTransferAuthResponse orderId(String orderId) {
@@ -126,14 +148,14 @@ public class MoneyTransferAuthResponse extends Transaction {
       if (!super.equals(o))
          return false;
       final MoneyTransferAuthResponse that = (MoneyTransferAuthResponse) o;
-      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(
-            orderRedeemRef,
-            that.orderRedeemRef) && Objects.equals(orderId, that.orderId);
+      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails)
+            && Objects.equals(orderRedeemRef, that.orderRedeemRef)
+            && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) && Objects.equals(orderId, that.orderId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), amount, senderDetails, orderRedeemRef, orderId);
+      return Objects.hash(super.hashCode(), amount, senderDetails, orderRedeemRef, orderId, orderRedeemRefAlt);
    }
 
    @Override
@@ -153,6 +175,7 @@ public class MoneyTransferAuthResponse extends Transaction {
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
+      sb.append("    orderRedeemRefAlt: ").append(Utils.toIndentedString(orderRedeemRefAlt)).append("\n");
       sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
       sb.append("}");
       return sb.toString();
