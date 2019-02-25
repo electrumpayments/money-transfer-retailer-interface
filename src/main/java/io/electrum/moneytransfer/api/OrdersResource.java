@@ -233,7 +233,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void lookupOrder(
-         @ApiParam(value = "Reference used by the recipient to redeem the order.") @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) String orderRedeemRef,
+         @ApiParam(value = "Reference used by the recipient to redeem the order. If both this value and remittanceRef are supplied then this takes precedence.") @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) String orderRedeemRef,
 
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(LookupOrder.QueryParameters.MERCHANT_ID) String merchantId,
 
@@ -241,7 +241,7 @@ public abstract class OrdersResource {
 
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrder.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
 
-         @ApiParam(value = "Reference used by the recipient to refer to the order when no redemption is to occur (e.g. direct account deposits).") @QueryParam(LookupOrder.QueryParameters.REMITTANCE_REF) String remittanceRef,
+         @ApiParam(value = "Reference used by the recipient to refer to the order when no redemption is to occur (e.g. direct account deposits). If both this value and orderRedeemRef are supplied then orderRedeemRef takes precedence.") @QueryParam(LookupOrder.QueryParameters.REMITTANCE_REF) String remittanceRef,
 
          @Context SecurityContext securityContext,
          @Context Request request,
@@ -356,7 +356,7 @@ public abstract class OrdersResource {
    @ApiOperation(value = OrderStatus.ORDER_STATUS, notes = "Advises of a change in an order's status.", authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = {
-         @ApiResponse(code = OrderStatus.SUCCESS, message = "No Content", response = MoneyTransferConfirmation.class),
+         @ApiResponse(code = OrderStatus.SUCCESS, message = "No Content"),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),

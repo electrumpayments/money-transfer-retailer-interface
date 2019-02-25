@@ -39,7 +39,7 @@ public class MoneyTransferAuthRequest extends Transaction {
 
    private PurposeOfRemittance purposeOfRemittance = null;
 
-   private Relationship relationship = null;
+   private Relationship recipientRelationship = null;
 
    public MoneyTransferAuthRequest amount(LedgerAmount amount) {
       this.amount = amount;
@@ -231,7 +231,7 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    public MoneyTransferAuthRequest relationship(Relationship relationship) {
-      this.relationship = relationship;
+      this.recipientRelationship = relationship;
       return this;
    }
 
@@ -239,16 +239,16 @@ public class MoneyTransferAuthRequest extends Transaction {
     * The relationship between the sender and recipient of the money transfer. This may be tracked for
     * compliance/reporting purposes.
     *
-    * @return relationship
+    * @return recipientRelationship
     **/
-   @JsonProperty("relationship")
-   @ApiModelProperty(value = "The relationship between the sender and recipient of the money transfer. This may be tracked for compliance/reporting purposes.")
+   @JsonProperty("recipientRelationship")
+   @ApiModelProperty(value = "The recipientRelationship between the sender and recipient of the money transfer. This may be tracked for compliance/reporting purposes.")
    public Relationship getRelationship() {
-      return relationship;
+      return recipientRelationship;
    }
 
    public void setRelationship(Relationship relationship) {
-      this.relationship = relationship;
+      this.recipientRelationship = relationship;
    }
 
    @Override
@@ -265,7 +265,7 @@ public class MoneyTransferAuthRequest extends Transaction {
             && Objects.equals(customerProfileId, that.customerProfileId)
             && Objects.equals(newCustomer, that.newCustomer) && Objects.equals(fee, that.fee)
             && Objects.equals(quoteId, that.quoteId) && Objects.equals(purposeOfRemittance, that.purposeOfRemittance)
-            && Objects.equals(relationship, that.relationship);
+            && Objects.equals(recipientRelationship, that.recipientRelationship);
    }
 
    @Override
@@ -281,7 +281,7 @@ public class MoneyTransferAuthRequest extends Transaction {
             fee,
             quoteId,
             purposeOfRemittance,
-            relationship);
+            recipientRelationship);
    }
 
    @Override
@@ -306,7 +306,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    fee: ").append(Utils.toIndentedString(fee)).append("\n");
       sb.append("    quoteId: ").append(Utils.toIndentedString(quoteId)).append("\n");
       sb.append("    purposeOfRemittance: ").append(Utils.toIndentedString(purposeOfRemittance)).append("\n");
-      sb.append("    relationship: ").append(Utils.toIndentedString(relationship)).append("\n");
+      sb.append("    recipientRelationship: ").append(Utils.toIndentedString(recipientRelationship)).append("\n");
       sb.append("}");
       return sb.toString();
    }

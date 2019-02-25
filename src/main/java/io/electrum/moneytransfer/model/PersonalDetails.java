@@ -6,12 +6,15 @@ import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.sdk.masking2.DoNotPersist;
 import io.electrum.sdk.masking2.MaskAll;
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Account;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -57,6 +60,24 @@ public class PersonalDetails {
 
    @JsonProperty("email")
    private String email = null;
+
+   @JsonProperty("accountDetails")
+   private Account accountDetails = null;
+
+   @JsonProperty("idIssuedDate")
+   private DateTime idIssuedDate = null;
+
+   @JsonProperty("idExpiryDate")
+   private DateTime idExpiryDate = null;
+
+   @JsonProperty("culturalName")
+   private String culturalName = null;
+
+   @JsonProperty("sourceOfIncome")
+   private SourceOfIncome sourceOfIncome = null;
+
+   @JsonProperty("occupation")
+   private Occupation occupation = null;
 
    public PersonalDetails firstName(String firstName) {
       this.firstName = firstName;
@@ -321,6 +342,131 @@ public class PersonalDetails {
       this.email = email;
    }
 
+   public PersonalDetails accountDetails(Account accountDetails) {
+      this.accountDetails = accountDetails;
+      return this;
+   }
+
+   /**
+    * The person's account details.
+    *
+    * @return accountDetails
+    **/
+   @JsonProperty("accountDetails")
+   @ApiModelProperty(value = "The person's account details.")
+   @Valid
+   public Account getAccountDetails() {
+      return accountDetails;
+   }
+
+   public void setAccountDetails(Account accountDetails) {
+      this.accountDetails = accountDetails;
+   }
+
+   public PersonalDetails idIssuedDate(DateTime idIssuedDate) {
+      this.idIssuedDate = idIssuedDate;
+      return this;
+   }
+
+   /**
+    * The date and time when the person's form of ID was issued.
+    *
+    * @return idIssuedDate
+    **/
+   @JsonProperty("idIssuedDate")
+   @ApiModelProperty(value = "The date and time when the person's form of ID was issued.")
+   @Valid
+   public DateTime getIdIssuedDate() {
+      return idIssuedDate;
+   }
+
+   public void setIdIssuedDate(DateTime idIssuedDate) {
+      this.idIssuedDate = idIssuedDate;
+   }
+
+   public PersonalDetails idExpiryDate(DateTime idExpiryDate) {
+      this.idExpiryDate = idExpiryDate;
+      return this;
+   }
+
+   /**
+    * The date and time when the person's form of ID expires.
+    *
+    * @return idExpiryDate
+    **/
+   @JsonProperty("idExpiryDate")
+   @ApiModelProperty(value = "The date and time when the person's form of ID expires.")
+   @Valid
+   public DateTime getIdExpiryDate() {
+      return idExpiryDate;
+   }
+
+   public void setIdExpiryDate(DateTime idExpiryDate) {
+      this.idExpiryDate = idExpiryDate;
+   }
+
+   public PersonalDetails culturalName(String culturalName) {
+      this.culturalName = culturalName;
+      return this;
+   }
+
+   /**
+    * The person's full name in their native alphabet.
+    *
+    * @return culturalName
+    **/
+   @JsonProperty("culturalName")
+   @ApiModelProperty(value = "The person's full name in their native alphabet.")
+   public String getCulturalName() {
+      return culturalName;
+   }
+
+   public void setCulturalName(String culturalName) {
+      this.culturalName = culturalName;
+   }
+
+   public PersonalDetails sourceOfIncome(SourceOfIncome sourceOfIncome) {
+      this.sourceOfIncome = sourceOfIncome;
+      return this;
+   }
+
+   /**
+    * The source of the funds used for the money transfer.
+    *
+    * @return sourceOfIncome
+    **/
+   @JsonProperty("sourceOfIncome")
+   @ApiModelProperty(value = "The source of the funds used for the money transfer.")
+   @Valid
+   public SourceOfIncome getSourceOfIncome() {
+      return sourceOfIncome;
+   }
+
+   public void setSourceOfIncome(SourceOfIncome sourceOfIncome) {
+      this.sourceOfIncome = sourceOfIncome;
+   }
+
+   public PersonalDetails occupation(Occupation occupation) {
+      this.occupation = occupation;
+      return this;
+   }
+
+   /**
+    * The person's occupation.
+    *
+    * @return occupation
+    **/
+   @JsonProperty("occupation")
+   @ApiModelProperty(value = "The person's occupation.")
+   @Valid
+   public Occupation getOccupation() {
+      return occupation;
+   }
+
+   public void setOccupation(Occupation occupation) {
+      this.occupation = occupation;
+   }
+
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -341,7 +487,13 @@ public class PersonalDetails {
             && Objects.equals(this.contactNumber, personalDetails.contactNumber)
             && Objects.equals(this.altContactHome, personalDetails.altContactHome)
             && Objects.equals(this.altContactWork, personalDetails.altContactWork)
-            && Objects.equals(this.email, personalDetails.email);
+            && Objects.equals(this.email, personalDetails.email)
+            && Objects.equals(this.accountDetails, personalDetails.accountDetails)
+            && Objects.equals(this.idIssuedDate, personalDetails.idIssuedDate)
+            && Objects.equals(this.idExpiryDate, personalDetails.idExpiryDate)
+            && Objects.equals(this.culturalName, personalDetails.culturalName)
+            && Objects.equals(this.sourceOfIncome, personalDetails.sourceOfIncome)
+            && Objects.equals(this.occupation, personalDetails.occupation);
    }
 
    @Override
@@ -358,7 +510,13 @@ public class PersonalDetails {
             contactNumber,
             altContactHome,
             altContactWork,
-            email);
+            email,
+            accountDetails,
+            idIssuedDate,
+            idExpiryDate,
+            culturalName,
+            sourceOfIncome,
+            occupation);
    }
 
    @Override
@@ -377,6 +535,12 @@ public class PersonalDetails {
       sb.append("    altContactHome: ").append(Utils.toIndentedString(new MaskAll().mask(altContactHome))).append("\n");
       sb.append("    altContactWork: ").append(Utils.toIndentedString(new MaskAll().mask(altContactWork))).append("\n");
       sb.append("    email: ").append(Utils.toIndentedString(new MaskAll().mask(email))).append("\n");
+      sb.append("    accountDetails: ").append(Utils.toIndentedString(accountDetails)).append("\n");
+      sb.append("    idIssuedDate: ").append(Utils.toIndentedString(idIssuedDate)).append("\n");
+      sb.append("    idExpiryDate: ").append(Utils.toIndentedString(idExpiryDate)).append("\n");
+      sb.append("    culturalName: ").append(Utils.toIndentedString(new MaskAll().mask(culturalName))).append("\n");
+      sb.append("    sourceOfIncome: ").append(Utils.toIndentedString(sourceOfIncome.toString())).append("\n");
+      sb.append("    occupation: ").append(Utils.toIndentedString(occupation.toString())).append("\n");
       sb.append("}");
       return sb.toString();
    }

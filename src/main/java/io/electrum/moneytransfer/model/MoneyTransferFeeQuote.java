@@ -176,7 +176,7 @@ public class MoneyTransferFeeQuote {
    /**
     * The date and time when the quote expires.
     *
-    * @return quoteId
+    * @return expiryDateTime
     **/
    @JsonProperty("expiryDateTime")
    @ApiModelProperty(value = "The date and time when the quote expires.")

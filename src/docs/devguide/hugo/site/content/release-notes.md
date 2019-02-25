@@ -21,7 +21,7 @@ Released TBC February 2019
     - `Account` to describe more varied accounts in a consistent manner. This has the following sub-types defined:
       - `BankAccount`
       - `IbanAccount`
-      - `IfsAccount`
+      - `IfscAccount`
       - `SwiftAccount`
       - `MobileWalletAccount`
   - The limitations on the `id` field of the `Institution` model have been removed to make the field suitable for a wider range of applications. The values in this field need no longer be defined by Electrum and similar values as recognised at third parties may now be carried in this field. However, care should be taken during implementation to ensure that different parties agree on the values which will be present in these fields.
