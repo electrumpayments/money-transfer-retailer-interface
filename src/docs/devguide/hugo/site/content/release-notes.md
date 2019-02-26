@@ -13,6 +13,28 @@ Released TBC February 2019
      - Get Fee Quote - allowed to be called via an HTTP POST method
     - Orders Resources:
       - LookupOrder - accepts a `remittanceRef` to refer to an order which will not be explicitly redeemed (e.g. direct account deposits).
+- Added the following new models:
+  - `MoneyTransferOrderStatusUpdateRequest` - describes a change to the status of an order.
+  - `MoneyTransferQuoteRequest` - describes a request for a quote for a money transfer.
+  - `Occupation` - enumerates the different occupations of a person taking part in a money transfer.
+  - `OrderStatus` - enumerates the various states of a money transfer order.
+- Altered the following models:
+  - `MoneyTransferAuthRequest`
+    - Added a `quoteId` field to refer to a previously obtained quote.
+    - Added a `purposeOfRemittance` field to record the reason for the money transfer.
+    - Added a `recipientRelationship` field to record the relationship between the sender and recipient of a money transfer.
+  - `MoneyTransferAuthResponse`
+    - Added a `orderRedeemRefAlt` field to record an alternative reference of a money transfer.
+  - `MoneyTransferFeeQuote`
+    - Added a `quoteId` field to identify a specific quote.
+    - Added an `expiryDateTime` to indicate when a quote expires.
+  - `PersonalDetails`
+      - Add an `accountDetails` to record source and destination account details.
+      - Add an `idIssuedDate` to record when a person's ID was issued.
+      - Add an `idExpiryDate` to record when a person's ID expires.
+      - Add a `culturalName` to record a person's name in their native alphabet.
+      - Add a `sourceOfIncome` to record a sender's funds used for money transfers are obtained from.
+      - Add an `occupation` to record the occupation of people who take part in a money transfer.
 - Corrected repetition of API base path.
   - *Note* This is breaking change to the API but is not treated as such. Previously the API defined paths to operations as `/moneytransfer/v2/moneytransfer/v2/{operation}` when they should have been of the more simple form `/moneytransfer/v2/{operation}`. Changing the API base path in this manner would typically be a breaking change and would be reflected as such by bumping the major version number in the URL from `v2` to `v3`. However, all known projects depending on the Money Transfer Retailer Interface are already implemented using the simpler base path of `/moneytransfer/v2/{operation}`. Thus the decision was made to transparently fix the base path repetition bug as a minor version update as this was deemed to be a less disruptive change to all known projects.
 - The version of the Base API has been updated to v3.18.0. This includes the following changes:
