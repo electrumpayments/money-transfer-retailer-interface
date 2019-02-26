@@ -33,7 +33,7 @@ Released TBC February 2019
       - Add an `idIssuedDate` to record when a person's ID was issued.
       - Add an `idExpiryDate` to record when a person's ID expires.
       - Add a `culturalName` to record a person's name in their native alphabet.
-      - Add a `sourceOfIncome` to record a sender's funds used for money transfers are obtained from.
+      - Add a `sourceOfIncome` to record where a sender's funds used for money transfers are obtained from.
       - Add an `occupation` to record the occupation of people who take part in a money transfer.
 - Corrected repetition of API base path.
   - *Note* This is breaking change to the API but is not treated as such. Previously the API defined paths to operations as `/moneytransfer/v2/moneytransfer/v2/{operation}` when they should have been of the more simple form `/moneytransfer/v2/{operation}`. Changing the API base path in this manner would typically be a breaking change and would be reflected as such by bumping the major version number in the URL from `v2` to `v3`. However, all known projects depending on the Money Transfer Retailer Interface are already implemented using the simpler base path of `/moneytransfer/v2/{operation}`. Thus the decision was made to transparently fix the base path repetition bug as a minor version update as this was deemed to be a less disruptive change to all known projects.
