@@ -10,6 +10,7 @@ import javax.ws.rs.core.UriInfo;
 
 import io.electrum.moneytransfer.model.MoneyTransferAuthRequest;
 import io.electrum.moneytransfer.model.MoneyTransferConfirmation;
+import io.electrum.moneytransfer.model.MoneyTransferOrderStatusUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemRequest;
 import io.electrum.moneytransfer.model.MoneyTransferReversal;
 
@@ -41,11 +42,25 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
+   @Deprecated
    void lookupOrder(
-         @NotNull String orderRedeemRef,
+         String orderRedeemRef,
          String merchantId,
          @NotNull String originatorInstId,
          @NotNull String receiverId,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
+
+   void lookupOrder(
+         String orderRedeemRef,
+         String merchantId,
+         @NotNull String originatorInstId,
+         @NotNull String receiverId,
+         String remittanceRef,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
@@ -73,6 +88,15 @@ public interface IOrdersResource {
 
    void reverseRedeem(
          MoneyTransferReversal body,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
+
+   void updateOrderStatus(
+         MoneyTransferOrderStatusUpdateRequest body,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,

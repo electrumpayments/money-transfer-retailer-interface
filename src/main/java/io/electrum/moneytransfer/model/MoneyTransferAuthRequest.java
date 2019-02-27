@@ -1,6 +1,12 @@
 package io.electrum.moneytransfer.model;
 
+import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.EncryptedPin;
 import io.electrum.vas.model.LedgerAmount;
@@ -8,10 +14,6 @@ import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 /**
  * Used to submit data in a call to the createOrder operation.
@@ -32,6 +34,12 @@ public class MoneyTransferAuthRequest extends Transaction {
    private Boolean newCustomer = null;
 
    private LedgerAmount fee = null;
+
+   private String quoteId = null;
+
+   private PurposeOfRemittance purposeOfRemittance = null;
+
+   private Relationship recipientRelationship = null;
 
    public MoneyTransferAuthRequest amount(LedgerAmount amount) {
       this.amount = amount;
@@ -88,8 +96,8 @@ public class MoneyTransferAuthRequest extends Transaction {
    }
 
    /**
-    * Personal details of the intended recipient.
-    * Conditionally optional - please confirm with your integration partner whether this is required.
+    * Personal details of the intended recipient. Conditionally optional - please confirm with your integration partner
+    * whether this is required.
     *
     * @return recipientDetails
     **/
@@ -181,6 +189,68 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.fee = fee;
    }
 
+   public MoneyTransferAuthRequest quoteId(String quoteId) {
+      this.quoteId = quoteId;
+      return this;
+   }
+
+   /**
+    * The value returned in a previous MoneyTransferFeeQuoteResponse object. This allows a specific money transfer order
+    * to be linked to a specific quote.
+    *
+    * @return quoteId
+    **/
+   @JsonProperty("quoteId")
+   @ApiModelProperty(value = "The value returned in a previous MoneyTransferFeeQuoteResponse object. This allows a specific money transfer order to be linked to a specific quote.")
+   public String getQuoteId() {
+      return quoteId;
+   }
+
+   public void setQuoteId(String quoteId) {
+      this.quoteId = quoteId;
+   }
+
+   public MoneyTransferAuthRequest purposeOfRemittance(PurposeOfRemittance purposeOfRemittance) {
+      this.purposeOfRemittance = purposeOfRemittance;
+      return this;
+   }
+
+   /**
+    * The reason the sender is performing a money transfer. This may be tracked for compliance/reporting purposes.
+    *
+    * @return purposeOfRemittance
+    **/
+   @JsonProperty("purposeOfRemittance")
+   @ApiModelProperty(value = "The reason the sender is performing a money transfer. This may be tracked for compliance/reporting purposes.")
+   public PurposeOfRemittance getPurposeOfRemittance() {
+      return purposeOfRemittance;
+   }
+
+   public void setPurposeOfRemittance(PurposeOfRemittance purposeOfRemittance) {
+      this.purposeOfRemittance = purposeOfRemittance;
+   }
+
+   public MoneyTransferAuthRequest relationship(Relationship relationship) {
+      this.recipientRelationship = relationship;
+      return this;
+   }
+
+   /**
+    * The relationship between the sender and recipient of the money transfer. This may be tracked for
+    * compliance/reporting purposes.
+    *
+    * @return recipientRelationship
+    **/
+   @JsonProperty("recipientRelationship")
+   @ApiModelProperty(value = "The recipientRelationship between the sender and recipient of the money transfer. This may be tracked for compliance/reporting purposes.")
+   public Relationship getRelationship() {
+      return recipientRelationship;
+   }
+
+   public void setRelationship(Relationship relationship) {
+      this.recipientRelationship = relationship;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -190,21 +260,28 @@ public class MoneyTransferAuthRequest extends Transaction {
       if (!super.equals(o))
          return false;
       final MoneyTransferAuthRequest that = (MoneyTransferAuthRequest) o;
-      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails) && Objects.equals(recipientDetails,
-            that.recipientDetails) && Objects.equals(pin, that.pin) && Objects.equals(customerProfileId,
-            that.customerProfileId) && Objects.equals(newCustomer, that.newCustomer) && Objects.equals(fee, that.fee);
+      return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails)
+            && Objects.equals(recipientDetails, that.recipientDetails) && Objects.equals(pin, that.pin)
+            && Objects.equals(customerProfileId, that.customerProfileId)
+            && Objects.equals(newCustomer, that.newCustomer) && Objects.equals(fee, that.fee)
+            && Objects.equals(quoteId, that.quoteId) && Objects.equals(purposeOfRemittance, that.purposeOfRemittance)
+            && Objects.equals(recipientRelationship, that.recipientRelationship);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(),
+      return Objects.hash(
+            super.hashCode(),
             amount,
             senderDetails,
             recipientDetails,
             pin,
             customerProfileId,
             newCustomer,
-            fee);
+            fee,
+            quoteId,
+            purposeOfRemittance,
+            recipientRelationship);
    }
 
    @Override
@@ -227,6 +304,9 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("    newCustomer: ").append(Utils.toIndentedString(newCustomer)).append("\n");
       sb.append("    fee: ").append(Utils.toIndentedString(fee)).append("\n");
+      sb.append("    quoteId: ").append(Utils.toIndentedString(quoteId)).append("\n");
+      sb.append("    purposeOfRemittance: ").append(Utils.toIndentedString(purposeOfRemittance)).append("\n");
+      sb.append("    recipientRelationship: ").append(Utils.toIndentedString(recipientRelationship)).append("\n");
       sb.append("}");
       return sb.toString();
    }
