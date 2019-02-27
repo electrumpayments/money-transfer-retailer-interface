@@ -2,7 +2,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.6.0
 
-Released TBC February 2019
+Released 27 February 2019
  - Added the following new operations:
   - Admin Resources:
     - Get Exchange Rate - used to obtain a currency exchange rate.
