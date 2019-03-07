@@ -29,6 +29,8 @@ public class MoneyTransferAuthResponse extends Transaction {
 
    private String orderId = null;
 
+   private String customerProfileId = null;
+
    public MoneyTransferAuthResponse amount(LedgerAmount amount) {
       this.amount = amount;
       return this;
@@ -139,6 +141,26 @@ public class MoneyTransferAuthResponse extends Transaction {
       this.orderId = orderId;
    }
 
+   /**
+    * Uniquely identifies a customer's profile on the upstream entity's system.
+    *
+    * @return customerProfileId
+    **/
+   @JsonProperty("customerProfileId")
+   @ApiModelProperty(value = "Uniquely identifies customer's profile on the upstream entity's system.")
+   public String getCustomerProfileId() {
+      return customerProfileId;
+   }
+
+   public void setCustomerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+   }
+
+   public MoneyTransferAuthResponse customerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+      return this;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -150,12 +172,20 @@ public class MoneyTransferAuthResponse extends Transaction {
       final MoneyTransferAuthResponse that = (MoneyTransferAuthResponse) o;
       return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails)
             && Objects.equals(orderRedeemRef, that.orderRedeemRef)
-            && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) && Objects.equals(orderId, that.orderId);
+            && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) && Objects.equals(orderId, that.orderId)
+            && Objects.equals(customerProfileId, that.customerProfileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), amount, senderDetails, orderRedeemRef, orderId, orderRedeemRefAlt);
+      return Objects.hash(
+            super.hashCode(),
+            amount,
+            senderDetails,
+            orderRedeemRef,
+            orderId,
+            orderRedeemRefAlt,
+            customerProfileId);
    }
 
    @Override
@@ -177,6 +207,7 @@ public class MoneyTransferAuthResponse extends Transaction {
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
       sb.append("    orderRedeemRefAlt: ").append(Utils.toIndentedString(orderRedeemRefAlt)).append("\n");
       sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
+      sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }
