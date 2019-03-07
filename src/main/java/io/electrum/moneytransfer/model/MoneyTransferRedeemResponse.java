@@ -1,5 +1,7 @@
 package io.electrum.moneytransfer.model;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -11,8 +13,6 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Objects;
-
 /**
  * Contains the data returned by a call to the redeemOrder operation.
  */
@@ -22,6 +22,8 @@ public class MoneyTransferRedeemResponse extends Transaction {
    private LedgerAmount amount = null;
 
    private String orderId = null;
+
+   private String customerProfileId = null;
 
    /**
     * Get amount
@@ -66,6 +68,26 @@ public class MoneyTransferRedeemResponse extends Transaction {
       this.orderId = orderId;
    }
 
+   public MoneyTransferRedeemResponse customerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+      return this;
+   }
+
+   /**
+    * Get customer profile id
+    *
+    * @return customer profile id
+    */
+   @JsonProperty("customerProfileId")
+   @ApiModelProperty(value = "Uniquely identifies customer's profile on the upstream entity's system.")
+   public String getCustomerProfileId() {
+      return customerProfileId;
+   }
+
+   public void setCustomerProfileId(String customerProfileId) {
+      this.customerProfileId = customerProfileId;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -75,12 +97,13 @@ public class MoneyTransferRedeemResponse extends Transaction {
       if (!super.equals(o))
          return false;
       final MoneyTransferRedeemResponse that = (MoneyTransferRedeemResponse) o;
-      return Objects.equals(amount, that.amount) && Objects.equals(orderId, that.orderId);
+      return Objects.equals(amount, that.amount) && Objects.equals(orderId, that.orderId)
+            && Objects.equals(customerProfileId, that.customerProfileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), amount, orderId);
+      return Objects.hash(super.hashCode(), amount, orderId, customerProfileId);
    }
 
    @Override
@@ -99,6 +122,7 @@ public class MoneyTransferRedeemResponse extends Transaction {
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
+      sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

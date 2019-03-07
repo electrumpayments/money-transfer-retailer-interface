@@ -1,5 +1,15 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.7.0
+
+Released 07 March 2019
+
+- Altered the following models:
+  - `MoneyTransferAuthResponse`
+    - Added the `customerProfileId` field from the request to the response model.
+  - `MoneyTransferRedeemResponse`
+    - Added the `customerProfileId` field from the request to the response model.
+
 ## v2.6.0
 
 Released 27 February 2019
