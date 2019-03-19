@@ -12,12 +12,12 @@ To include the service interface into your maven project, include the below depe
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>money-transfer-retailer-interface</artifactId>
-    <version>2.6.0</version>
+    <version>2.8.0</version>
 </dependency>
 <dependency>
   <groupId>io.electrum</groupId>
   <artifactId>service-interface-base</artifactId>
-  <version>3.9.0</version>
+  <version>3.18.0</version>
   <scope>provided</scope>
 </dependency>
 ```
