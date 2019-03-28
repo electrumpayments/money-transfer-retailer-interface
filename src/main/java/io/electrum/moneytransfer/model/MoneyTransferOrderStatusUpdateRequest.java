@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Institution;
+import io.electrum.vas.model.Originator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -37,6 +39,17 @@ public class MoneyTransferOrderStatusUpdateRequest {
    @Valid
    @NotNull
    private OrderStatus status = null;
+
+   @JsonProperty("receiver")
+   @ApiModelProperty(value = "Data relating to the entity which ultimately processes the request.")
+   @Valid
+   private Institution receiver = null;
+
+   @JsonProperty("originator")
+   @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction.")
+   @NotNull
+   @Valid
+   private Originator originator = null;
 
    public MoneyTransferOrderStatusUpdateRequest updateTime(DateTime updateTime) {
       this.updateTime = updateTime;
@@ -88,6 +101,32 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    public void setStatus(OrderStatus status) {
       this.status = status;
+   }
+
+   public MoneyTransferOrderStatusUpdateRequest receiver(Institution receiver) {
+      this.receiver = receiver;
+      return this;
+   }
+
+   public Institution getReceiver() {
+      return receiver;
+   }
+
+   public void setReceiver(Institution receiver) {
+      this.receiver = receiver;
+   }
+
+   public MoneyTransferOrderStatusUpdateRequest originator(Originator originator) {
+      this.originator = originator;
+      return this;
+   }
+
+   public Originator getOriginator() {
+      return originator;
+   }
+
+   public void setOriginator(Originator originator) {
+      this.originator = originator;
    }
 
    @Override
