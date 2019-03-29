@@ -31,14 +31,14 @@ if [ -z $CI ]; then
       --name hugo \
       -e "HUGO_THEME=hugo-material-docs" \
       -e "HUGO_BASEURL=/" \
-      jojomi/hugo
+      jojomi/hugo:0.29
 else
     docker run \
       --volumes-from src-vol \
       --name hugo \
       -e "HUGO_THEME=hugo-material-docs" \
       -e "HUGO_BASEURL=https://electrumpayments.github.io/money-transfer-retailer-interface-docs/" \
-      jojomi/hugo
+      jojomi/hugo:0.29
 fi
 
 docker cp hugo:/output/. "${BASE_DIR}/target/devguide/site"
