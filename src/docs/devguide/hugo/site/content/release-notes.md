@@ -2,7 +2,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.8.0
 
-Released 19 March 2019
+Released 1 April 2019
 
 - Updated the `MoneyTransferOrderStatusUpdateRequest` model to contain at least as much information as may be returned in a `MoneyTransferAuthResponse`.
 
