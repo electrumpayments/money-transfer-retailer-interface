@@ -70,7 +70,7 @@ public abstract class OrdersResource {
    public class ConfirmPayment {
       public static final String CONFIRM_PAYMENT = "confirmPayment";
       public static final int SUCCESS = 202;
-      public static final String RELATIVE_PATH = CreateOrder.RELATIVE_PATH + "/confirmations";
+      public static final String RELATIVE_PATH = "/confirmations";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
 
@@ -84,7 +84,7 @@ public abstract class OrdersResource {
    public class ReversePayment {
       public static final String REVERSE_PAYMENT = "reversePayment";
       public static final int SUCCESS = 202;
-      public static final String RELATIVE_PATH = CreateOrder.RELATIVE_PATH + "/reversals";
+      public static final String RELATIVE_PATH = "/reversals";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
 
@@ -98,7 +98,7 @@ public abstract class OrdersResource {
    public class OrderStatus {
       public static final String ORDER_STATUS = "orderStatus";
       public static final int SUCCESS = 204;
-      public static final String RELATIVE_PATH = CreateOrder.RELATIVE_PATH + "/status";
+      public static final String RELATIVE_PATH = "/status";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
 
