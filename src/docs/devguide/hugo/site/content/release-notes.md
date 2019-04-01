@@ -1,5 +1,11 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.8.0
+
+Released 1 April 2019
+
+- Updated the `MoneyTransferOrderStatusUpdateRequest` model to contain at least as much information as may be returned in a `MoneyTransferAuthResponse`.
+
 ## v2.7.0
 
 Released 07 March 2019
@@ -13,6 +19,7 @@ Released 07 March 2019
 ## v2.6.0
 
 Released 27 February 2019
+
  - Added the following new operations:
   - Admin Resources:
     - Get Exchange Rate - used to obtain a currency exchange rate.
@@ -61,43 +68,52 @@ Released 27 February 2019
 ## v2.5.0
 
 Released 18 January 2019
+
 - Added `ON_HOLD` and `UNCONFIRMED` to the `StatusEnum` in the `MoneyTransferLookupResponse`. These may be used when a transaction has entered a frozen/on hold state, or if only the first leg of a dual leg transaction has completed respectively.
 
 ## v2.4.0
 
 Released 6 November 2018
- - Added `TRANSACTION_LIMIT_EXCEEDED` to the `ErrorTypeEnum`. This may be used to indicate if a single transaction's limit was exceeded.
+
+- Added `TRANSACTION_LIMIT_EXCEEDED` to the `ErrorTypeEnum`. This may be used to indicate if a single transaction's limit was exceeded.
 
 ## v2.3.0
 
 Released 29 October 2018
- - Added `cashierComment` to `MoneyTransferRedeemRequest`. This field may be used to describe suspicious behaviour observed by the cashier.
+
+- Added `cashierComment` to `MoneyTransferRedeemRequest`. This field may be used to describe suspicious behaviour observed by the cashier.
 
 ## v2.2.1
 
 Released 18 September 2018
- - Added `@DoNotPersist` annotation to the `IdNumber` field of `PersonalDetails` model.
- - Masked the `IdNumber` field in the `PersonalDetails` models `toString()` method.
+
+- Added `@DoNotPersist` annotation to the `IdNumber` field of `PersonalDetails` model.
+- Masked the `IdNumber` field in the `PersonalDetails` models `toString()` method.
+
 ## v2.2.0
 
 Released 14 September 2018
- - Added `@Masked` annotation to the `IdNumber` field of `PersonalDetails` model.
- - Added `customerProfileId` in `MoneyTransferRedeemRequest`
+
+- Added `@Masked` annotation to the `IdNumber` field of `PersonalDetails` model.
+- Added `customerProfileId` in `MoneyTransferRedeemRequest`
 
 ## v2.1.0
 
 Released 27 August 2018
- - Deprecated TRANSACTION_NOT_ALLOWED_FOR_MERCHANT ErrorType. Provided INVALID_MERCHANT ErrorType for use instead.
+
+- Deprecated TRANSACTION_NOT_ALLOWED_FOR_MERCHANT ErrorType. Provided INVALID_MERCHANT ErrorType for use instead.
 
 ## v2.0.2
 
- Released 8 August 2018
-  - No code changes. Changes to release process only.
+Released 8 August 2018
+
+- No code changes. Changes to release process only.
 
 ## v2.0.1
 
 Released 2 August 2018
- - Added `@Valid` annotations to resources and model objects, which allows the object to be recursively validated.
+
+- Added `@Valid` annotations to resources and model objects, which allows the object to be recursively validated.
 
 ## v2.0.0
 
