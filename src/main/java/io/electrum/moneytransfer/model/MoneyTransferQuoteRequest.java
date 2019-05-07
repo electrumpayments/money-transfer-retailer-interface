@@ -159,7 +159,6 @@ public class MoneyTransferQuoteRequest {
    @JsonProperty("amountIncludesFees")
    @ApiModelProperty(required = true, value = "Indicates whether the amount in this MoneyTransferQuoteRequest is the amount the sender is willing to pay (false) or the amount the recipient is to receive (true).")
    @Valid
-   @NotNull
    public boolean getAmountIncludesFees() {
       return amountIncludesFees;
    }

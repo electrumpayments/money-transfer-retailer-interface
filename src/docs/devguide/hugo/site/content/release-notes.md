@@ -1,5 +1,19 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.9.0
+
+Released xx May 2019
+
+- Added the following new operations:
+  - Orders Resources:
+    - CancelOrder - used to cancel an order.
+    - CancelOrderReversal - used to reverse a cancel order request
+
+- Added the following new models:
+  - `MoneyTransferOrderCancelRequest` - describes a request to cancel an order.
+  - `MoneyTransferOrderCancelResponse` - describes a response for a cancel order request.
+  - `MoneyTransferCancelOrderReversal` - describes a request and response for a cancel order reversal.
+
 ## v2.8.0
 
 Released 1 April 2019
