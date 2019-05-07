@@ -7,7 +7,7 @@ Released xx May 2019
 - Added the following new operations:
   - Orders Resources:
     - CancelOrder - used to cancel an order.
-    - CancelOrderReversal - used to reverse a cancel order request
+    - CancelOrderReversal - used to reverse a cancel order request.
 
 - Added the following new models:
   - `MoneyTransferOrderCancelRequest` - describes a request to cancel an order.
