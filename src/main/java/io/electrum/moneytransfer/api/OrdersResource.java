@@ -385,6 +385,7 @@ public abstract class OrdersResource {
    }
 
    @POST
+   @Path(CancelOrder.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = CancelOrder.CANCEL_ORDER, notes = "Requests that an order be cancelled and that a sender be refunded. This requested is treated as an online message. If no response is received, the cancellation will be reversed.", response = MoneyTransferOrderCancelResponse.class, authorizations = {
@@ -410,6 +411,7 @@ public abstract class OrdersResource {
    }
 
    @POST
+   @Path(CancelOrderReversal.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = CancelOrderReversal.CANCEL_ORDER_REVERSAL, notes = "Requests that a cancellation be reversed. This is treated as a store-and-forward transaction. Upon receipt, the Electrum service will respond immediately to acknowledge receipt and place the message on a queue for guaranteed delivery to the service provider.", response = MoneyTransferCancelOrderReversal.class, authorizations = {
