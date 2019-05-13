@@ -111,7 +111,7 @@ public class MoneyTransferOrderCancelRequest extends Transaction {
    @Masked
    @DoNotPersist(replacementValue = "000000000000")
    public String getIdNumber() {
-      return orderRedeemRefAlt;
+      return idNumber;
    }
 
    public void setIdNumber(String idNumber) {
