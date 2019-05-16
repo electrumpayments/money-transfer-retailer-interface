@@ -2,13 +2,12 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.9.0
 
-Released x May 2019
+Released 16 May 2019
 
-- Updated the `MoneyTransferLookupResponse` model to contain the same amount of order references that could be returned in the `MoneyTransferAuthResponse`.
-    - The new fields added to the `MoneyTransferLookupResponse` are:
-        - orderRedeemRef - Reference used by the recipient to redeem the order.
-        - orderRedeemRefAlt - An alternate reference used by the recipient to redeem the order.
-        - orderId - Reference used by the service provider to uniquely identify the money transfer order on their system.
+- Updated the `MoneyTransferLookupResponse` model to contain the order references that are returned in the `MoneyTransferAuthResponse`, namely:
+    - `orderRedeemRef` - Reference used by the recipient to redeem the order.
+    - `orderRedeemRefAlt` - An alternate reference used by the recipient to redeem the order.
+    - `orderId` - Reference used by the service provider to uniquely identify the money transfer order on their system.
 
 ## v2.8.0
 

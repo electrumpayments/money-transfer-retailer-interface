@@ -197,7 +197,6 @@ public class MoneyTransferLookupResponse {
     **/
    @JsonProperty("orderRedeemRefAlt")
    @ApiModelProperty(value = "An alternate reference used by the recipient to redeem the order. This must be printed on the receipt.")
-   @Valid
    public String getOrderRedeemRefAlt() {
       return orderRedeemRefAlt;
    }
