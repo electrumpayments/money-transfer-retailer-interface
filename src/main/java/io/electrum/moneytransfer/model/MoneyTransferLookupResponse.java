@@ -24,12 +24,6 @@ public class MoneyTransferLookupResponse {
    @JsonProperty("amount")
    private LedgerAmount amount = null;
 
-   private String orderRedeemRef = null;
-
-   private String orderRedeemRefAlt = null;
-
-   private String orderId = null;
-
    /**
     * The status of the order
     */
@@ -77,6 +71,12 @@ public class MoneyTransferLookupResponse {
 
    @JsonProperty("receiver")
    private Institution receiver = null;
+
+   private String orderRedeemRef = null;
+
+   private String orderRedeemRefAlt = null;
+
+   private String orderId = null;
 
    public MoneyTransferLookupResponse amount(LedgerAmount amount) {
       this.amount = amount;
