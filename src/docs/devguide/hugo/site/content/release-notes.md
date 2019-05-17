@@ -1,5 +1,13 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+
+## v2.10.0
+
+Released 17 May 2019
+
+- Updated base API dependency to v3.20.0
+	- Added new `Account.AccountType` value `CASH_PICKUP` for cash pickup scenarios.
+
 ## v2.9.0
 
 Released 16 May 2019
