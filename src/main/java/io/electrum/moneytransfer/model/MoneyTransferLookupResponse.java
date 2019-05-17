@@ -72,6 +72,12 @@ public class MoneyTransferLookupResponse {
    @JsonProperty("receiver")
    private Institution receiver = null;
 
+   private String orderRedeemRef = null;
+
+   private String orderRedeemRefAlt = null;
+
+   private String orderId = null;
+
    public MoneyTransferLookupResponse amount(LedgerAmount amount) {
       this.amount = amount;
       return this;
@@ -158,24 +164,88 @@ public class MoneyTransferLookupResponse {
       this.receiver = receiver;
    }
 
+   public MoneyTransferLookupResponse orderRedeemRef(String orderRedeemRef) {
+      this.orderRedeemRef = orderRedeemRef;
+      return this;
+   }
+
+   /**
+    * Reference used by the recipient to redeem the order. This must be printed on the receipt.
+    *
+    * @return orderRedeemRef
+    **/
+   @JsonProperty("orderRedeemRef")
+   @ApiModelProperty(value = "Reference used by the recipient to redeem the order. This must be printed on the receipt.")
+   @Valid
+   public String getOrderRedeemRef() {
+      return orderRedeemRef;
+   }
+
+   public void setOrderRedeemRef(String orderRedeemRef) {
+      this.orderRedeemRef = orderRedeemRef;
+   }
+
+   public MoneyTransferLookupResponse orderRedeemRefAlt(String orderRedeemRefAlt) {
+      this.orderRedeemRefAlt = orderRedeemRefAlt;
+      return this;
+   }
+
+   /**
+    * An alternate reference used by the recipient to redeem the order. This must be printed on the receipt.
+    *
+    * @return orderRedeemRefAlt
+    **/
+   @JsonProperty("orderRedeemRefAlt")
+   @ApiModelProperty(value = "An alternate reference used by the recipient to redeem the order. This must be printed on the receipt.")
+   public String getOrderRedeemRefAlt() {
+      return orderRedeemRefAlt;
+   }
+
+   public void setOrderRedeemRefAlt(String orderRedeemRefAlt) {
+      this.orderRedeemRefAlt = orderRedeemRefAlt;
+   }
+
+   public MoneyTransferLookupResponse orderId(String orderId) {
+      this.orderId = orderId;
+      return this;
+   }
+
+   /**
+    * Reference used by the service provider to uniquely identify the money transfer order on their system. This field
+    * can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef.
+    * Note that any reference issued by the provider that is specific to a particular leg of the order process should be
+    * set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own
+    * reference).
+    *
+    * @return orderId
+    **/
+   @JsonProperty("orderId")
+   @ApiModelProperty(value = "Reference used by the service provider to uniquely identify the money transfer order on their system. This field can be used if the provider supplies a supplementary reference for the order in addition to the orderRedeemRef. Note that any reference issued by the provider that is specific to a particular leg of the order process should be set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own reference).")
+   public String getOrderId() {
+      return orderId;
+   }
+
+   public void setOrderId(String orderId) {
+      this.orderId = orderId;
+   }
+
    @Override
-   public boolean equals(java.lang.Object o) {
-      if (this == o) {
-         return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-         return false;
-      }
-      MoneyTransferLookupResponse moneyTransferLookupResponse = (MoneyTransferLookupResponse) o;
-      return Objects.equals(this.amount, moneyTransferLookupResponse.amount)
-            && Objects.equals(this.status, moneyTransferLookupResponse.status)
-            && Objects.equals(this.originator, moneyTransferLookupResponse.originator)
-            && Objects.equals(this.receiver, moneyTransferLookupResponse.receiver);
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof MoneyTransferLookupResponse)) return false;
+      MoneyTransferLookupResponse that = (MoneyTransferLookupResponse) o;
+      return Objects.equals(amount, that.amount) &&
+            Objects.equals(orderRedeemRef, that.orderRedeemRef) &&
+            Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) &&
+            Objects.equals(orderId, that.orderId) &&
+            status == that.status &&
+            Objects.equals(originator, that.originator) &&
+            Objects.equals(receiver, that.receiver);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(amount, status, originator, receiver);
+      return Objects.hash(amount, orderRedeemRef, orderRedeemRefAlt, orderId, status, originator, receiver);
    }
 
    @Override
@@ -187,6 +257,9 @@ public class MoneyTransferLookupResponse {
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
+      sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
+      sb.append("    orderRedeemRefAlt: ").append(Utils.toIndentedString(orderRedeemRefAlt)).append("\n");
+      sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
       sb.append("}");
       return sb.toString();
    }
