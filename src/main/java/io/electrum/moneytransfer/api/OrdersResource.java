@@ -399,7 +399,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void cancelOrder(
-         @ApiParam(value = "A message containing the data required to carry out the payment order, as well as information about the point-of-sale from which the transaction originates.", required = true) @NotNull @Valid MoneyTransferOrderCancelRequest body,
+         @ApiParam(value = "A message containing the data required to cancel a payment order, as well as information about the point-of-sale from which the transaction originates.", required = true) @NotNull @Valid MoneyTransferOrderCancelRequest body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -414,7 +414,7 @@ public abstract class OrdersResource {
    @Path(CancelOrderReversal.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = CancelOrderReversal.CANCEL_ORDER_REVERSAL, notes = "Requests that a cancellation be reversed. This is treated as a store-and-forward transaction. Upon receipt, the Electrum service will respond immediately to acknowledge receipt and place the message on a queue for guaranteed delivery to the service provider.", response = MoneyTransferCancelOrderReversal.class, authorizations = {
+   @ApiOperation(value = CancelOrderReversal.CANCEL_ORDER_REVERSAL, notes = "Requests that a cancellation be reversed. This is treated as a store-and-forward transaction. Upon receipt, it's recommended that implementors respond immediately to acknowledge receipt and place the message on a queue for guaranteed delivery to the service provider.", response = MoneyTransferCancelOrderReversal.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = {
          @ApiResponse(code = CancelOrderReversal.SUCCESS, message = "Accepted", response = MoneyTransferCancelOrderReversal.class),
@@ -426,7 +426,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void cancelOrderReversal(
-         @ApiParam(value = "A message containing the data required to carry out the payment order, as well as information about the point-of-sale from which the transaction originates.", required = true) @NotNull @Valid MoneyTransferCancelOrderReversal body,
+         @ApiParam(value = "A message containing the data required to reverse an order cancellation.", required = true) @NotNull @Valid MoneyTransferCancelOrderReversal body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,

@@ -17,22 +17,16 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Used to submit data in a call to the redeemOrder operation.
+ * Used to submit data in a call to the cancelOrder operation.
  */
 @ApiModel(description = "Used to submit data in a call to the cancelOrder operation.")
 public class MoneyTransferOrderCancelRequest extends Transaction {
-   @JsonProperty("orderRedeemRef")
    private String orderRedeemRef = null;
 
-   @JsonProperty("orderRedeemRefAlt")
    private String orderRedeemRefAlt = null;
 
-   @JsonProperty("pin")
    private EncryptedPin pin;
 
-   @JsonProperty("idNumber")
-   @Masked
-   @DoNotPersist(replacementValue = "000000000000")
    private String idNumber = null;
 
    /**
@@ -63,9 +57,8 @@ public class MoneyTransferOrderCancelRequest extends Transaction {
     * @return orderRedeemRefAlt
     **/
    @JsonProperty("orderRedeemRefAlt")
-   @ApiModelProperty(required = true, value = "The reference used to identify the order which should be cancelled.")
+   @ApiModelProperty(required = true, value = "An alternate reference used to identify the order which should be cancelled.")
    @Valid
-   @NotNull
    public String getOrderRedeemRefAlt() {
       return orderRedeemRefAlt;
    }
