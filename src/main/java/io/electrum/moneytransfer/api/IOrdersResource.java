@@ -9,7 +9,9 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import io.electrum.moneytransfer.model.MoneyTransferAuthRequest;
+import io.electrum.moneytransfer.model.MoneyTransferCancelOrderReversal;
 import io.electrum.moneytransfer.model.MoneyTransferConfirmation;
+import io.electrum.moneytransfer.model.MoneyTransferOrderCancelRequest;
 import io.electrum.moneytransfer.model.MoneyTransferOrderStatusUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemRequest;
 import io.electrum.moneytransfer.model.MoneyTransferReversal;
@@ -97,6 +99,24 @@ public interface IOrdersResource {
 
    void updateOrderStatus(
          MoneyTransferOrderStatusUpdateRequest body,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
+
+   void cancelOrder(
+         MoneyTransferOrderCancelRequest body,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
+
+   void cancelOrderReversal(
+         MoneyTransferCancelOrderReversal body,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
