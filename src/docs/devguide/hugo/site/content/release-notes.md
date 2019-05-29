@@ -1,6 +1,13 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
 
+## v2.13.0
+
+Released 29 May 2019
+
+- Updated the `MoneyTransferOrderStatusUpdateRequest` model with a new `statusDescription` field. This field will be used to update an order with additional information about the status of an order.
+
+
 ## v2.12.0
 
 Released 29 May 2019
