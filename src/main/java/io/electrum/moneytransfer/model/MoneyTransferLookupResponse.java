@@ -66,6 +66,8 @@ public class MoneyTransferLookupResponse {
    @JsonProperty("status")
    private StatusEnum status = null;
 
+   private String statusDescription = null;
+
    @JsonProperty("originator")
    private Originator originator = null;
 
@@ -118,6 +120,26 @@ public class MoneyTransferLookupResponse {
 
    public void setStatus(StatusEnum status) {
       this.status = status;
+   }
+
+   public MoneyTransferLookupResponse statusDescription(String statusDescription) {
+      this.statusDescription = statusDescription;
+      return this;
+   }
+
+   /**
+    * The detailed description of the status of an order
+    *
+    * @return statusDescription
+    **/
+   @JsonProperty("statusDescription")
+   @ApiModelProperty(value = "The detailed description of the status of an order")
+   public String getStatusDescription() {
+      return statusDescription;
+   }
+
+   public void setStatusDescription(String statusDescription) {
+      this.statusDescription = statusDescription;
    }
 
    public MoneyTransferLookupResponse originator(Originator originator) {
@@ -235,17 +257,18 @@ public class MoneyTransferLookupResponse {
       if (!(o instanceof MoneyTransferLookupResponse)) return false;
       MoneyTransferLookupResponse that = (MoneyTransferLookupResponse) o;
       return Objects.equals(amount, that.amount) &&
+            status == that.status &&
+            Objects.equals(statusDescription, that.statusDescription) &&
+            Objects.equals(originator, that.originator) &&
+            Objects.equals(receiver, that.receiver) &&
             Objects.equals(orderRedeemRef, that.orderRedeemRef) &&
             Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) &&
-            Objects.equals(orderId, that.orderId) &&
-            status == that.status &&
-            Objects.equals(originator, that.originator) &&
-            Objects.equals(receiver, that.receiver);
+            Objects.equals(orderId, that.orderId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(amount, orderRedeemRef, orderRedeemRefAlt, orderId, status, originator, receiver);
+      return Objects.hash(amount, status, statusDescription, originator, receiver, orderRedeemRef, orderRedeemRefAlt, orderId);
    }
 
    @Override
@@ -255,6 +278,7 @@ public class MoneyTransferLookupResponse {
 
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
+      sb.append("    statusDescription: ").append(Utils.toIndentedString(statusDescription)).append("\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
