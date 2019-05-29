@@ -2,6 +2,7 @@ package io.electrum.moneytransfer.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -47,6 +48,10 @@ public class MoneyTransferOrderStatusUpdateRequest {
    @Valid
    @NotNull
    private OrderStatus status = null;
+
+   @JsonProperty("statusDescription")
+   @ApiModelProperty(value = "The new detailed description of the status of an order.")
+   private String statusDescription = null;
 
    @ApiModelProperty(value = "Data relating to the originator of the transaction.")
    @JsonProperty("originator")
@@ -160,6 +165,19 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    public void setStatus(OrderStatus status) {
       this.status = status;
+   }
+
+   public MoneyTransferOrderStatusUpdateRequest statusDescription(String statusDescription) {
+      this.statusDescription = statusDescription;
+      return this;
+   }
+
+   public String getStatusDescription() {
+      return statusDescription;
+   }
+
+   public void setStatusDescription(String statusDescription) {
+      this.statusDescription = statusDescription;
    }
 
    /**
@@ -309,118 +327,37 @@ public class MoneyTransferOrderStatusUpdateRequest {
    }
 
    @Override
-   public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((orderRedeemRef == null) ? 0 : orderRedeemRef.hashCode());
-      result = prime * result + ((remittanceRef == null) ? 0 : remittanceRef.hashCode());
-      result = prime * result + ((status == null) ? 0 : status.hashCode());
-      result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-      return result;
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof MoneyTransferOrderStatusUpdateRequest)) return false;
+      MoneyTransferOrderStatusUpdateRequest that = (MoneyTransferOrderStatusUpdateRequest) o;
+      return Objects.equals(updateTime, that.updateTime) &&
+            Objects.equals(orderRedeemRef, that.orderRedeemRef) &&
+            Objects.equals(remittanceRef, that.remittanceRef) &&
+            status == that.status &&
+            Objects.equals(statusDescription, that.statusDescription) &&
+            Objects.equals(originator, that.originator) &&
+            Objects.equals(client, that.client) &&
+            Objects.equals(settlementEntity, that.settlementEntity) &&
+            Objects.equals(receiver, that.receiver) &&
+            Objects.equals(thirdPartyIdentifiers, that.thirdPartyIdentifiers) &&
+            Objects.equals(slipData, that.slipData) &&
+            Objects.equals(basketRef, that.basketRef) &&
+            tranType == that.tranType &&
+            srcAccType == that.srcAccType &&
+            destAccType == that.destAccType &&
+            Objects.equals(stan, that.stan) &&
+            Objects.equals(rrn, that.rrn) &&
+            Objects.equals(amount, that.amount) &&
+            Objects.equals(senderDetails, that.senderDetails) &&
+            Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) &&
+            Objects.equals(orderId, that.orderId) &&
+            Objects.equals(customerProfileId, that.customerProfileId);
    }
 
    @Override
-   public boolean equals(Object obj) {
-      if (this == obj)
-         return true;
-      if (obj == null)
-         return false;
-      if (getClass() != obj.getClass())
-         return false;
-      MoneyTransferOrderStatusUpdateRequest other = (MoneyTransferOrderStatusUpdateRequest) obj;
-      if (orderRedeemRef == null) {
-         if (other.orderRedeemRef != null)
-            return false;
-      } else if (!orderRedeemRef.equals(other.orderRedeemRef))
-         return false;
-      if (remittanceRef == null) {
-         if (other.remittanceRef != null)
-            return false;
-      } else if (!remittanceRef.equals(other.remittanceRef))
-         return false;
-      if (status != other.status)
-         return false;
-      if (updateTime == null) {
-         if (other.updateTime != null)
-            return false;
-      } else if (!updateTime.equals(other.updateTime))
-         return false;
-      if (client == null) {
-         if (other.client != null)
-            return false;
-      } else if (!client.equals(other.client))
-         return false;
-      if (settlementEntity == null) {
-         if (other.settlementEntity != null)
-            return false;
-      } else if (!settlementEntity.equals(other.settlementEntity))
-         return false;
-      if (receiver == null) {
-         if (other.receiver != null)
-            return false;
-      } else if (!receiver.equals(other.receiver))
-         return false;
-      if (thirdPartyIdentifiers == null) {
-         if (other.thirdPartyIdentifiers != null)
-            return false;
-      } else if (!thirdPartyIdentifiers.equals(other.thirdPartyIdentifiers))
-         return false;
-      if (basketRef == null) {
-         if (other.basketRef != null)
-            return false;
-      } else if (!basketRef.equals(other.basketRef))
-         return false;
-      if (tranType == null) {
-         if (other.tranType != null)
-            return false;
-      } else if (!tranType.equals(other.tranType))
-         return false;
-      if (srcAccType == null) {
-         if (other.srcAccType != null)
-            return false;
-      } else if (!srcAccType.equals(other.srcAccType))
-         return false;
-      if (destAccType == null) {
-         if (other.destAccType != null)
-            return false;
-      } else if (!destAccType.equals(other.destAccType))
-         return false;
-      if (stan == null) {
-         if (other.stan != null)
-            return false;
-      } else if (!stan.equals(other.stan))
-         return false;
-      if (rrn == null) {
-         if (other.rrn != null)
-            return false;
-      } else if (!rrn.equals(other.rrn))
-         return false;
-      if (amount == null) {
-         if (other.amount != null)
-            return false;
-      } else if (!amount.equals(other.amount))
-         return false;
-      if (senderDetails == null) {
-         if (other.senderDetails != null)
-            return false;
-      } else if (!senderDetails.equals(other.senderDetails))
-         return false;
-      if (orderRedeemRefAlt == null) {
-         if (other.orderRedeemRefAlt != null)
-            return false;
-      } else if (!orderRedeemRefAlt.equals(other.orderRedeemRefAlt))
-         return false;
-      if (orderId == null) {
-         if (other.orderId != null)
-            return false;
-      } else if (!orderId.equals(other.orderId))
-         return false;
-      if (customerProfileId == null) {
-         if (other.customerProfileId != null)
-            return false;
-      } else if (!customerProfileId.equals(other.customerProfileId))
-         return false;
-      return true;
+   public int hashCode() {
+      return Objects.hash(updateTime, orderRedeemRef, remittanceRef, status, statusDescription, originator, client, settlementEntity, receiver, thirdPartyIdentifiers, slipData, basketRef, tranType, srcAccType, destAccType, stan, rrn, amount, senderDetails, orderRedeemRefAlt, orderId, customerProfileId);
    }
 
    @Override
@@ -431,6 +368,7 @@ public class MoneyTransferOrderStatusUpdateRequest {
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
       sb.append("    remittanceRef: ").append(Utils.toIndentedString(remittanceRef)).append("\n");
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
+      sb.append("    statusDescription: ").append(Utils.toIndentedString(statusDescription)).append("\n");
       sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
