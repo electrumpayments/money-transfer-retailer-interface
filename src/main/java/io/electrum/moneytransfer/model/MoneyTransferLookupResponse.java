@@ -66,6 +66,8 @@ public class MoneyTransferLookupResponse {
    @JsonProperty("status")
    private StatusEnum status = null;
 
+   private String statusDescription = null;
+
    @JsonProperty("originator")
    private Originator originator = null;
 
@@ -118,6 +120,26 @@ public class MoneyTransferLookupResponse {
 
    public void setStatus(StatusEnum status) {
       this.status = status;
+   }
+
+   public MoneyTransferLookupResponse statusDescription(String statusDescription) {
+      this.statusDescription = statusDescription;
+      return this;
+   }
+
+   /**
+    * The detailed description of the status of an order
+    *
+    * @return statusDescription
+    **/
+   @JsonProperty("statusDescription")
+   @ApiModelProperty(value = "The detailed description of the status of an order")
+   public String getStatusDescription() {
+      return statusDescription;
+   }
+
+   public void setStatusDescription(String statusDescription) {
+      this.statusDescription = statusDescription;
    }
 
    public MoneyTransferLookupResponse originator(Originator originator) {
