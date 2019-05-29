@@ -1,5 +1,12 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.12.0
+
+Released 29 May 2019
+
+- Updated the `MoneyTransferLookupResponse` model with a new `statusDescription` field. This field will be used to hold additional information about the status of an order.
+
+
 ## v2.11.0
 
 Released 21 May 2019
@@ -18,12 +25,6 @@ Released 21 May 2019
     - `confirmPayment`
     - `reversePayment`
     - `orderStatus`
-
-## v2.11.0
-
-Released 29 May 2019
-
-- Updated the `MoneyTransferLookupResponse` model with a new `statusDescription` field. This field will be used to hold additional information about the status of an order.
 
 ## v2.10.0
 
