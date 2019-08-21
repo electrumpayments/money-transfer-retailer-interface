@@ -90,6 +90,7 @@ public abstract class AdminResource {
          public static final String FROM_CURRENCY = "fromCurrency";
          public static final String TO_CURRENCY = "toCurrency";
          public static final String RECEIVER_ID = "receiverId";
+         public static final String SETTLEMENT_ENTITY_ID = "settlementEntity";
       }
    }
 
@@ -263,6 +264,8 @@ public abstract class AdminResource {
          @ApiParam(value = "The currency which amounts are converted to. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the fromCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.TO_CURRENCY) @NotNull String toCurrency,
 
          @ApiParam(value = "The ID of the receiver who would process such a currency exchange. If this is supplied then a specific institution's exchange rate may be returned. If this parameter is not supplied then the exchange rate may simply be the market exchange rate.") @QueryParam(GetExchangeRate.QueryParameters.RECEIVER_ID) String receiverId,
+
+         @ApiParam(value = "The ID of the settlement entity who would process such a currency exchange. If this is supplied then a specific settlement entity's exchange rate may be returned for a specific receiver. If this parameter is not supplied then the exchange rate may simply be the market exchange rate.") @QueryParam(GetExchangeRate.QueryParameters.SETTLEMENT_ENTITY_ID) String settlementEntityId,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -273,6 +276,7 @@ public abstract class AdminResource {
             fromCurrency,
             toCurrency,
             receiverId,
+            settlementEntityId,
             securityContext,
             request,
             httpHeaders,

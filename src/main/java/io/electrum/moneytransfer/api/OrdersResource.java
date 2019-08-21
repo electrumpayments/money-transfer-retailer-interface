@@ -60,6 +60,7 @@ public abstract class OrdersResource {
          public static final String MERCHANT_ID = "merchantId";
          public static final String ORIGINATOR_INST_ID = "originatorInstId";
          public static final String RECEIVER_ID = "receiverId";
+         public static final String SETTLEMENT_ENTITY_ID = "settlementEntityId";
       }
    }
 
@@ -216,6 +217,7 @@ public abstract class OrdersResource {
          String merchantId,
          String originatorInstId,
          String receiverId,
+         String settlementEntityId,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -227,6 +229,7 @@ public abstract class OrdersResource {
             merchantId,
             originatorInstId,
             receiverId,
+            settlementEntityId,
             null,
             securityContext,
             request,
@@ -253,6 +256,7 @@ public abstract class OrdersResource {
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(LookupOrder.QueryParameters.MERCHANT_ID) String merchantId,
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(LookupOrder.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrder.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
+         @ApiParam(value = "Identifies the entity with whom the Merchant will settle the transaction.", required = false) @QueryParam(LookupOrder.QueryParameters.SETTLEMENT_ENTITY_ID) String settlementEntityId,
          @ApiParam(value = "Reference used by the recipient to refer to the order when no redemption is to occur (e.g. direct account deposits). If both this value and orderRedeemRef are supplied then orderRedeemRef takes precedence.") @QueryParam(LookupOrder.QueryParameters.REMITTANCE_REF) String remittanceRef,
          @Context SecurityContext securityContext,
          @Context Request request,
@@ -265,6 +269,7 @@ public abstract class OrdersResource {
             merchantId,
             originatorInstId,
             receiverId,
+            settlementEntityId,
             remittanceRef,
             securityContext,
             request,

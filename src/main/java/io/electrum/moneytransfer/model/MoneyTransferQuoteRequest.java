@@ -24,6 +24,9 @@ public class MoneyTransferQuoteRequest {
    @JsonProperty("receiver")
    private Institution receiver = null;
 
+   @JsonProperty("settlementEntity")
+   private Institution settlementEntity = null;
+
    @JsonProperty("senderDetails")
    private PersonalDetails senderDetails;
 
@@ -78,6 +81,27 @@ public class MoneyTransferQuoteRequest {
 
    public void setReceiver(Institution receiver) {
       this.receiver = receiver;
+   }
+
+   public MoneyTransferQuoteRequest settlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
+      return this;
+   }
+
+   /**
+    * Data relating to the entity with whom the Merchant will settle the transaction..
+    *
+    * @return settlementEntity
+    **/
+   @JsonProperty("settlementEntity")
+   @ApiModelProperty(required = false, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @Valid
+   public Institution getSettlementEntity() {
+      return settlementEntity;
+   }
+
+   public void setSettlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
    }
 
    public MoneyTransferQuoteRequest senderDetails(PersonalDetails senderDetails) {

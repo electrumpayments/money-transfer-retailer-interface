@@ -1,5 +1,12 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.14.0
+
+Released x August 2019
+
+- Updated the `getExchangeRate` operation with a new `settlementEntityId` field which will allow for settlement entities to be specified for exchange rate calls
+- Updated the `lookupOrder` operation with a new `settlementEntityId` field which will allow for settlement entities to be specified for order lookups calls
+- Updated the `MoneyTransferQuoteRequest` and `MoneyTransferFeeQuote` models with a new `settlementEntity` field which will allow for settlement entities to be specified for `getQuote` POST operation calls
 
 ## v2.13.0
 

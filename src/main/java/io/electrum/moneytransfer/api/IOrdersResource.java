@@ -62,6 +62,7 @@ public interface IOrdersResource {
          String merchantId,
          @NotNull String originatorInstId,
          @NotNull String receiverId,
+         String settlementEntityId,
          String remittanceRef,
          SecurityContext securityContext,
          Request request,

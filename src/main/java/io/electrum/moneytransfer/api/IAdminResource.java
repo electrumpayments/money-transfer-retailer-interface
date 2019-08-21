@@ -69,6 +69,7 @@ public interface IAdminResource {
          @NotNull String fromCurrency,
          String toCurrency,
          String receiverId,
+         String settlementEntityId,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
