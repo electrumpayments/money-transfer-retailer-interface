@@ -217,7 +217,6 @@ public abstract class OrdersResource {
          String merchantId,
          String originatorInstId,
          String receiverId,
-         String settlementEntityId,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -229,8 +228,36 @@ public abstract class OrdersResource {
             merchantId,
             originatorInstId,
             receiverId,
-            settlementEntityId,
             null,
+            null,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
+   }
+
+   @Deprecated
+   public final void lookupOrder(
+         String orderRedeemRef,
+         String merchantId,
+         String originatorInstId,
+         String receiverId,
+         String remittanceRef,
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation().lookupOrder(
+            orderRedeemRef,
+            merchantId,
+            originatorInstId,
+            receiverId,
+            null,
+            remittanceRef,
             securityContext,
             request,
             httpHeaders,

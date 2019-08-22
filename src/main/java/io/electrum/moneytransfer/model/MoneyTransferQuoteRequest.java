@@ -202,6 +202,7 @@ public class MoneyTransferQuoteRequest {
       MoneyTransferQuoteRequest moneyTransferFeeQuote = (MoneyTransferQuoteRequest) o;
       return Objects.equals(this.originator, moneyTransferFeeQuote.originator)
             && Objects.equals(this.receiver, moneyTransferFeeQuote.receiver)
+            && Objects.equals(this.settlementEntity, moneyTransferFeeQuote.settlementEntity)
             && Objects.equals(this.senderDetails, moneyTransferFeeQuote.senderDetails)
             && Objects.equals(this.recipientDetails, moneyTransferFeeQuote.recipientDetails)
             && Objects.equals(this.amount, moneyTransferFeeQuote.amount)
@@ -210,7 +211,8 @@ public class MoneyTransferQuoteRequest {
 
    @Override
    public int hashCode() {
-      return Objects.hash(originator, receiver, senderDetails, recipientDetails, amount, amountIncludesFees);
+      return Objects
+            .hash(originator, receiver, settlementEntity, senderDetails, recipientDetails, amount, amountIncludesFees);
    }
 
    @Override
@@ -219,6 +221,7 @@ public class MoneyTransferQuoteRequest {
       sb.append("class MoneyTransferQuoteRequest {\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
+      sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
