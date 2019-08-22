@@ -65,10 +65,24 @@ public interface IAdminResource {
          HttpServletRequest httpServletRequest)
          throws NotFoundException;
 
+   @Deprecated
    void getExchangeRate(
          @NotNull String fromCurrency,
          String toCurrency,
          String receiverId,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest)
+         throws NotFoundException;
+
+   void getExchangeRate(
+         @NotNull String fromCurrency,
+         String toCurrency,
+         String receiverId,
+         String settlementEntityId,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,

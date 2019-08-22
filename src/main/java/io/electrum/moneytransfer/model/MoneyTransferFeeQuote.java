@@ -25,6 +25,9 @@ public class MoneyTransferFeeQuote {
    @JsonProperty("receiver")
    private Institution receiver = null;
 
+   @JsonProperty("settlementEntity")
+   private Institution settlementEntity = null;
+
    @JsonProperty("feeQuote")
    private FeeQuote feeQuote = null;
 
@@ -82,6 +85,27 @@ public class MoneyTransferFeeQuote {
 
    public void setReceiver(Institution receiver) {
       this.receiver = receiver;
+   }
+
+   public MoneyTransferFeeQuote settlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
+      return this;
+   }
+
+   /**
+    * Data relating to the entity with whom the Merchant will settle the transaction..
+    *
+    * @return settlementEntity
+    **/
+   @JsonProperty("settlementEntity")
+   @ApiModelProperty(required = false, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @Valid
+   public Institution getSettlementEntity() {
+      return settlementEntity;
+   }
+
+   public void setSettlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
    }
 
    public MoneyTransferFeeQuote feeQuote(FeeQuote feeQuote) {
@@ -200,6 +224,7 @@ public class MoneyTransferFeeQuote {
       MoneyTransferFeeQuote moneyTransferFeeQuote = (MoneyTransferFeeQuote) o;
       return Objects.equals(this.originator, moneyTransferFeeQuote.originator)
             && Objects.equals(this.receiver, moneyTransferFeeQuote.receiver)
+            && Objects.equals(this.settlementEntity, moneyTransferFeeQuote.settlementEntity)
             && Objects.equals(this.feeQuote, moneyTransferFeeQuote.feeQuote)
             && Objects.equals(this.senderDetails, moneyTransferFeeQuote.senderDetails)
             && Objects.equals(this.recipientDetails, moneyTransferFeeQuote.recipientDetails)
@@ -209,7 +234,15 @@ public class MoneyTransferFeeQuote {
 
    @Override
    public int hashCode() {
-      return Objects.hash(originator, receiver, feeQuote, senderDetails, recipientDetails, quoteId, expiryDateTime);
+      return Objects.hash(
+            originator,
+            receiver,
+            settlementEntity,
+            feeQuote,
+            senderDetails,
+            recipientDetails,
+            quoteId,
+            expiryDateTime);
    }
 
    @Override
@@ -218,6 +251,7 @@ public class MoneyTransferFeeQuote {
       sb.append("class MoneyTransferFeeQuote {\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
+      sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    feeQuote: ").append(Utils.toIndentedString(feeQuote)).append("\n");
       sb.append("    senderDetails: ").append(Utils.toIndentedString(senderDetails)).append("\n");
       sb.append("    recipientDetails: ").append(Utils.toIndentedString(recipientDetails)).append("\n");

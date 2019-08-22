@@ -57,11 +57,26 @@ public interface IOrdersResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
+   @Deprecated
    void lookupOrder(
          String orderRedeemRef,
          String merchantId,
          @NotNull String originatorInstId,
          @NotNull String receiverId,
+         String remittanceRef,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
+
+   void lookupOrder(
+         String orderRedeemRef,
+         String merchantId,
+         @NotNull String originatorInstId,
+         @NotNull String receiverId,
+         String settlementEntityId,
          String remittanceRef,
          SecurityContext securityContext,
          Request request,
