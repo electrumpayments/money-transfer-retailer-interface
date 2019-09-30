@@ -9,6 +9,8 @@ Released 17 September 2019
     - Made the `originator` field optional to coincide with the fact that originator information is optional on the request side
 - Appropriately deprecated the old `getExchangeRate` call 
 
+- Fixed the `toString()` method within the `PersonalDetails` model which was throwing a `NullPointerException` when non-mandatory fields were left null.
+
 ## v2.14.0
 
 Released 22 August 2019
