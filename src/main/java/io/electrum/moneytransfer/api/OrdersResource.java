@@ -81,7 +81,7 @@ public abstract class OrdersResource {
    public class ConfirmRedeem {
       public static final String CONFIRM_REDEEM = "confirmRedeem";
       public static final int SUCCESS = 202;
-      public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/";
+      public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/confirmations";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
    }
 
