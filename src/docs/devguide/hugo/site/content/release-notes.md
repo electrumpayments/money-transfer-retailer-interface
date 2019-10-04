@@ -5,9 +5,9 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 Released 17 September 2019
 
 - Updated the `MoneyTransferLookupResponse` model as follows:
-    - Added a new `settlementEntity` field which will allow for information about who the Merchant settles with to be sent downstream
-    - Made the `originator` field optional to coincide with the fact that originator information is optional on the request side
-- Appropriately deprecated the old `getExchangeRate` call 
+    - Added a new `settlementEntity` field which will allow for information about who the Merchant settles with to be sent downstream.
+    - Made the `originator` field optional to coincide with the fact that originator information is optional on the request side.
+- Appropriately deprecated the old `getExchangeRate` call.
 
 - Fixed the `toString()` method within the `PersonalDetails` model which was throwing a `NullPointerException` when non-mandatory fields were left null.
 
