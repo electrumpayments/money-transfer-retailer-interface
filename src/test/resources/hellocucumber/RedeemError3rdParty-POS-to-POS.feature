@@ -4,7 +4,7 @@ Feature: When a client performs a redeem order and an error occurs at the third 
     Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    And customer has the corresponding PIN
-    And an error occurs at the third party
     When The client sends a redeem order request
+    And customer has the correct PIN
+    And an error occurs at the third party
     Then The client receives an error detail message
