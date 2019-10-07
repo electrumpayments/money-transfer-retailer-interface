@@ -248,23 +248,10 @@ public abstract class AdminResource {
    }
 
    @Deprecated
-   @GET
-   @Path(GetExchangeRate.RELATIVE_PATH)
-   @Produces({ "application/json" })
-   @ApiOperation(value = GetExchangeRate.GET_EXCHANGE_RATE, notes = "Returns an exchange rate between two currencies.", response = ExchangeRate.class, authorizations = {
-         @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = GetExchangeRate.SUCCESS, message = "OK", response = ExchangeRate.class),
-         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
-         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
-         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
-         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
-         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getExchangeRate(
-         @ApiParam(value = "The currency which amounts are converted from. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the toCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.FROM_CURRENCY) @NotNull String fromCurrency,
-
-         @ApiParam(value = "The currency which amounts are converted to. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the fromCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.TO_CURRENCY) @NotNull String toCurrency,
-
-         @ApiParam(value = "The ID of the receiver who would process such a currency exchange. If this is supplied then a specific institution's exchange rate may be returned. If this parameter is not supplied then the exchange rate may simply be the market exchange rate.") @QueryParam(GetExchangeRate.QueryParameters.RECEIVER_ID) String receiverId,
+         @NotNull String fromCurrency,
+         @NotNull String toCurrency,
+         String receiverId,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
