@@ -1,9 +1,9 @@
-Feature: When a lookupOrder request is sent from POS, the Electrum Switch sends a lookupOrder request to the third party
+Feature: When a client performs a lookup order, the details of the order are returned to them.
 
-  Scenario: POS sends a lookupOrder request
-  Given a live POS/Electrum connection
-    And a live Electrum/Capitec connection
-    And customer has a valid voucher number, the corresponding PIN and the correct transfer amount
-    When The POS sends a lookupOrder request
-    And Electrum Switch receives the lookupOrder request
-    Then Electrum Switch automatically sends a lookupOrder request to Capitec
+  Scenario: Client sends a lookup order request
+  Given a client
+    And an Electrum Switch
+    And Given a Money Transfer Service
+    And customer has a valid voucher number
+    When The client sends a lookup order request
+    Then The client receives the order details back for the corresponding order reference number
