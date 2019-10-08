@@ -4,7 +4,7 @@ Feature: When a client sends a create or update customer request, a successful c
     Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    When The client sends a create or update customer request
-    And Sender cell phone number is inputted
-    And Sender source of funds is updated or confirmed
-    Then The client receives a successful create or update customer response
+    When the client sends a create or update customer request
+    And sender cell phone number is inputted
+    And sender source of funds is updated or confirmed
+    Then the client receives a successful create or update customer response

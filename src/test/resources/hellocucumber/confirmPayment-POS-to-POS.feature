@@ -4,7 +4,7 @@ Feature: When a client sends a confirm payment request, a successful confirm pay
     Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    When The client sends a confirm payment request
-    And Amount to be transferred is tendered in cash
-    Then The client receives a successful confirm payment response
-    And Till slip is printed for customer
+    When the client sends a confirm payment request
+    And amount to be transferred is tendered in cash
+    Then the client receives a successful confirm payment response
+    And till slip is printed for customer

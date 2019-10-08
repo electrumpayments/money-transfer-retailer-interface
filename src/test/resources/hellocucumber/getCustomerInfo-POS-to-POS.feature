@@ -5,5 +5,5 @@ Feature: When a client sends a get customer info request, a response detailing w
     And an Electrum Switch
     And a Money Transfer Service
     And customer/sender ID number
-    When The client sends a get customer info request
-    Then The client receives a response detailing whether or not the customer is a known user
+    When the client sends a get customer info request
+    Then the client receives a response detailing whether or not the customer is a known user
