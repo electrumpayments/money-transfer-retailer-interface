@@ -539,8 +539,8 @@ public class PersonalDetails {
       sb.append("    idIssuedDate: ").append(Utils.toIndentedString(idIssuedDate)).append("\n");
       sb.append("    idExpiryDate: ").append(Utils.toIndentedString(idExpiryDate)).append("\n");
       sb.append("    culturalName: ").append(Utils.toIndentedString(new MaskAll().mask(culturalName))).append("\n");
-      sb.append("    sourceOfIncome: ").append(Utils.toIndentedString(sourceOfIncome.toString())).append("\n");
-      sb.append("    occupation: ").append(Utils.toIndentedString(occupation.toString())).append("\n");
+      sb.append("    sourceOfIncome: ").append(Utils.toIndentedString(sourceOfIncome)).append("\n");
+      sb.append("    occupation: ").append(Utils.toIndentedString(occupation)).append("\n");
       sb.append("}");
       return sb.toString();
    }

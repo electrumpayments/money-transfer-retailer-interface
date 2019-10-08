@@ -74,6 +74,8 @@ public class MoneyTransferLookupResponse {
    @JsonProperty("receiver")
    private Institution receiver = null;
 
+   protected Institution settlementEntity = null;
+
    private String orderRedeemRef = null;
 
    private String orderRedeemRefAlt = null;
@@ -153,9 +155,8 @@ public class MoneyTransferLookupResponse {
     * @return originator
     **/
    @JsonProperty("originator")
-   @ApiModelProperty(required = true, value = "")
+   @ApiModelProperty(value = "")
    @Valid
-   @NotNull
    public Originator getOriginator() {
       return originator;
    }
@@ -171,7 +172,7 @@ public class MoneyTransferLookupResponse {
 
    /**
     * Get receiver
-    * 
+    *
     * @return receiver
     **/
    @JsonProperty("receiver")
@@ -184,6 +185,26 @@ public class MoneyTransferLookupResponse {
 
    public void setReceiver(Institution receiver) {
       this.receiver = receiver;
+   }
+
+   public MoneyTransferLookupResponse settlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
+      return this;
+   }
+
+   /**
+    * Data relating to the entity with whom the Merchant will settle the transaction.
+    *
+    * @return settlementEntity
+    **/
+   @JsonProperty("settlementEntity")
+   @ApiModelProperty(value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   public Institution getSettlementEntity() {
+      return settlementEntity;
+   }
+
+   public void setSettlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
    }
 
    public MoneyTransferLookupResponse orderRedeemRef(String orderRedeemRef) {
@@ -253,23 +274,30 @@ public class MoneyTransferLookupResponse {
 
    @Override
    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (!(o instanceof MoneyTransferLookupResponse)) return false;
+      if (this == o)
+         return true;
+      if (!(o instanceof MoneyTransferLookupResponse))
+         return false;
       MoneyTransferLookupResponse that = (MoneyTransferLookupResponse) o;
-      return Objects.equals(amount, that.amount) &&
-            status == that.status &&
-            Objects.equals(statusDescription, that.statusDescription) &&
-            Objects.equals(originator, that.originator) &&
-            Objects.equals(receiver, that.receiver) &&
-            Objects.equals(orderRedeemRef, that.orderRedeemRef) &&
-            Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) &&
-            Objects.equals(orderId, that.orderId);
+      return Objects.equals(amount, that.amount) && status == that.status
+            && Objects.equals(statusDescription, that.statusDescription) && Objects.equals(originator, that.originator)
+            && Objects.equals(receiver, that.receiver) && Objects.equals(settlementEntity, that.settlementEntity)
+            && Objects.equals(orderRedeemRef, that.orderRedeemRef)
+            && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) && Objects.equals(orderId, that.orderId);
    }
 
    @Override
    public int hashCode() {
-
-      return Objects.hash(amount, status, statusDescription, originator, receiver, orderRedeemRef, orderRedeemRefAlt, orderId);
+      return Objects.hash(
+            amount,
+            status,
+            statusDescription,
+            originator,
+            receiver,
+            settlementEntity,
+            orderRedeemRef,
+            orderRedeemRefAlt,
+            orderId);
    }
 
    @Override
@@ -282,6 +310,7 @@ public class MoneyTransferLookupResponse {
       sb.append("    statusDescription: ").append(Utils.toIndentedString(statusDescription)).append("\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
+      sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    orderRedeemRef: ").append(Utils.toIndentedString(orderRedeemRef)).append("\n");
       sb.append("    orderRedeemRefAlt: ").append(Utils.toIndentedString(orderRedeemRefAlt)).append("\n");
       sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
