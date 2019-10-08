@@ -1,10 +1,9 @@
-Feature: When a client sends a create or update customer request, a successful create or update customer response is returned.
+Feature: When a client sends a get customer info request, a response detailing whether the customer is a known user is returned.
 
-  Scenario: Client sends a create or update customer request
+  Scenario: Client sends a get customer info request
     Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    When The client sends a create or update customer request
-    And Sender cell phone number is inputted
-    And Sender source of funds updated or confirmed
-    Then The client receives a successful create or update customer response
+    And customer/sender ID number
+    When The client sends a get customer info request
+    Then The client receives a response detailing whether or not the customer is a known user
