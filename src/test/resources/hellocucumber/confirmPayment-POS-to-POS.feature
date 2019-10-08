@@ -1,4 +1,4 @@
-Feature: When a client sends a confirm payment request, a successful confirm payment response is returned.
+Feature: When a client sends a confirm payment request, a successful confirm payment response is returned
 
   Scenario: Client sends a confirm payment request
     Given a client

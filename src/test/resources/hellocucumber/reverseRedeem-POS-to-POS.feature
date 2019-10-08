@@ -1,4 +1,4 @@
-Feature: When a client performs a reverse redeem, a successful reversal message is returned to them.
+Feature: When a client performs a reverse redeem, a successful reversal message is returned to them
 
   Scenario: Client sends a reverse redeem request
     Given a client

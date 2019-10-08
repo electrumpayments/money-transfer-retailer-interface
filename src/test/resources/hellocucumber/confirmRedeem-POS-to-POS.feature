@@ -1,4 +1,4 @@
-Feature: When a client performs a confirm redeem, a successful confirmation message is returned to them.
+Feature: When a client performs a confirm redeem, a successful confirmation message is returned to them
 
   Scenario: Client sends a confirm redeem request
     Given a client

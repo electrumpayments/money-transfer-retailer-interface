@@ -1,4 +1,4 @@
-Feature: When a client sends a create or update customer request, a successful create or update customer response is returned.
+Feature: When a client sends a create or update customer request, a successful create or update customer response is returned
 
   Scenario: Client sends a create or update customer request
     Given a client

@@ -1,4 +1,4 @@
-Feature: When a client performs a reverse payment, a successful reversal payment is returned to them.
+Feature: When a client performs a reverse payment, a successful reversal payment is returned to them
 
   Scenario: Client sends a reverse payment request pre-tender
     Given a client

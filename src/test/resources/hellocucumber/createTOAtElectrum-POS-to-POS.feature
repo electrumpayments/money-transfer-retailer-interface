@@ -1,4 +1,4 @@
-Feature:When a client sends a create order request and a timeout occurs at the Electrum Switch, an error detail message is returned to them and a reversePayment message is sent.
+Feature:When a client sends a create order request and a timeout occurs at the Electrum Switch, an error detail message is returned to them and a reversePayment message is sent
 
   Scenario: Client sends a create order request
     Given a client

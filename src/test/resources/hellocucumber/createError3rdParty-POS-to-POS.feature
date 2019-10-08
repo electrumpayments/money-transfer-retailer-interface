@@ -1,4 +1,4 @@
-Feature: When a client performs a create order and an error occurs at the third party, an error detail message is returned to them.
+Feature: When a client performs a create order and an error occurs at the third party, an error detail message is returned to them
 
   Scenario: Client sends a create order request
     Given a client
@@ -10,5 +10,3 @@ Feature: When a client performs a create order and an error occurs at the third 
     And Amount to be transferred is captured
     And an error occurs at the third party
     Then The client receives a error detail message
-    And The order creation is automatically reversed
-    And Money Voucher is non-redeemable

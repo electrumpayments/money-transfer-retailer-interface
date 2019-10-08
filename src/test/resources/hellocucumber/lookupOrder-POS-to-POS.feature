@@ -1,4 +1,4 @@
-Feature: When a client performs a lookup order, the details of the order are returned to them.
+Feature: When a client performs a lookup order, the details of the order are returned to them
 
   Scenario: Client sends a lookup order request
   Given a client

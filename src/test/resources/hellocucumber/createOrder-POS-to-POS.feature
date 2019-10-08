@@ -1,4 +1,4 @@
-Feature: When a client sends a create order request, a successful create order response is returned.
+Feature: When a client sends a create order request, a successful create order response is returned
 
   Scenario: Client sends a create order request
     Given a client

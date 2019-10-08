@@ -1,4 +1,4 @@
-Feature: When a client sends a get customer info request, a response detailing whether the customer is a known user is returned.
+Feature: When a client sends a get customer info request, a response detailing whether the customer is a known user is returned
 
   Scenario: Client sends a get customer info request
     Given a client
