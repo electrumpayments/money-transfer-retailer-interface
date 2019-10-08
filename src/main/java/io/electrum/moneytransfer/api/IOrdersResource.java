@@ -48,7 +48,7 @@ public interface IOrdersResource {
    void lookupOrder(
          String orderRedeemRef,
          String merchantId,
-         @NotNull String originatorInstId,
+         String originatorInstId,
          @NotNull String receiverId,
          SecurityContext securityContext,
          Request request,
@@ -61,7 +61,7 @@ public interface IOrdersResource {
    void lookupOrder(
          String orderRedeemRef,
          String merchantId,
-         @NotNull String originatorInstId,
+         String originatorInstId,
          @NotNull String receiverId,
          String remittanceRef,
          SecurityContext securityContext,
@@ -74,7 +74,7 @@ public interface IOrdersResource {
    void lookupOrder(
          String orderRedeemRef,
          String merchantId,
-         @NotNull String originatorInstId,
+         String originatorInstId,
          @NotNull String receiverId,
          String settlementEntityId,
          String remittanceRef,
