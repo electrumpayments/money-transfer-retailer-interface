@@ -4,6 +4,6 @@ Feature: When a client performs a redeem order, a successful redeem response mes
     Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    And customer has the corresponding PIN
     When the client sends a redeem order request
+    And customer inputs the correct corresponding PIN
     Then the client receives a successful redemption response message

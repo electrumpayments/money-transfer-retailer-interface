@@ -4,7 +4,7 @@ Feature: When a client performs a lookup order, the details of the order are ret
   Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    And receiver cell phone number
-    And valid voucher number
     When the client sends a lookup order request
+    And inputs the receiver cell phone number
+    And inputs a valid voucher number
     Then the client receives the order details back for the corresponding order reference number

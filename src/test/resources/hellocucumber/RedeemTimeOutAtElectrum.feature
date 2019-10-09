@@ -4,8 +4,8 @@ Feature: When a client performs a redeem order and a timeout occurs at the Elect
     Given a client
     And an Electrum Switch
     And a Money Transfer Service
-    And customer has the corresponding PIN
-    And a timeout occurs at the Electrum Switch
     When the client sends a redeem order request
+    And customer has the correct corresponding PIN
+    And a timeout occurs at the Electrum Switch
     Then the client receives a error detail message
     And the redemption is automatically reversed
