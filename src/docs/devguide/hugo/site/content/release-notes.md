@@ -1,5 +1,11 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.15.1 - 08 October 2019
+
+Released 08 October 2019
+
+- Updated the `ConfirmRedeem` operation RELATIVE_PATH.
+
 ## v2.15.0
 
 Released 17 September 2019
