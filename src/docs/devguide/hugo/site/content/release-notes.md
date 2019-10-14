@@ -4,7 +4,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 Released 08 October 2019
 
-- Updated `RELATIVE_PATH` of the ConfirmRedeem operation within OrdersResource.
+- Updated `RELATIVE_PATH` of the `ConfirmRedeem` operation within `OrdersResource`.
 
 ## v2.15.0
 
