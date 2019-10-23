@@ -1,5 +1,17 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.16.0
+
+Released 24 October 2019
+
+- Added the following values for field `sourceOfIncome`:
+    - `GIFT`
+    - `WINNINGS`
+    - `SALE_OF_ASSETS`
+    - `INVESTMENTS`
+    - `FAMILY_FINANCIAL_SUPPORT`
+    - `GOVERNMENT_FINANCIAL_SUPPORT`
+
 ## v2.15.1
 
 Released 08 October 2019
