@@ -2,7 +2,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.16.0
 
-Released 24 October 2019
+Released 25 October 2019
 
 - Added the following values for field `sourceOfIncome`:
     - `GIFT`
@@ -11,6 +11,12 @@ Released 24 October 2019
     - `INVESTMENTS`
     - `FAMILY_FINANCIAL_SUPPORT`
     - `GOVERNMENT_FINANCIAL_SUPPORT`
+
+- Updated the service-interface-base plugin version from v3.20.0 to v3.22.0. This version update includes the following from service-interface-base:
+     - v3.22.0
+          - Added new field `region` to `BankAccount` model for scenarios where the `routingCode` is not sufficient to uniquely identify a bank account.
+     - v3.21.0
+          - Added new field `emailAddress` to `Customer` model.
 
 ## v2.15.1
 
