@@ -1,5 +1,22 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.17.0
+
+Released 06 November 2019
+
+- Added validation for query parameters to conform to existing model objects for following resources:
+    - `GetCustomerInfo`
+        - `idCountryCode` must conform to `[A-Za-z]{2}`
+        - `merchantId` must conform to `[ A-Za-z0-9]{1,15}`
+    - `GetFeeQuote`
+        - `amount` must have minimum value of 0
+        - `merchantId` must conform to `[ A-Za-z0-9]{1,15}`
+    - `GetExchangeRate`
+        - `fromCurrency` must conform to `[0-9]{3}`
+        - `toCurrency` must conform to `[0-9]{3}`
+    - `LookupOrder`
+        - `merchantId` must conform to `[ A-Za-z0-9]{1,15}`
+
 ## v2.16.0
 
 Released 25 October 2019

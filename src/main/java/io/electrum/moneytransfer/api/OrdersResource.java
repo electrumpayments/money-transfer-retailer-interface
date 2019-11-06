@@ -3,6 +3,7 @@ package io.electrum.moneytransfer.api;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,6 +37,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
+
+import static io.electrum.moneytransfer.util.ValidationUtil.MERCHANT_ID_REGEX;
 
 @Path(OrdersResource.PATH)
 @Api(description = "the orders API")
@@ -280,7 +283,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void lookupOrder(
          @ApiParam(value = "Reference used by the recipient to redeem the order. If both this value and remittanceRef are supplied then this takes precedence.") @QueryParam(LookupOrder.QueryParameters.ORDER_REDEEM_REF) String orderRedeemRef,
-         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(LookupOrder.QueryParameters.MERCHANT_ID) String merchantId,
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(LookupOrder.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(LookupOrder.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrder.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
          @ApiParam(value = "Identifies the entity with whom the Merchant will settle the transaction.", required = false) @QueryParam(LookupOrder.QueryParameters.SETTLEMENT_ENTITY_ID) String settlementEntityId,

@@ -1,8 +1,14 @@
 package io.electrum.moneytransfer.api;
 
+import static io.electrum.moneytransfer.util.ValidationUtil.CURRENCY_REGEX;
+import static io.electrum.moneytransfer.util.ValidationUtil.ID_COUNTRY_CODE_REGEX;
+import static io.electrum.moneytransfer.util.ValidationUtil.MERCHANT_ID_REGEX;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -144,8 +150,8 @@ public abstract class AdminResource {
    public final void getCustomerInfo(
          @ApiParam(value = "Customer's identification number as per presented identification document.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.ID_NUMBER) @NotNull String idNumber,
          @ApiParam(value = "Type of presented identification document.") @QueryParam(GetCustomerInfo.QueryParameters.ID_TYPE) IdType idType,
-         @ApiParam(value = "Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code.") @QueryParam(GetCustomerInfo.QueryParameters.ID_COUNTRY_CODE) String idCountryCode,
-         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(GetCustomerInfo.QueryParameters.MERCHANT_ID) String merchantId,
+         @ApiParam(value = "Country of issue of presented identification document, expressed as an ISO 3166-1 Alpha-2 country code.") @QueryParam(GetCustomerInfo.QueryParameters.ID_COUNTRY_CODE) @Pattern(regexp = ID_COUNTRY_CODE_REGEX) String idCountryCode,
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor id.") @QueryParam(GetCustomerInfo.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerInfo.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerInfo.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
          @Context SecurityContext securityContext,
@@ -182,13 +188,13 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getFeeQuote(
-         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) @NotNull Long amount,
+         @ApiParam(value = "The amount the customer wishes to transfer.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT) @NotNull @Min(0) Long amount,
 
          @ApiParam(value = "Whether or not the amount is inclusive of the fee.", required = true) @QueryParam(GetFeeQuote.QueryParameters.AMOUNT_INCLUDES_FEE) @NotNull Boolean amountIncludesFee,
 
          @ApiParam(value = "National identity number of the customer.") @QueryParam(GetFeeQuote.QueryParameters.ID_NUMBER) String idNumber,
 
-         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(GetFeeQuote.QueryParameters.MERCHANT_ID) String merchantId,
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(GetFeeQuote.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
 
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.", required = true) @QueryParam(GetFeeQuote.QueryParameters.ORIGINATOR_INST_ID) @NotNull String originatorInstId,
 
@@ -283,9 +289,9 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getExchangeRate(
-         @ApiParam(value = "The currency which amounts are converted from. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the toCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.FROM_CURRENCY) @NotNull String fromCurrency,
+         @ApiParam(value = "The currency which amounts are converted from. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the toCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.FROM_CURRENCY) @NotNull @Pattern(regexp = CURRENCY_REGEX) String fromCurrency,
 
-         @ApiParam(value = "The currency which amounts are converted to. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the fromCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.TO_CURRENCY) @NotNull String toCurrency,
+         @ApiParam(value = "The currency which amounts are converted to. One unit of this currency multiplied by the rate returned by this operation is equal to one unit of the fromCurrency. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.", required = true) @QueryParam(GetExchangeRate.QueryParameters.TO_CURRENCY) @NotNull @Pattern(regexp = CURRENCY_REGEX) String toCurrency,
 
          @ApiParam(value = "The ID of the receiver who would process such a currency exchange. If this is supplied then a specific institution's exchange rate may be returned. If this parameter is not supplied then the exchange rate may simply be the market exchange rate.") @QueryParam(GetExchangeRate.QueryParameters.RECEIVER_ID) String receiverId,
 
