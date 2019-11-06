@@ -2,7 +2,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.17.0
 
-Released 05 November 2019
+Released 06 November 2019
 
 - Added validation for query parameters to conform to existing model objects for following resources:
     - `GetCustomerInfo`
