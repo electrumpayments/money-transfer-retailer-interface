@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
@@ -30,6 +31,8 @@ public class MoneyTransferAuthResponse extends Transaction {
    private String orderId = null;
 
    private String customerProfileId = null;
+
+   private Amounts amounts = null;
 
    public MoneyTransferAuthResponse amount(LedgerAmount amount) {
       this.amount = amount;
@@ -161,6 +164,27 @@ public class MoneyTransferAuthResponse extends Transaction {
       return this;
    }
 
+   public MoneyTransferAuthResponse amounts(Amounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
+   /**
+    * Amounts which make up the transaction. Absent amounts have zero value.
+    *
+    * @return amounts
+    **/
+   @JsonProperty("amounts")
+   @ApiModelProperty(value = "Amounts which make up the transaction. Absent amounts have zero value.")
+   @Valid
+   public Amounts getAmounts() {
+      return amounts;
+   }
+
+   public void setAmounts(Amounts amounts) {
+      this.amounts = amounts;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -173,7 +197,7 @@ public class MoneyTransferAuthResponse extends Transaction {
       return Objects.equals(amount, that.amount) && Objects.equals(senderDetails, that.senderDetails)
             && Objects.equals(orderRedeemRef, that.orderRedeemRef)
             && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) && Objects.equals(orderId, that.orderId)
-            && Objects.equals(customerProfileId, that.customerProfileId);
+            && Objects.equals(customerProfileId, that.customerProfileId) && Objects.equals(amounts, that.amounts);
    }
 
    @Override
@@ -185,7 +209,8 @@ public class MoneyTransferAuthResponse extends Transaction {
             orderRedeemRef,
             orderId,
             orderRedeemRefAlt,
-            customerProfileId);
+            customerProfileId,
+            amounts);
    }
 
    @Override
@@ -208,6 +233,7 @@ public class MoneyTransferAuthResponse extends Transaction {
       sb.append("    orderRedeemRefAlt: ").append(Utils.toIndentedString(orderRedeemRefAlt)).append("\n");
       sb.append("    orderId: ").append(Utils.toIndentedString(orderId)).append("\n");
       sb.append("    customerProfileId: ").append(Utils.toIndentedString(customerProfileId)).append("\n");
+      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("}");
       return sb.toString();
    }

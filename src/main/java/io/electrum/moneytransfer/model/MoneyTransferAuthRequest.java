@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.EncryptedPin;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Originator;
@@ -40,6 +41,8 @@ public class MoneyTransferAuthRequest extends Transaction {
    private PurposeOfRemittance purposeOfRemittance = null;
 
    private Relationship recipientRelationship = null;
+
+   private Amounts amounts = null;
 
    public MoneyTransferAuthRequest amount(LedgerAmount amount) {
       this.amount = amount;
@@ -251,6 +254,27 @@ public class MoneyTransferAuthRequest extends Transaction {
       this.recipientRelationship = relationship;
    }
 
+   public MoneyTransferAuthRequest amounts(Amounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
+   /**
+    * Amounts which make up the transaction. Absent amounts have zero value.
+    *
+    * @return amounts
+    **/
+   @JsonProperty("amounts")
+   @ApiModelProperty(value = "Amounts which make up the transaction. Absent amounts have zero value.")
+   @Valid
+   public Amounts getAmounts() {
+      return amounts;
+   }
+
+   public void setAmounts(Amounts amounts) {
+      this.amounts = amounts;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -265,7 +289,8 @@ public class MoneyTransferAuthRequest extends Transaction {
             && Objects.equals(customerProfileId, that.customerProfileId)
             && Objects.equals(newCustomer, that.newCustomer) && Objects.equals(fee, that.fee)
             && Objects.equals(quoteId, that.quoteId) && Objects.equals(purposeOfRemittance, that.purposeOfRemittance)
-            && Objects.equals(recipientRelationship, that.recipientRelationship);
+            && Objects.equals(recipientRelationship, that.recipientRelationship)
+            && Objects.equals(amounts, that.amounts);
    }
 
    @Override
@@ -281,7 +306,8 @@ public class MoneyTransferAuthRequest extends Transaction {
             fee,
             quoteId,
             purposeOfRemittance,
-            recipientRelationship);
+            recipientRelationship,
+            amounts);
    }
 
    @Override
@@ -307,6 +333,7 @@ public class MoneyTransferAuthRequest extends Transaction {
       sb.append("    quoteId: ").append(Utils.toIndentedString(quoteId)).append("\n");
       sb.append("    purposeOfRemittance: ").append(Utils.toIndentedString(purposeOfRemittance)).append("\n");
       sb.append("    recipientRelationship: ").append(Utils.toIndentedString(recipientRelationship)).append("\n");
+      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("}");
       return sb.toString();
    }
