@@ -40,12 +40,14 @@ public class MoneyTransferAuthResponse extends Transaction {
    }
 
    /**
-    * Get amount
+    * The amount to be transferred. This field may be deprecated in a future version of the API. We encourage you to
+    * please also populate the 'amounts.requestAmount' field with this information.
     * 
     * @return amount
     **/
    @JsonProperty("amount")
-   @ApiModelProperty(required = true, value = "")
+   @ApiModelProperty(required = true, value = "The amount to be transferred. This field may be deprecated in a future "
+         + "version of the API. We encourage you to please also populate the 'amounts.requestAmount' field with this information.")
    @Valid
    @NotNull
    public LedgerAmount getAmount() {
@@ -170,12 +172,16 @@ public class MoneyTransferAuthResponse extends Transaction {
    }
 
    /**
-    * Amounts which make up the transaction. Absent amounts have zero value.
+    * Amounts which make up the transaction. The existing 'amount' field currently takes precedence over this 'amounts'
+    * field, however the use of this 'amounts' field is encouraged. The 'amount' field may be deprecated in a future
+    * version of this API.
     *
     * @return amounts
     **/
    @JsonProperty("amounts")
-   @ApiModelProperty(value = "Amounts which make up the transaction. Absent amounts have zero value.")
+   @ApiModelProperty(value = "Amounts which make up the transaction. The existing 'amount' field currently takes "
+         + "precedence over this 'amounts' field, however the use of this 'amounts' field is encouraged. The 'amount' "
+         + "field may be deprecated in a future version of this API.")
    @Valid
    public Amounts getAmounts() {
       return amounts;
