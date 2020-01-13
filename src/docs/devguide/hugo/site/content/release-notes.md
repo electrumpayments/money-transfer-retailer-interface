@@ -2,9 +2,9 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 ## v2.18.0
 
-Released xx Dec 2019
+Released 14 January 2020
 
-- Updated the `MoneyTransferAuthResponse` and `MoneyTransferAuthRequest` models with a new `amounts` field:
+- Updated the `MoneyTransferAuthRequest`, `MoneyTransferAuthResponse`, `MoneyTransferRedeemRequest` and `MoneyTransferRedeemResponse` models with a new `amounts` field:
     - The `amounts` field allows for more amounts to be used to describe a Money Transfer transaction.
         - The `amount` field takes precedence over this `amounts` field, however the use of this 
         `amounts` field is encouraged. The `amount` field may be deprecated in a future version of this API.
