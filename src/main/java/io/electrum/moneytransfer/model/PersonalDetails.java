@@ -46,6 +46,9 @@ public class PersonalDetails {
    @JsonProperty("nationality")
    private String nationality = null;
 
+   @JsonProperty("countryOfBirth")
+   private String countryOfBirth = null;
+
    @JsonProperty("dateOfBirth")
    private String dateOfBirth = null;
 
@@ -226,6 +229,29 @@ public class PersonalDetails {
 
    public void setNationality(String nationality) {
       this.nationality = nationality;
+   }
+
+   public PersonalDetails countryOfBirth(String countryOfBirth) {
+      this.countryOfBirth = countryOfBirth;
+      return this;
+   }
+
+   /**
+    * Country of Birth expressed as an ISO 3166-1 Alpha-2 country code
+    *
+    * @return countryOfBirth
+    **/
+   @JsonProperty("countryOfBirth")
+   @ApiModelProperty(value = "Country of Birth expressed as an ISO 3166-1 Alpha-2 country code")
+   @Valid
+   @Size(min = 2, max = 2)
+   @Masked
+   public String getCountryOfBirth() {
+      return countryOfBirth;
+   }
+
+   public void setCountryOfBirth(String countryOfBirth) {
+      this.countryOfBirth = countryOfBirth;
    }
 
    public PersonalDetails dateOfBirth(String dateOfBirth) {
@@ -482,6 +508,7 @@ public class PersonalDetails {
             && Objects.equals(this.idNumber, personalDetails.idNumber)
             && Objects.equals(this.idType, personalDetails.idType)
             && Objects.equals(this.nationality, personalDetails.nationality)
+            && Objects.equals(this.countryOfBirth, personalDetails.countryOfBirth)
             && Objects.equals(this.idCountryCode, personalDetails.idCountryCode)
             && Objects.equals(this.dateOfBirth, personalDetails.dateOfBirth)
             && Objects.equals(this.contactNumber, personalDetails.contactNumber)
@@ -505,6 +532,7 @@ public class PersonalDetails {
             idNumber,
             idType,
             nationality,
+            countryOfBirth,
             idCountryCode,
             dateOfBirth,
             contactNumber,
@@ -529,6 +557,7 @@ public class PersonalDetails {
       sb.append("    idNumber: ").append(Utils.toIndentedString(new MaskAll().mask(idNumber))).append("\n");
       sb.append("    idType: ").append(Utils.toIndentedString(idType)).append("\n");
       sb.append("    nationality: ").append(Utils.toIndentedString(new MaskAll().mask(nationality))).append("\n");
+      sb.append("    countryOfBirth: ").append(Utils.toIndentedString(new MaskAll().mask(countryOfBirth))).append("\n");
       sb.append("    idCountryCode: ").append(Utils.toIndentedString(new MaskAll().mask(idCountryCode))).append("\n");
       sb.append("    dateOfBirth: ").append(Utils.toIndentedString(new MaskAll().mask(dateOfBirth))).append("\n");
       sb.append("    contactNumber: ").append(Utils.toIndentedString(new MaskAll().mask(contactNumber))).append("\n");
