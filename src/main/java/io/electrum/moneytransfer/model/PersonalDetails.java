@@ -508,6 +508,7 @@ public class PersonalDetails {
             && Objects.equals(this.idNumber, personalDetails.idNumber)
             && Objects.equals(this.idType, personalDetails.idType)
             && Objects.equals(this.nationality, personalDetails.nationality)
+            && Objects.equals(this.countryOfBirth, personalDetails.countryOfBirth)
             && Objects.equals(this.idCountryCode, personalDetails.idCountryCode)
             && Objects.equals(this.dateOfBirth, personalDetails.dateOfBirth)
             && Objects.equals(this.contactNumber, personalDetails.contactNumber)
@@ -531,6 +532,7 @@ public class PersonalDetails {
             idNumber,
             idType,
             nationality,
+            countryOfBirth,
             idCountryCode,
             dateOfBirth,
             contactNumber,
@@ -555,6 +557,7 @@ public class PersonalDetails {
       sb.append("    idNumber: ").append(Utils.toIndentedString(new MaskAll().mask(idNumber))).append("\n");
       sb.append("    idType: ").append(Utils.toIndentedString(idType)).append("\n");
       sb.append("    nationality: ").append(Utils.toIndentedString(new MaskAll().mask(nationality))).append("\n");
+      sb.append("    countryOfBirth: ").append(Utils.toIndentedString(new MaskAll().mask(countryOfBirth))).append("\n");
       sb.append("    idCountryCode: ").append(Utils.toIndentedString(new MaskAll().mask(idCountryCode))).append("\n");
       sb.append("    dateOfBirth: ").append(Utils.toIndentedString(new MaskAll().mask(dateOfBirth))).append("\n");
       sb.append("    contactNumber: ").append(Utils.toIndentedString(new MaskAll().mask(contactNumber))).append("\n");
