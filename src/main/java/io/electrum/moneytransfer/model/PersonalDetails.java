@@ -46,6 +46,9 @@ public class PersonalDetails {
    @JsonProperty("nationality")
    private String nationality = null;
 
+   @JsonProperty("countryOfBirth")
+   private String countryOfBirth = null;
+
    @JsonProperty("dateOfBirth")
    private String dateOfBirth = null;
 
@@ -226,6 +229,29 @@ public class PersonalDetails {
 
    public void setNationality(String nationality) {
       this.nationality = nationality;
+   }
+
+   public PersonalDetails countryOfBirth(String countryOfBirth) {
+      this.countryOfBirth = countryOfBirth;
+      return this;
+   }
+
+   /**
+    * Country of Birth expressed as an ISO 3166-1 Alpha-2 country code
+    *
+    * @return countryOfBirth
+    **/
+   @JsonProperty("countryOfBirth")
+   @ApiModelProperty(value = "Country of Birth expressed as an ISO 3166-1 Alpha-2 country code")
+   @Valid
+   @Size(min = 2, max = 2)
+   @Masked
+   public String getCountryOfBirth() {
+      return countryOfBirth;
+   }
+
+   public void setCountryOfBirth(String countryOfBirth) {
+      this.countryOfBirth = countryOfBirth;
    }
 
    public PersonalDetails dateOfBirth(String dateOfBirth) {

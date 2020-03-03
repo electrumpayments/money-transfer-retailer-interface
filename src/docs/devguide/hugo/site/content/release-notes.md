@@ -1,5 +1,12 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.19.0
+
+Released 03 March 2020
+
+- Updated the `PersonalDetails` model with a new optional `countryOfBirth` field:
+    - The `countryOfBirth` field is used to record a person's country of birth as an ISO 3166-1 Alpha-2 country code.
+
 ## v2.18.0
 
 Released 07 February 2020
