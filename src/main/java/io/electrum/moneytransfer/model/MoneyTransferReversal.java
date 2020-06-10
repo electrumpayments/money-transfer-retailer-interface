@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiModelProperty;
 import jdk.internal.jline.internal.Nullable;
 import org.joda.time.DateTime;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
