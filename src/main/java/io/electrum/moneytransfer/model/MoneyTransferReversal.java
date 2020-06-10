@@ -1,11 +1,15 @@
 package io.electrum.moneytransfer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicReversal;
+import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.joda.time.DateTime;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -15,6 +19,24 @@ import java.util.List;
 @ApiModel(
       description = "An advice that notifies that the outcome of an authorisation transaction be reversed. This can be either due to cashier cancellation, or upstream timeout.")
 public class MoneyTransferReversal extends BasicReversal {
+
+   protected LedgerAmount amount;
+
+   MoneyTransferReversal amount(LedgerAmount amount) {
+      this.amount = amount;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "The amount to be reversed, can be the full order amount or less as is in the case of partial redemptions")
+   @JsonProperty("amount")
+   @NotNull
+   public LedgerAmount getAmount() {
+      return amount;
+   }
+
+   public void setAmount(LedgerAmount amount) {
+      this.amount = amount;
+   }
 
    public MoneyTransferReversal id(String id) {
       this.id = id;
