@@ -7,9 +7,9 @@ import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import jdk.internal.jline.internal.Nullable;
 import org.joda.time.DateTime;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
