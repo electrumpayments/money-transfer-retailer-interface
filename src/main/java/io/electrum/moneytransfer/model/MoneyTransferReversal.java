@@ -7,6 +7,7 @@ import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.internal.jline.internal.Nullable;
 import org.joda.time.DateTime;
 
 import javax.validation.constraints.NotNull;
@@ -29,7 +30,7 @@ public class MoneyTransferReversal extends BasicReversal {
 
    @ApiModelProperty(required = true, value = "The amount to be reversed, can be the full order amount or less as is in the case of partial redemptions")
    @JsonProperty("amount")
-   @NotNull
+   @Nullable
    public LedgerAmount getAmount() {
       return amount;
    }
