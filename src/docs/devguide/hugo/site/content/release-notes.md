@@ -1,5 +1,17 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.20.0
+
+Released 18 June 2020
+
+- Updated the service-interface-base plugin version from v3.23.0 to v3.25.0. This version update includes the following from service-interface-base:
+     - v3.25.0
+          - Added a new field `amounts` to the `BasicAdvice` model.
+     - v3.24.0
+          - Added support for hashed PINs (via a new sub-type of `Pin` named `HashedPin`).
+     - v3.23.0
+          - Added utility methods to JsonUtil class to assist in reading the contents of a file as a string and deserialising JSON objects from files.
+
 ## v2.19.0
 
 Released 03 March 2020
