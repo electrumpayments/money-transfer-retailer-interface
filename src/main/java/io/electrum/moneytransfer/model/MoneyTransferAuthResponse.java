@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.LedgerAmount;
 import io.electrum.vas.model.Transaction;
@@ -18,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Contains the data returned by a call to the createOrder operation.
  */
 @ApiModel(description = "Contains the data returned by a call to the createOrder operation.")
-public class MoneyTransferAuthResponse extends Transaction {
+public class MoneyTransferAuthResponse extends Transaction implements HasAmounts {
 
    private LedgerAmount amount = null;
 
@@ -42,7 +43,7 @@ public class MoneyTransferAuthResponse extends Transaction {
    /**
     * The amount to be transferred. This field may be deprecated in a future version of the API. We encourage you to
     * please also populate the 'amounts.requestAmount' field with this information.
-    * 
+    *
     * @return amount
     **/
    @JsonProperty("amount")
@@ -65,7 +66,7 @@ public class MoneyTransferAuthResponse extends Transaction {
 
    /**
     * Get senderDetails
-    * 
+    *
     * @return senderDetails
     **/
    @JsonProperty("senderDetails")
@@ -87,7 +88,7 @@ public class MoneyTransferAuthResponse extends Transaction {
 
    /**
     * Reference used by the recipient to redeem the order. This must be printed on the receipt.
-    * 
+    *
     * @return orderRedeemRef
     **/
    @JsonProperty("orderRedeemRef")
@@ -108,7 +109,7 @@ public class MoneyTransferAuthResponse extends Transaction {
 
    /**
     * An alternate reference used by the recipient to redeem the order. This must be printed on the receipt.
-    * 
+    *
     * @return orderRedeemRefAlt
     **/
    @JsonProperty("orderRedeemRefAlt")
@@ -133,7 +134,7 @@ public class MoneyTransferAuthResponse extends Transaction {
     * Note that any reference issued by the provider that is specific to a particular leg of the order process should be
     * set as a ThirdPartyIdentifier (i.e. the authorization and redeem legs of the order should each have its own
     * reference).
-    * 
+    *
     * @return orderId
     **/
    @JsonProperty("orderId")
