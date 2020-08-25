@@ -4,7 +4,7 @@ This page describes changes to the Money Transfer Retailer Interface implemented
 
 Released 25 August 2020
 
-- Updated the `service-interface-base` plugin version from v3.25.0 to v3.28.0. This version update includes the following from `service-interface-base`:
+- Updated the `service-interface-base` library version from v3.25.0 to v3.28.0. This version update includes the following from `service-interface-base`:
     - v3.28.0
          - Added `operatorId` field to the `Originator` model.
     - v3.27.0
