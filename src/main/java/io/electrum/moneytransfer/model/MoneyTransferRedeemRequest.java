@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import io.electrum.vas.interfaces.HasAmounts;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Used to submit data in a call to the redeemOrder operation.
  */
 @ApiModel(description = "Used to submit data in a call to the redeemOrder operation.")
-public class MoneyTransferRedeemRequest extends Transaction {
+public class MoneyTransferRedeemRequest extends Transaction implements HasAmounts {
 
    private LedgerAmount amount = null;
 

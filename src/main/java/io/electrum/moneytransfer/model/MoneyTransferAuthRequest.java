@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.EncryptedPin;
 import io.electrum.vas.model.LedgerAmount;
@@ -20,7 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Used to submit data in a call to the createOrder operation.
  */
 @ApiModel(description = "Used to submit data in a call to the createOrder operation.")
-public class MoneyTransferAuthRequest extends Transaction {
+public class MoneyTransferAuthRequest extends Transaction implements HasAmounts {
 
    private LedgerAmount amount = null;
 

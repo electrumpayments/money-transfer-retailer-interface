@@ -1,5 +1,19 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.21.0
+
+Released 25 August 2020
+
+- Updated the `service-interface-base` library version from v3.25.0 to v3.28.0. This version update includes the following from `service-interface-base`:
+    - v3.28.0
+         - Added `operatorId` field to the `Originator` model.
+    - v3.27.0
+        -  Added `RewardPayment` method.
+        -  Provided testing utilities to aid API development in the Java implementation provided by Electrum.
+    -  v3.26.0
+        -  Added `Account` `PaymentMethod`.
+        -  Added interfaces for `HasAmounts` & `HasPaymentMethods` to the Java implementation provided by Electrum. These can be used for creating shared utilities across API implementations.
+
 ## v2.20.0
 
 Released 18 June 2020
