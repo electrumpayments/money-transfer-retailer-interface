@@ -14,7 +14,7 @@ Released 18 August 2020
         -  Added Account PaymentMethod.
         -  Added Interfaces for HasAmounts & HasPaymentMethods. These can be used for creating shared utilities across API implementations.
 
-## vv2.20.0
+## v2.20.0
 
 Released 18 June 2020
 
