@@ -11,7 +11,7 @@ Released 25 August 2020
         -  Added `RewardPayment` method.
         -  Provided testing utilities to aid API development in the Java implementation provided by Electrum.
     -  v3.26.0
-        -  Added Account PaymentMethod.
+        -  Added `Account` `PaymentMethod`.
         -  Added Interfaces for HasAmounts & HasPaymentMethods. These can be used for creating shared utilities across API implementations.
 
 ## v2.20.0
