@@ -12,6 +12,7 @@ import io.electrum.moneytransfer.model.MoneyTransferAuthRequest;
 import io.electrum.moneytransfer.model.MoneyTransferCancelOrderReversal;
 import io.electrum.moneytransfer.model.MoneyTransferConfirmation;
 import io.electrum.moneytransfer.model.MoneyTransferOrderCancelRequest;
+import io.electrum.moneytransfer.model.MoneyTransferOrderPinUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferOrderStatusUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemRequest;
 import io.electrum.moneytransfer.model.MoneyTransferReversal;
@@ -132,6 +133,15 @@ public interface IOrdersResource {
 
    void cancelOrderReversal(
          MoneyTransferCancelOrderReversal body,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
+
+   void updateOrderPin(
+         MoneyTransferOrderPinUpdateRequest body,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
