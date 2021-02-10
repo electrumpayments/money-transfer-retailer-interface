@@ -42,9 +42,90 @@ import io.swagger.annotations.Authorization;
 @Api(description = "the admin API")
 public abstract class AdminResource {
 
+   protected abstract IAdminResource getResourceImplementation();
+
    public static final String PATH = "/admin";
 
-   protected abstract IAdminResource getResourceImplementation();
+   public class GetCustomerInfo {
+      public static final String RELATIVE_PATH = "/customers";
+      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+      public static final String GET_CUSTOMER_INFO = "getCustomerInfo";
+      public static final int SUCCESS = 200;
+
+      public class QueryParameters {
+         public static final String ID_NUMBER = "idNumber";
+         public static final String ID_TYPE = "idType";
+         public static final String ID_COUNTRY_CODE = "idCountryCode";
+         public static final String MERCHANT_ID = "merchantId";
+         public static final String ORIGINATOR_INST_ID = "originatorInstId";
+         public static final String RECEIVER_ID = "receiverId";
+      }
+   }
+
+   public class CreateOrUpdateCustomer {
+      public static final String RELATIVE_PATH = "/customers";
+      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+      public static final String CREATE_OR_UPDATE_CUSTOMER = "createOrUpdateCustomer";
+      public static final int SUCCESS = 201;
+   }
+
+   public class GetFeeQuote {
+      public static final String RELATIVE_PATH = "/fees";
+      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+      public static final String GET_FEE_QUOTE = "getFeeQuote";
+      public static final int SUCCESS = 200;
+
+      public class QueryParameters {
+         public static final String AMOUNT = "amount";
+         public static final String AMOUNT_INCLUDES_FEE = "amountIncludesFee";
+         public static final String ID_NUMBER = "idNumber";
+         public static final String MERCHANT_ID = "merchantId";
+         public static final String ORIGINATOR_INST_ID = "originatorInstId";
+         public static final String RECEIVER_ID = "receiverId";
+         public static final String SENDER_CELL = "senderCell";
+         public static final String RECIPIENT_CELL = "recipientCell";
+      }
+   }
+
+   public class GetExchangeRate {
+      public static final String RELATIVE_PATH = "/exchangerate";
+      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+      public static final String GET_EXCHANGE_RATE = "getExchangeRate";
+      public static final int SUCCESS = 200;
+
+      public class QueryParameters {
+         public static final String FROM_CURRENCY = "fromCurrency";
+         public static final String TO_CURRENCY = "toCurrency";
+         public static final String RECEIVER_ID = "receiverId";
+         public static final String SETTLEMENT_ENTITY_ID = "settlementEntity";
+      }
+   }
+
+   public class LookupOrders {
+      private LookupOrders(){}
+
+      public static final String LOOKUP_ORDERS = "lookupOrders";
+      public static final int SUCCESS = 200;
+      public static final String RELATIVE_PATH = "/customers/orders";
+      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+
+      public class QueryParameters {
+         private QueryParameters(){}
+
+         public static final String CUSTOMER_PROFILE_ID = "customerProfileId";
+         public static final String RECEIVER_ID = "receiverId";
+         public static final String MERCHANT_ID = "merchantId";
+         public static final String ORIGINATOR_INST_ID = "originatorInstId";
+         public static final String FROM_DATETIME = "fromDateTime";
+         public static final String TO_DATETIME = "toDateTime";
+         public static final String STATUS = "status";
+         public static final String PAYMENT_TYPE = "paymentType";
+         public static final String PAYMENT_IDENTIFIER_NAME = "paymentIdentifierName";
+         public static final String PAYMENT_IDENTIFIER_VALUE = "paymentIdentifierValue";
+         public static final String LIMIT = "limit";
+         public static final String OFFSET = "offset";
+      }
+   }
 
    @POST
    @Path(CreateOrUpdateCustomer.RELATIVE_PATH)
@@ -310,98 +391,4 @@ public abstract class AdminResource {
             httpServletRequest);
    }
 
-   public class GetCustomerInfo {
-      private GetCustomerInfo(){}
-
-      public static final String RELATIVE_PATH = "/customers";
-      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
-      public static final String GET_CUSTOMER_INFO = "getCustomerInfo";
-      public static final int SUCCESS = 200;
-
-      public class QueryParameters {
-         private QueryParameters(){}
-
-         public static final String ID_NUMBER = "idNumber";
-         public static final String ID_TYPE = "idType";
-         public static final String ID_COUNTRY_CODE = "idCountryCode";
-         public static final String MERCHANT_ID = "merchantId";
-         public static final String ORIGINATOR_INST_ID = "originatorInstId";
-         public static final String RECEIVER_ID = "receiverId";
-      }
-   }
-
-   public class CreateOrUpdateCustomer {
-      private CreateOrUpdateCustomer(){}
-
-      public static final String RELATIVE_PATH = "/customers";
-      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
-      public static final String CREATE_OR_UPDATE_CUSTOMER = "createOrUpdateCustomer";
-      public static final int SUCCESS = 201;
-   }
-
-   public class GetFeeQuote {
-      private GetFeeQuote(){}
-
-      public static final String RELATIVE_PATH = "/fees";
-      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
-      public static final String GET_FEE_QUOTE = "getFeeQuote";
-      public static final int SUCCESS = 200;
-
-      public class QueryParameters {
-         private QueryParameters(){}
-
-         public static final String AMOUNT = "amount";
-         public static final String AMOUNT_INCLUDES_FEE = "amountIncludesFee";
-         public static final String ID_NUMBER = "idNumber";
-         public static final String MERCHANT_ID = "merchantId";
-         public static final String ORIGINATOR_INST_ID = "originatorInstId";
-         public static final String RECEIVER_ID = "receiverId";
-         public static final String SENDER_CELL = "senderCell";
-         public static final String RECIPIENT_CELL = "recipientCell";
-      }
-   }
-
-   public class GetExchangeRate {
-      private GetExchangeRate(){}
-
-      public static final String RELATIVE_PATH = "/exchangerate";
-      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
-      public static final String GET_EXCHANGE_RATE = "getExchangeRate";
-      public static final int SUCCESS = 200;
-
-      public class QueryParameters {
-         private QueryParameters(){}
-
-         public static final String FROM_CURRENCY = "fromCurrency";
-         public static final String TO_CURRENCY = "toCurrency";
-         public static final String RECEIVER_ID = "receiverId";
-         public static final String SETTLEMENT_ENTITY_ID = "settlementEntity";
-      }
-   }
-
-   public class LookupOrders {
-      private LookupOrders(){}
-
-      public static final String LOOKUP_ORDERS = "lookupOrders";
-      public static final int SUCCESS = 200;
-      public static final String RELATIVE_PATH = "/customers/orders";
-      public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
-
-      public class QueryParameters {
-         private QueryParameters(){}
-
-         public static final String CUSTOMER_PROFILE_ID = "customerProfileId";
-         public static final String RECEIVER_ID = "receiverId";
-         public static final String MERCHANT_ID = "merchantId";
-         public static final String ORIGINATOR_INST_ID = "originatorInstId";
-         public static final String FROM_DATETIME = "fromDateTime";
-         public static final String TO_DATETIME = "toDateTime";
-         public static final String STATUS = "status";
-         public static final String PAYMENT_TYPE = "paymentType";
-         public static final String PAYMENT_IDENTIFIER_NAME = "paymentIdentifierName";
-         public static final String PAYMENT_IDENTIFIER_VALUE = "paymentIdentifierValue";
-         public static final String LIMIT = "limit";
-         public static final String OFFSET = "offset";
-      }
-   }
 }
