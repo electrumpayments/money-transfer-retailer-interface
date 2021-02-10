@@ -28,7 +28,6 @@ import io.electrum.moneytransfer.model.IdType;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 import io.electrum.moneytransfer.model.MoneyTransferCustomerOrderHistory;
 import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
-import io.electrum.moneytransfer.model.MoneyTransferLookupResponse;
 import io.electrum.moneytransfer.model.MoneyTransferQuoteRequest;
 import io.electrum.vas.model.ExchangeRate;
 import io.swagger.annotations.Api;
