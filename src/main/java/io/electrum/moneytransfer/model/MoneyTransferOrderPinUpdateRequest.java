@@ -1,5 +1,7 @@
 package io.electrum.moneytransfer.model;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -154,6 +156,27 @@ public class MoneyTransferOrderPinUpdateRequest extends Transaction {
    public MoneyTransferOrderPinUpdateRequest remittanceRef(String remittanceRef) {
       this.remittanceRef = remittanceRef;
       return this;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof MoneyTransferOrderPinUpdateRequest))
+         return false;
+      if (!super.equals(o))
+         return false;
+      MoneyTransferOrderPinUpdateRequest that = (MoneyTransferOrderPinUpdateRequest) o;
+      return pin.equals(that.pin) && Objects.equals(orderRedeemRef, that.orderRedeemRef)
+            && Objects.equals(remittanceRef, that.remittanceRef) && Objects.equals(orderId, that.orderId)
+            && Objects.equals(customerProfileId, that.customerProfileId)
+            && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects
+            .hash(super.hashCode(), pin, orderRedeemRef, remittanceRef, orderId, customerProfileId, orderRedeemRefAlt);
    }
 
    @Override

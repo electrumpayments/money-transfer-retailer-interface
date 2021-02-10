@@ -264,7 +264,7 @@ public abstract class AdminResource {
 
    @GET
    @Produces({ "application/json" })
-   @ApiOperation(value = LookupOrders.LOOKUP_ORDERS, notes = "Queries the details of a client's existing money transfer orders.", response = MoneyTransferLookupResponse.class, authorizations = {
+   @ApiOperation(value = LookupOrders.LOOKUP_ORDERS, notes = "Queries the details of a client's existing money transfer orders.", response = MoneyTransferCustomerOrderHistory.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = {
          @ApiResponse(code = OrdersResource.LookupOrder.SUCCESS, message = "OK", response = MoneyTransferCustomerOrderHistory.class),
