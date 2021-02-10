@@ -427,6 +427,7 @@ public abstract class OrdersResource {
    }
 
    public class CreateOrder {
+      private CreateOrder() {}
       public static final String CREATE_ORDER = "createOrder";
       public static final int SUCCESS = 201;
       public static final String RELATIVE_PATH = "/";
@@ -434,12 +435,14 @@ public abstract class OrdersResource {
    }
 
    public class LookupOrder {
+      private LookupOrder() {}
       public static final String LOOKUP_ORDER = "lookupOrder";
       public static final int SUCCESS = 200;
       public static final String RELATIVE_PATH = "/";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
 
       public class QueryParameters {
+         private QueryParameters() {}
          public static final String ORDER_REDEEM_REF = "orderRedeemRef";
          public static final String REMITTANCE_REF = "remittanceRef";
          public static final String MERCHANT_ID = "merchantId";
@@ -450,6 +453,7 @@ public abstract class OrdersResource {
    }
 
    public class RedeemOrder {
+      private RedeemOrder() {}
       public static final String REDEEM_ORDER = "redeemOrder";
       public static final int SUCCESS = 201;
       public static final String RELATIVE_PATH = "/redemptions";
@@ -457,6 +461,7 @@ public abstract class OrdersResource {
    }
 
    public class ConfirmPayment {
+      private ConfirmPayment() {}
       public static final String CONFIRM_PAYMENT = "confirmPayment";
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = "/confirmations";
@@ -464,6 +469,7 @@ public abstract class OrdersResource {
    }
 
    public class ConfirmRedeem {
+      private ConfirmRedeem() {}
       public static final String CONFIRM_REDEEM = "confirmRedeem";
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/confirmations";
@@ -471,6 +477,7 @@ public abstract class OrdersResource {
    }
 
    public class ReversePayment {
+      private ReversePayment() {}
       public static final String REVERSE_PAYMENT = "reversePayment";
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = "/reversals";
@@ -478,6 +485,7 @@ public abstract class OrdersResource {
    }
 
    public class ReverseRedeem {
+      private ReverseRedeem() {}
       public static final String REVERSE_REDEEM = "reverseRedeem";
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = RedeemOrder.RELATIVE_PATH + "/reversals";
@@ -485,6 +493,7 @@ public abstract class OrdersResource {
    }
 
    public class OrderStatus {
+      private OrderStatus() {}
       public static final String ORDER_STATUS = "orderStatus";
       public static final int SUCCESS = 204;
       public static final String RELATIVE_PATH = "/status";
@@ -492,6 +501,7 @@ public abstract class OrdersResource {
    }
 
    public class CancelOrder {
+      private CancelOrder() {}
       public static final String CANCEL_ORDER = "cancelOrder";
       public static final int SUCCESS = 200;
       public static final String RELATIVE_PATH = "/cancel";
@@ -499,6 +509,7 @@ public abstract class OrdersResource {
    }
 
    public class CancelOrderReversal {
+      private CancelOrderReversal() {}
       public static final String CANCEL_ORDER_REVERSAL = "cancelOrderReversal";
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = CancelOrder.RELATIVE_PATH + "/reversals";
@@ -506,6 +517,7 @@ public abstract class OrdersResource {
    }
 
    public class UpdateOrderPin {
+      private UpdateOrderPin() {}
       public static final String UPDATE_ORDER_PIN = "updateOrderPin";
       public static final int SUCCESS = 204;
       public static final String RELATIVE_PATH = "/pin";
