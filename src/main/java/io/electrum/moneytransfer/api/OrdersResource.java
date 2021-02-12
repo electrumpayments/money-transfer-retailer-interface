@@ -492,7 +492,7 @@ public abstract class OrdersResource {
    @Path(UpdateOrderPin.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = UpdateOrderPin.UPDATE_ORDER_PIN, notes = "Request to set the order's redemption pin to a new value", response = MoneyTransferOrderPinUpdateRequest.class, authorizations = {
+   @ApiOperation(value = UpdateOrderPin.UPDATE_ORDER_PIN, notes = "Request to set the order's redemption PIN to a new value", response = MoneyTransferOrderPinUpdateRequest.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = { @ApiResponse(code = UpdateOrderPin.SUCCESS, message = "OK"),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),

@@ -92,7 +92,7 @@ public interface IAdminResource {
          throws NotFoundException;
 
    void lookupOrders(
-         String customerProfileId,
+         @NotNull String customerProfileId,
          String merchantId,
          String originatorInstId,
          String fromDateTime,
@@ -101,8 +101,9 @@ public interface IAdminResource {
          String paymentType,
          String paymentIdentifierName,
          String paymentIdentifierValue,
-         String limit,
          @NotNull String receiverId,
+         String limit,
+         String offSet,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,

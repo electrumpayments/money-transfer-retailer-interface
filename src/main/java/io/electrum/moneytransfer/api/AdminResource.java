@@ -104,10 +104,10 @@ public abstract class AdminResource {
    public class LookupOrders {
       private LookupOrders(){}
 
-      public static final String LOOKUP_ORDERS = "lookupOrders";
-      public static final int SUCCESS = 200;
       public static final String RELATIVE_PATH = "/customers/orders";
       public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
+      public static final String LOOKUP_ORDERS = "getCustomerOrderHistory";
+      public static final int SUCCESS = 200;
 
       public class QueryParameters {
          private QueryParameters(){}
@@ -116,8 +116,8 @@ public abstract class AdminResource {
          public static final String RECEIVER_ID = "receiverId";
          public static final String MERCHANT_ID = "merchantId";
          public static final String ORIGINATOR_INST_ID = "originatorInstId";
-         public static final String FROM_DATETIME = "fromDateTime";
-         public static final String TO_DATETIME = "toDateTime";
+         public static final String FROM_DATE_TIME = "fromDateTime";
+         public static final String TO_DATE_TIME = "toDateTime";
          public static final String STATUS = "status";
          public static final String PAYMENT_TYPE = "paymentType";
          public static final String PAYMENT_IDENTIFIER_NAME = "paymentIdentifierName";
@@ -347,7 +347,7 @@ public abstract class AdminResource {
    @ApiOperation(value = LookupOrders.LOOKUP_ORDERS, notes = "Queries the details of a client's existing money transfer orders.", response = MoneyTransferCustomerOrderHistory.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = {
-         @ApiResponse(code = OrdersResource.LookupOrder.SUCCESS, message = "OK", response = MoneyTransferCustomerOrderHistory.class),
+         @ApiResponse(code = AdminResource.LookupOrders.SUCCESS, message = "OK", response = MoneyTransferCustomerOrderHistory.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
@@ -357,14 +357,15 @@ public abstract class AdminResource {
          @ApiParam(value = "Uniquely identifies customer's profile on the upstream entity's system.") @QueryParam(LookupOrders.QueryParameters.CUSTOMER_PROFILE_ID) String customerProfileId,
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(LookupOrders.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(LookupOrders.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
-         @ApiParam(value = "The date from which to start searching for orders (inclusive).") @QueryParam(LookupOrders.QueryParameters.FROM_DATETIME) String fromDateTime,
-         @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(LookupOrders.QueryParameters.TO_DATETIME) String toDateTime,
+         @ApiParam(value = "The date from which to start searching for orders (inclusive).") @QueryParam(LookupOrders.QueryParameters.FROM_DATE_TIME) String fromDateTime,
+         @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(LookupOrders.QueryParameters.TO_DATE_TIME) String toDateTime,
          @ApiParam(value = "Should be among the options of the OrderStatus in SendCash") @QueryParam(LookupOrders.QueryParameters.STATUS) String status,
          @ApiParam(value = "Payment type to filter orders by.") @QueryParam(LookupOrders.QueryParameters.PAYMENT_TYPE) String paymentType,
          @ApiParam(value = "Payment identifier for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(LookupOrders.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
          @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(LookupOrders.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
-         @ApiParam(value = "The max number of expected responses.") @QueryParam(LookupOrders.QueryParameters.LIMIT) String limit,
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrders.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
+         @ApiParam(value = "The max number of expected responses.") @QueryParam(LookupOrders.QueryParameters.LIMIT) String limit,
+         @ApiParam(value = "The offset from the beginning date.") @QueryParam(LookupOrders.QueryParameters.OFFSET) String offset,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -381,8 +382,9 @@ public abstract class AdminResource {
             paymentType,
             paymentIdentifierName,
             paymentIdentifierValue,
-            limit,
             receiverId,
+            limit,
+            offset,
             securityContext,
             request,
             httpHeaders,

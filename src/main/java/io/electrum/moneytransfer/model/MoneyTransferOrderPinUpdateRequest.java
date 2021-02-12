@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Used to update the pin on a order
  */
-@ApiModel(description = "Used to update the pin on a order.")
+@ApiModel(description = "Used to update the PIN on a order.")
 public class MoneyTransferOrderPinUpdateRequest extends Transaction {
 
    @JsonProperty("pin")

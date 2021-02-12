@@ -2,10 +2,10 @@ version: 2
 jobs:
   build-and-release:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: ${ARTIFACTORY_DOCKER_URL}/circleci-openjdk
+        auth:
+          username: $ARTIFACTORY_READER_USERNAME
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - setup_remote_docker
       - checkout
@@ -57,10 +57,10 @@ jobs:
           destination: release
   code-coverage-report:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: ${ARTIFACTORY_DOCKER_URL}/circleci-openjdk
+        auth:
+          username: $ARTIFACTORY_READER_USERNAME
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - run:
           name: Sonar Checkout
@@ -81,10 +81,10 @@ jobs:
           destination: coverage
   build-with-latest-deps:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: ${ARTIFACTORY_DOCKER_URL}/circleci-openjdk
+        auth:
+          username: $ARTIFACTORY_READER_USERNAME
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - setup_remote_docker
       - checkout
