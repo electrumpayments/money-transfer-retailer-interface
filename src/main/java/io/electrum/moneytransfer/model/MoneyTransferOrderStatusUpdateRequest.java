@@ -182,6 +182,8 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    /**
     * Data relating to the originator of the transaction
+    * @param originator the originator of the current request
+    * @return MoneyTransferOrderStatusUpdateRequest
     **/
    public MoneyTransferOrderStatusUpdateRequest originator(Originator originator) {
       this.originator = originator;
@@ -198,6 +200,8 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    /**
     * Data relating to the sender of BasicRequest.
+    * @param client the client of the cuurent request
+    * @return MoneyTransferOrderStatusUpdateRequest
     **/
    public MoneyTransferOrderStatusUpdateRequest client(Institution client) {
       this.client = client;
@@ -214,6 +218,8 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    /**
     * Data relating to the entity with whom the Merchant will settle the transaction.
+    * @param settlementEntity the settlementEntity of the current request
+    * @return MoneyTransferOrderStatusUpdateRequest
     **/
    public MoneyTransferOrderStatusUpdateRequest settlementEntity(Institution settlementEntity) {
       this.settlementEntity = settlementEntity;
@@ -230,6 +236,8 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    /**
     * Data relating to the entity which ultimately processes the request.
+    * @param receiver the receiver of the current request
+    * @return MoneyTransferOrderStatusUpdateRequest
     **/
    public MoneyTransferOrderStatusUpdateRequest receiver(Institution receiver) {
       this.receiver = receiver;
@@ -246,6 +254,10 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    /**
     * An array of identifiers which each identify the transaction within each entity's system.
+    *
+    * @param transactionIdentifiers
+    *           - a list of the transaction identifiers to set as the current request's thirdPartyIdentifiers
+    * @return MoneyTransferOrderStatusUpdateRequest
     **/
    public MoneyTransferOrderStatusUpdateRequest thirdPartyIdentifiers(
          List<ThirdPartyIdentifier> transactionIdentifiers) {
@@ -328,36 +340,50 @@ public class MoneyTransferOrderStatusUpdateRequest {
 
    @Override
    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (!(o instanceof MoneyTransferOrderStatusUpdateRequest)) return false;
+      if (this == o)
+         return true;
+      if (!(o instanceof MoneyTransferOrderStatusUpdateRequest))
+         return false;
       MoneyTransferOrderStatusUpdateRequest that = (MoneyTransferOrderStatusUpdateRequest) o;
-      return Objects.equals(updateTime, that.updateTime) &&
-            Objects.equals(orderRedeemRef, that.orderRedeemRef) &&
-            Objects.equals(remittanceRef, that.remittanceRef) &&
-            status == that.status &&
-            Objects.equals(statusDescription, that.statusDescription) &&
-            Objects.equals(originator, that.originator) &&
-            Objects.equals(client, that.client) &&
-            Objects.equals(settlementEntity, that.settlementEntity) &&
-            Objects.equals(receiver, that.receiver) &&
-            Objects.equals(thirdPartyIdentifiers, that.thirdPartyIdentifiers) &&
-            Objects.equals(slipData, that.slipData) &&
-            Objects.equals(basketRef, that.basketRef) &&
-            tranType == that.tranType &&
-            srcAccType == that.srcAccType &&
-            destAccType == that.destAccType &&
-            Objects.equals(stan, that.stan) &&
-            Objects.equals(rrn, that.rrn) &&
-            Objects.equals(amount, that.amount) &&
-            Objects.equals(senderDetails, that.senderDetails) &&
-            Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) &&
-            Objects.equals(orderId, that.orderId) &&
-            Objects.equals(customerProfileId, that.customerProfileId);
+      return Objects.equals(updateTime, that.updateTime) && Objects.equals(orderRedeemRef, that.orderRedeemRef)
+            && Objects.equals(remittanceRef, that.remittanceRef) && status == that.status
+            && Objects.equals(statusDescription, that.statusDescription) && Objects.equals(originator, that.originator)
+            && Objects.equals(client, that.client) && Objects.equals(settlementEntity, that.settlementEntity)
+            && Objects.equals(receiver, that.receiver)
+            && Objects.equals(thirdPartyIdentifiers, that.thirdPartyIdentifiers)
+            && Objects.equals(slipData, that.slipData) && Objects.equals(basketRef, that.basketRef)
+            && tranType == that.tranType && srcAccType == that.srcAccType && destAccType == that.destAccType
+            && Objects.equals(stan, that.stan) && Objects.equals(rrn, that.rrn) && Objects.equals(amount, that.amount)
+            && Objects.equals(senderDetails, that.senderDetails)
+            && Objects.equals(orderRedeemRefAlt, that.orderRedeemRefAlt) && Objects.equals(orderId, that.orderId)
+            && Objects.equals(customerProfileId, that.customerProfileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(updateTime, orderRedeemRef, remittanceRef, status, statusDescription, originator, client, settlementEntity, receiver, thirdPartyIdentifiers, slipData, basketRef, tranType, srcAccType, destAccType, stan, rrn, amount, senderDetails, orderRedeemRefAlt, orderId, customerProfileId);
+      return Objects.hash(
+            updateTime,
+            orderRedeemRef,
+            remittanceRef,
+            status,
+            statusDescription,
+            originator,
+            client,
+            settlementEntity,
+            receiver,
+            thirdPartyIdentifiers,
+            slipData,
+            basketRef,
+            tranType,
+            srcAccType,
+            destAccType,
+            stan,
+            rrn,
+            amount,
+            senderDetails,
+            orderRedeemRefAlt,
+            orderId,
+            customerProfileId);
    }
 
    @Override
