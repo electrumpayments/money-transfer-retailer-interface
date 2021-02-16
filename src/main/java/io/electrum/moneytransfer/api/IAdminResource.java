@@ -93,6 +93,7 @@ public interface IAdminResource {
 
    void lookupOrders(
          @NotNull String customerProfileId,
+         @NotNull String receiverId,
          String merchantId,
          String originatorInstId,
          String fromDateTime,
@@ -101,9 +102,8 @@ public interface IAdminResource {
          String paymentType,
          String paymentIdentifierName,
          String paymentIdentifierValue,
-         @NotNull String receiverId,
-         String limit,
-         String offSet,
+         int limit,
+         int offSet,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,

@@ -72,7 +72,7 @@ jobs:
             - v1-maven-{{ .Branch }}
       - run:
           name: Generate code coverage report
-          command: mvn cobertura:cobertura -B -Dstyle.color=always -Dcobertura.report.format=xml
+          command: /electrum/bin/codeCoverageJacoco.sh
       - run:
           name: Push to SonarQube
           command: /electrum/bin/runSonar.sh
