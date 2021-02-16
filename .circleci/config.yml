@@ -62,6 +62,8 @@ jobs:
           username: $ARTIFACTORY_READER_USERNAME
           password: $ARTIFACTORY_READER_PASSWORD
     steps:
+      - setup_remote_docker
+      - checkout
       - run:
           name: Sonar Checkout
           command: /electrum/bin/sonarCheckout.sh
