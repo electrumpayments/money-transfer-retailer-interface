@@ -77,7 +77,7 @@ jobs:
           name: Push to SonarQube
           command: /electrum/bin/runSonar.sh
       - store_artifacts:
-          path: target/site/cobertura
+          path: target/site
           destination: coverage
   build-with-latest-deps:
     docker:
