@@ -26,7 +26,7 @@ jobs:
           command: /electrum/bin/validateReleaseType.sh
       - run:
           name: Compile, Test, and Release
-          command: /electrum/bin/simpleTestAndReleaseJava.sh "-PpackagePluginRpm"
+          command: /electrum/bin/simpleTestAndReleaseJava.sh
       - run:
           name: Deploy docs to Github Pages
           command: /electrum/bin/deployGithubPages.sh ~/project/target/devguide/site
@@ -72,12 +72,12 @@ jobs:
             - v1-maven-{{ .Branch }}
       - run:
           name: Generate code coverage report
-          command: /electrum/bin/codeCoverageJacoco.sh
+          command: mvn cobertura:cobertura -B -Dstyle.color=always -Dcobertura.report.format=xml
       - run:
           name: Push to SonarQube
           command: /electrum/bin/runSonar.sh
       - store_artifacts:
-          path: target/site
+          path: target/site/cobertura
           destination: coverage
   build-with-latest-deps:
     docker:
@@ -100,10 +100,6 @@ jobs:
           name: Test, but only if any Electrum dependencies changed
           command: /electrum/bin/testWithUpdatedDepsJava.sh
       - run:
-          name: Notify success to slack
-          command: /electrum/bin/notifySlackDepBuildSucceeded.sh
-          when: on_success
-      - run:
           name: Notify failure to slack
           command: /electrum/bin/notifySlackDepBuildFailed.sh
           when: on_fail
@@ -119,9 +115,6 @@ jobs:
       - store_artifacts:
           path: ~/tests
           destination: tests
-      - store_artifacts:
-          path: log
-          destination: log
       - store_artifacts:
           path: logs
           destination: logs
