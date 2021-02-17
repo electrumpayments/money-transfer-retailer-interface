@@ -91,7 +91,7 @@ public interface IAdminResource {
          HttpServletRequest httpServletRequest)
          throws NotFoundException;
 
-   void lookupOrders(
+   void getCustomerOrderHistory(
          @NotNull String customerProfileId,
          @NotNull String receiverId,
          String merchantId,

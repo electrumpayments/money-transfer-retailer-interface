@@ -101,12 +101,12 @@ public abstract class AdminResource {
       }
    }
 
-   public class LookupOrders {
-      private LookupOrders(){}
+   public class GetCustomerOrderHistory {
+      private GetCustomerOrderHistory(){}
 
       public static final String RELATIVE_PATH = "/customers/orders";
       public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
-      public static final String LOOKUP_ORDERS = "getCustomerOrderHistory";
+      public static final String GET_CUSTOMER_ORDER_HISTORY = "getCustomerOrderHistory";
       public static final int SUCCESS = 200;
 
       public class QueryParameters {
@@ -344,35 +344,35 @@ public abstract class AdminResource {
 
    @GET
    @Produces({ "application/json" })
-   @ApiOperation(value = LookupOrders.LOOKUP_ORDERS, notes = "Queries the details of a client's existing money transfer orders.", response = MoneyTransferCustomerOrderHistory.class, authorizations = {
+   @ApiOperation(value = GetCustomerOrderHistory.GET_CUSTOMER_ORDER_HISTORY, notes = "Queries the details of a client's existing money transfer orders.", response = MoneyTransferCustomerOrderHistory.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
    @ApiResponses(value = {
-         @ApiResponse(code = AdminResource.LookupOrders.SUCCESS, message = "OK", response = MoneyTransferCustomerOrderHistory.class),
+         @ApiResponse(code = AdminResource.GetCustomerOrderHistory.SUCCESS, message = "OK", response = MoneyTransferCustomerOrderHistory.class),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
-   public final void lookupOrders(
-         @ApiParam(value = "Uniquely identifies customer's profile on the upstream entity's system.") @QueryParam(LookupOrders.QueryParameters.CUSTOMER_PROFILE_ID) @NotNull String customerProfileId,
-         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(LookupOrders.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
-         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(LookupOrders.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
-         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(LookupOrders.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
-         @ApiParam(value = "The date from which to start searching for orders (inclusive).") @QueryParam(LookupOrders.QueryParameters.FROM_DATE_TIME) String fromDateTime,
-         @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(LookupOrders.QueryParameters.TO_DATE_TIME) String toDateTime,
-         @ApiParam(value = "Should be among the options of the OrderStatus in SendCash") @QueryParam(LookupOrders.QueryParameters.STATUS) String status,
-         @ApiParam(value = "Payment type to filter orders by.") @QueryParam(LookupOrders.QueryParameters.PAYMENT_TYPE) String paymentType,
-         @ApiParam(value = "Payment identifier for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(LookupOrders.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
-         @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(LookupOrders.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
-         @ApiParam(value = "The max number of expected responses.") @QueryParam(LookupOrders.QueryParameters.LIMIT) int limit,
-         @ApiParam(value = "The offset from the beginning date.") @QueryParam(LookupOrders.QueryParameters.OFFSET) int offset,
+   public final void getCustomerOrderHistory(
+         @ApiParam(value = "Uniquely identifies customer's profile on the upstream entity's system.") @QueryParam(GetCustomerOrderHistory.QueryParameters.CUSTOMER_PROFILE_ID) @NotNull String customerProfileId,
+         @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerOrderHistory.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
+         @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(GetCustomerOrderHistory.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
+         @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerOrderHistory.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
+         @ApiParam(value = "The date from which to start searching for orders (inclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.FROM_DATE_TIME) String fromDateTime,
+         @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.TO_DATE_TIME) String toDateTime,
+         @ApiParam(value = "Should be among the options of the OrderStatus in the money transfer system.") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
+         @ApiParam(value = "Payment type to filter orders by.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_TYPE) String paymentType,
+         @ApiParam(value = "Payment identifier for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
+         @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
+         @ApiParam(value = "The max number of expected responses.") @QueryParam(GetCustomerOrderHistory.QueryParameters.LIMIT) int limit,
+         @ApiParam(value = "The offset for the number of orders.") @QueryParam(GetCustomerOrderHistory.QueryParameters.OFFSET) int offset,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().lookupOrders(
+      getResourceImplementation().getCustomerOrderHistory(
             customerProfileId,
             merchantId,
             originatorInstId,
