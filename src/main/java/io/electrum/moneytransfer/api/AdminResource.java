@@ -345,7 +345,9 @@ public abstract class AdminResource {
             httpServletRequest);
    }
 
+   // MNS TODO: Find a more dynamic way to list Enums. See status and paymentType
    @GET
+   @Path(GetCustomerOrderHistory.RELATIVE_PATH)
    @Produces({ "application/json" })
    @ApiOperation(value = GetCustomerOrderHistory.GET_CUSTOMER_ORDER_HISTORY, notes = "Queries the details of a client's existing money transfer orders.", response = MoneyTransferCustomerOrderHistory.class, authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
@@ -363,12 +365,12 @@ public abstract class AdminResource {
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerOrderHistory.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
          @ApiParam(value = "The date from which to start searching for orders (inclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.FROM_DATE_TIME) String fromDateTime,
          @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.TO_DATE_TIME) String toDateTime,
-         @ApiParam(value = "Should be among the options of the MoneyTransferLookupResponse statuses.") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
+         @ApiParam(value = "Should be among the options of the Money Transfer Order Statuses: [UNREDEEMED, REDEEMED, CANCELLED, EXPIRED, ON_HOLD, UNCONFIRMED]") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
          @ApiParam(value = "Payment type to filter orders by.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_TYPE) String paymentType,
-         @ApiParam(value = "Payment identifier for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
+         @ApiParam(value = "Payment identifier name for the payment type indicated. Must be one of: [BANK_CUSTOMER_ID, BANK_ACCOUNT_ID]. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
          @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
-         @ApiParam(value = "The max number of expected responses.") @QueryParam(GetCustomerOrderHistory.QueryParameters.LIMIT) int limit,
-         @ApiParam(value = "The offset for the number of orders.") @QueryParam(GetCustomerOrderHistory.QueryParameters.OFFSET) int offset,
+         @ApiParam(value = "A limit on the number of orders to be returned.") @QueryParam(GetCustomerOrderHistory.QueryParameters.LIMIT) int limit,
+         @ApiParam(value = "The number of orders to skip before starting to collect the result set.") @QueryParam(GetCustomerOrderHistory.QueryParameters.OFFSET) int offset,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
