@@ -28,6 +28,7 @@ import io.electrum.moneytransfer.model.IdType;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 import io.electrum.moneytransfer.model.MoneyTransferCustomerOrderHistory;
 import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
+import io.electrum.moneytransfer.model.MoneyTransferLookupResponse;
 import io.electrum.moneytransfer.model.MoneyTransferQuoteRequest;
 import io.electrum.vas.model.ExchangeRate;
 import io.swagger.annotations.Api;
@@ -36,6 +37,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
+
+import java.util.Arrays;
 
 @Path(AdminResource.PATH)
 
@@ -360,7 +363,7 @@ public abstract class AdminResource {
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerOrderHistory.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,
          @ApiParam(value = "The date from which to start searching for orders (inclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.FROM_DATE_TIME) String fromDateTime,
          @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.TO_DATE_TIME) String toDateTime,
-         @ApiParam(value = "Should be among the options of the OrderStatus in the money transfer system.") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
+         @ApiParam(value = "Should be among the options of the MoneyTransferLookupResponse statuses.") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
          @ApiParam(value = "Payment type to filter orders by.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_TYPE) String paymentType,
          @ApiParam(value = "Payment identifier for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
          @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
