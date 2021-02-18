@@ -356,7 +356,7 @@ public abstract class AdminResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void getCustomerOrderHistory(
-         @ApiParam(value = "Uniquely identifies customer's profile on the upstream entity's system.") @QueryParam(GetCustomerOrderHistory.QueryParameters.CUSTOMER_PROFILE_ID) @NotNull String customerProfileId,
+         @ApiParam(value = "Uniquely identifies customer's profile on the upstream entity's system.", required = true) @QueryParam(GetCustomerOrderHistory.QueryParameters.CUSTOMER_PROFILE_ID) @NotNull String customerProfileId,
          @ApiParam(value = "Identifies the service provider to whom this request must be directed.", required = true) @QueryParam(GetCustomerOrderHistory.QueryParameters.RECEIVER_ID) @NotNull String receiverId,
          @ApiParam(value = "The assigned merchant identifier. Also known as card acceptor ID.") @QueryParam(GetCustomerOrderHistory.QueryParameters.MERCHANT_ID) @Pattern(regexp = MERCHANT_ID_REGEX) String merchantId,
          @ApiParam(value = "Identifies the institution from which the transaction originates. Value to be assigned by Electrum.") @QueryParam(GetCustomerOrderHistory.QueryParameters.ORIGINATOR_INST_ID) String originatorInstId,

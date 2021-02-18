@@ -492,9 +492,9 @@ public abstract class OrdersResource {
    @Path(UpdateOrderPin.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = UpdateOrderPin.UPDATE_ORDER_PIN, notes = "Request to set the order's redemption PIN to a new value", response = MoneyTransferOrderPinUpdateRequest.class, authorizations = {
+   @ApiOperation(value = UpdateOrderPin.UPDATE_ORDER_PIN, notes = "Request to set the order's redemption PIN to a new value", authorizations = {
          @Authorization(value = "httpBasic") }, tags = {})
-   @ApiResponses(value = { @ApiResponse(code = UpdateOrderPin.SUCCESS, message = "OK"),
+   @ApiResponses(value = { @ApiResponse(code = UpdateOrderPin.SUCCESS, message = "No Content"),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
@@ -502,7 +502,7 @@ public abstract class OrdersResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void updateOrderPin(
-         @ApiParam(value = "A message containing the data required to reverse an order cancellation.", required = true) @NotNull @Valid MoneyTransferOrderPinUpdateRequest body,
+         @ApiParam(value = "The new pin for the order.", required = true) @NotNull @Valid MoneyTransferOrderPinUpdateRequest body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,

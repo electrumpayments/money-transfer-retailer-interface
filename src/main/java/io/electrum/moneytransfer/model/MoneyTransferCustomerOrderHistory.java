@@ -12,8 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * A list of orders made by a customer for the given receiver
+ */
+@ApiModel(description = "A list of orders made by a customer for the given receiver.")
 public class MoneyTransferCustomerOrderHistory {
 
    @JsonProperty("receiver")
@@ -48,6 +53,8 @@ public class MoneyTransferCustomerOrderHistory {
       return this;
    }
 
+   @JsonProperty("orders")
+   @Valid
    public List<MoneyTransferLookupResponse> getOrders() {
       return orders;
    }
