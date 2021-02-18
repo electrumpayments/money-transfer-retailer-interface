@@ -103,7 +103,8 @@ public abstract class AdminResource {
    }
 
    public class GetCustomerOrderHistory {
-      private GetCustomerOrderHistory(){}
+      private GetCustomerOrderHistory() {
+      }
 
       public static final String RELATIVE_PATH = "/customers/orders";
       public static final String FULL_PATH = AdminResource.PATH + RELATIVE_PATH;
@@ -111,7 +112,8 @@ public abstract class AdminResource {
       public static final int SUCCESS = 200;
 
       public class QueryParameters {
-         private QueryParameters(){}
+         private QueryParameters() {
+         }
 
          public static final String CUSTOMER_PROFILE_ID = "customerProfileId";
          public static final String RECEIVER_ID = "receiverId";
@@ -362,7 +364,7 @@ public abstract class AdminResource {
          @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.TO_DATE_TIME) String toDateTime,
          @ApiParam(value = "Should be among the options of the MoneyTransferLookupResponse Statuses.") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
          @ApiParam(value = "Payment type to filter orders by.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_TYPE) String paymentType,
-         @ApiParam(value = "Payment identifier name for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
+         @ApiParam(value = "Payment identifier for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
          @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
          @Context SecurityContext securityContext,
          @Context Request request,
