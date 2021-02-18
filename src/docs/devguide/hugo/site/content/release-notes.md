@@ -1,5 +1,21 @@
 This page describes changes to the Money Transfer Retailer Interface implemented across different releases of the interface.
 
+## v2.22.0
+
+Released 18 February 2021
+
+- Added the following new operations:
+    - Orders Resources:
+        - UpdateOrderPin: used to update the pin of an order.
+    - Admin Resources:
+        - GetCustomerOrderHistory: used to retrieve a list of a customer's orders.
+
+- Added the following new models:
+    - `MoneyTransferCustomerOrderHistory` - describes a request to get a list of a customer's orders.
+    - `MoneyTransferOrderPinUpdateRequest` - describes a request to update an order's pin.
+    
+- Ensured Java 11 compatibility.
+
 ## v2.21.0
 
 Released 25 August 2020

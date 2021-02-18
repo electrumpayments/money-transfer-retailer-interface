@@ -90,4 +90,22 @@ public interface IAdminResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest)
          throws NotFoundException;
+
+   void getCustomerOrderHistory(
+         @NotNull String customerProfileId,
+         @NotNull String receiverId,
+         String merchantId,
+         String originatorInstId,
+         String fromDateTime,
+         String toDateTime,
+         String status,
+         String paymentType,
+         String paymentIdentifierName,
+         String paymentIdentifierValue,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
 }

@@ -27,6 +27,7 @@ import io.electrum.moneytransfer.model.MoneyTransferConfirmation;
 import io.electrum.moneytransfer.model.MoneyTransferLookupResponse;
 import io.electrum.moneytransfer.model.MoneyTransferOrderCancelRequest;
 import io.electrum.moneytransfer.model.MoneyTransferOrderCancelResponse;
+import io.electrum.moneytransfer.model.MoneyTransferOrderPinUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferOrderStatusUpdateRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemRequest;
 import io.electrum.moneytransfer.model.MoneyTransferRedeemResponse;
@@ -121,6 +122,15 @@ public abstract class OrdersResource {
       public static final int SUCCESS = 202;
       public static final String RELATIVE_PATH = CancelOrder.RELATIVE_PATH + "/reversals";
       public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
+   }
+
+   public class UpdateOrderPin {
+      public static final String UPDATE_ORDER_PIN = "updateOrderPin";
+      public static final int SUCCESS = 204;
+      public static final String RELATIVE_PATH = "/pin";
+      public static final String FULL_PATH = OrdersResource.PATH + RELATIVE_PATH;
+      private UpdateOrderPin() {
+      }
    }
 
    protected abstract IOrdersResource getResourceImplementation();
@@ -477,4 +487,30 @@ public abstract class OrdersResource {
             uriInfo,
             httpServletRequest);
    }
+
+   @PUT
+   @Path(UpdateOrderPin.RELATIVE_PATH)
+   @Consumes({ "application/json" })
+   @Produces({ "application/json" })
+   @ApiOperation(value = UpdateOrderPin.UPDATE_ORDER_PIN, notes = "Request to set the order's redemption PIN to a new value", authorizations = {
+         @Authorization(value = "httpBasic") }, tags = {})
+   @ApiResponses(value = { @ApiResponse(code = UpdateOrderPin.SUCCESS, message = "No Content"),
+         @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
+         @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 501, message = "Not implemented", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
+   public final void updateOrderPin(
+         @ApiParam(value = "The new pin for the order.", required = true) @NotNull @Valid MoneyTransferOrderPinUpdateRequest body,
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation()
+            .updateOrderPin(body, securityContext, request, httpHeaders, asyncResponse, uriInfo, httpServletRequest);
+   }
+
 }
