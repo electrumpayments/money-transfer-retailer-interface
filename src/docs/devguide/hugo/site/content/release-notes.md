@@ -14,7 +14,7 @@ Released 18 February 2021
     - `MoneyTransferCustomerOrderHistory` - describes a request to get a list of a customer's orders.
     - `MoneyTransferOrderPinUpdateRequest` - describes a request to update an order's pin.
     
-- Ensured java 11 compatibility.
+- Ensured Java 11 compatibility.
 
 ## v2.21.0
 
