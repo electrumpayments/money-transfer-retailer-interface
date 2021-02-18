@@ -13,6 +13,8 @@ Released 18 February 2021
 - Added the following new models:
     - `MoneyTransferCustomerOrderHistory` - describes a request to get a list of a customer's orders.
     - `MoneyTransferOrderPinUpdateRequest` - describes a request to update an order's pin.
+    
+- Ensured java 11 compatibility.
 
 ## v2.21.0
 

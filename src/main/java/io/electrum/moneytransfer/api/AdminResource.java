@@ -37,7 +37,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-
 @Path(AdminResource.PATH)
 
 @Api(description = "the admin API")
