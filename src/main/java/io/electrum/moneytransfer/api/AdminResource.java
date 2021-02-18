@@ -28,7 +28,6 @@ import io.electrum.moneytransfer.model.IdType;
 import io.electrum.moneytransfer.model.MoneyTransferAdminMessage;
 import io.electrum.moneytransfer.model.MoneyTransferCustomerOrderHistory;
 import io.electrum.moneytransfer.model.MoneyTransferFeeQuote;
-import io.electrum.moneytransfer.model.MoneyTransferLookupResponse;
 import io.electrum.moneytransfer.model.MoneyTransferQuoteRequest;
 import io.electrum.vas.model.ExchangeRate;
 import io.swagger.annotations.Api;
@@ -38,7 +37,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-import java.util.Arrays;
 
 @Path(AdminResource.PATH)
 
@@ -125,8 +123,6 @@ public abstract class AdminResource {
          public static final String PAYMENT_TYPE = "paymentType";
          public static final String PAYMENT_IDENTIFIER_NAME = "paymentIdentifierName";
          public static final String PAYMENT_IDENTIFIER_VALUE = "paymentIdentifierValue";
-         public static final String LIMIT = "limit";
-         public static final String OFFSET = "offset";
       }
    }
 
@@ -366,10 +362,8 @@ public abstract class AdminResource {
          @ApiParam(value = "The date from which to end searching for orders (exclusive).") @QueryParam(GetCustomerOrderHistory.QueryParameters.TO_DATE_TIME) String toDateTime,
          @ApiParam(value = "Should be among the options of the MoneyTransferLookupResponse Statuses.") @QueryParam(GetCustomerOrderHistory.QueryParameters.STATUS) String status,
          @ApiParam(value = "Payment type to filter orders by.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_TYPE) String paymentType,
-         @ApiParam(value = "Payment identifier name for the payment type indicated. Must be one of: [BANK_CUSTOMER_ID, BANK_ACCOUNT_ID]. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
+         @ApiParam(value = "Payment identifier name for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_NAME) String paymentIdentifierName,
          @ApiParam(value = "Payment identifier value for the payment type indicated. Required if 'paymentType' is defined.") @QueryParam(GetCustomerOrderHistory.QueryParameters.PAYMENT_IDENTIFIER_VALUE) String paymentIdentifierValue,
-         @ApiParam(value = "A limit on the number of orders to be returned.") @QueryParam(GetCustomerOrderHistory.QueryParameters.LIMIT) int limit,
-         @ApiParam(value = "The number of orders to skip before starting to collect the result set.") @QueryParam(GetCustomerOrderHistory.QueryParameters.OFFSET) int offset,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,
@@ -387,8 +381,6 @@ public abstract class AdminResource {
             paymentIdentifierName,
             paymentIdentifierValue,
             receiverId,
-            limit,
-            offset,
             securityContext,
             request,
             httpHeaders,

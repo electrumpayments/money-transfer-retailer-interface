@@ -102,8 +102,6 @@ public interface IAdminResource {
          String paymentType,
          String paymentIdentifierName,
          String paymentIdentifierValue,
-         int limit,
-         int offSet,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
